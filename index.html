@@ -5,15 +5,170 @@
 <meta charset="UTF-8" />
 <title>가이드 작업</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../styles/main.css">
-<script src="../scripts/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="/styles/main.css">
+<script src="/scripts/jquery-3.7.1.min.js"></script>
 <style>
-    .wrapper { padding: 50px; max-width: 500px; margin: 0 auto; font-size: 16px; }
+    .titleBox {margin-top: 50px;}
+    .titleBox h2 {font-size: 24px;}
+    .titleBox p {color: var(--gray-500); margin: 0;}
+    .portfolioList { display:flex; flex-wrap:wrap; gap:15px; margin-top: 30px;}
+    .portfolioList li {width: calc(50% - 7.5px); box-shadow:0 4px 20px rgba(15,23,42,0.04); border-radius: 10px; border: 1px solid var(--gray-300); overflow: hidden;}
+    .portfolioList li .thumb {width:100%; height: 150px; overflow:hidden; border-top-left-radius:10px; border-top-right-radius:10px;}
+    .portfolioList li .thumb img {width:100%; height:100%; transition:transform .4s ease;}
+    .portfolioList li:hover .thumb img { transform:scale(1.03);}
+    .portfolioList li .info { position: relative; padding: 15px; border-bottom-left-radius:10px; border-bottom-right-radius:10px; background-color: var(--white);}
+    .portfolioList li .info::after {content: ""; position: absolute; width: 18px; height: 18px; right: 5px; bottom: 18px; background: url(./images/icons/icon_arrowdown.svg) no-repeat center/contain; transform: rotate(-90deg)}
+    .portfolioList li .info span {display:block; font-size: 12px; color: var(--gray-500); margin-bottom: 5px;}
+    .portfolioList li .info strong {font-size: 16px;}
+
+    @media (min-width: 600px) {
+        .portfolioList li {width: calc(33.333% - 10px);}
+    }
+    @media (min-width: 1000px) {
+        .portfolioList li {width: calc(25% - 11.25px);}
+    }
 </style>
 </head>
 <body>
 <div class="wrapper">
-    <a href="./guide/common.html">공통</a> <br>
+    <div class="container">
+        <main>
+            <section>
+                <div class="inner">
+                    <div class="titleBox">
+                        <h2>Portfolio Index</h2>
+                        <p>차량 견적 플랫폼 UI 퍼블리싱 작업물</p>
+                    </div>
+
+                    <ul class="portfolioList">
+                        
+                        <li>
+                            <a href="./guide/login.html">
+                                <div class="thumb">
+                                    <img src="./images/login.png" alt="로그인 페이지">
+                                </div>
+                                <div class="info">
+                                    <span>01</span>
+                                    <strong>Login</strong>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./guide/home.html">
+                                <div class="thumb">
+                                    <img src="./images/dashboard.png" alt="대시보드 페이지">
+                                </div>
+                                <div class="info">
+                                    <span>02</span>
+                                    <strong>Dashboard</strong>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./guide/model.html">
+                                <div class="thumb">
+                                    <img src="./images/models.png" alt="모델 페이지">
+                                </div>
+                                <div class="info">
+                                    <span>03</span>
+                                    <strong>Models</strong>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./guide/estimate.html">
+                                <div class="thumb">
+                                    <img src="./images/estimate.png" alt="견적 페이지">
+                                </div>
+                                <div class="info">
+                                    <span>04</span>
+                                    <strong>Estimate</strong>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./guide/finance.html">
+                                <div class="thumb">
+                                    <img src="./images/finance.png" alt="금융 페이지">
+                                </div>
+                                <div class="info">
+                                    <span>05</span>
+                                    <strong>Finance</strong>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./guide/utility.html">
+                                <div class="thumb">
+                                    <img src="./images/utility.png" alt="유틸리티 페이지">
+                                </div>
+                                <div class="info">
+                                    <span>06</span>
+                                    <strong>Utility</strong>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./guide/board.html">
+                                <div class="thumb">
+                                    <img src="./images/board.png" alt="게시판 페이지">
+                                </div>
+                                <div class="info">
+                                    <span>07</span>
+                                    <strong>Board</strong>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./guide/shop.html">
+                                <div class="thumb">
+                                    <img src="./images/shop.png" alt="쇼핑 페이지">
+                                </div>
+                                <div class="info">
+                                    <span>08</span>
+                                    <strong>Shopping</strong>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./guide/discount.html">
+                                <div class="thumb">
+                                    <img src="./images/discount.png" alt="할인 페이지">
+                                </div>
+                                <div class="info">
+                                    <span>09</span>
+                                    <strong>Discount</strong>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./guide/common.html">
+                                <div class="thumb">
+                                    <img src="./images/common.png" alt="공통 페이지">
+                                </div>
+                                <div class="info">
+                                    <span>10</span>
+                                    <strong>Common</strong>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./guide/error.html">
+                                <div class="thumb">
+                                    <img src="./images/error.png" alt="에러 페이지">
+                                </div>
+                                <div class="info">
+                                    <span>11</span>
+                                    <strong>Error</strong>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+            </section>
+        </main>
+    </div>
+    
+<!--     <a href="./guide/common.html">공통</a> <br>
     <a href="./guide/login.html">로그인 페이지</a> <br>
     <a href="./guide/home.html"> 메뉴 + 홈 페이지</a> <br>
     <a href="./guide/model.html">모델정보</a> <br>
@@ -23,7 +178,7 @@
     <a href="./guide/discount.html">판매조건 페이지</a> <br>
     <a href="./guide/board.html">게시판 페이지</a> <br>
     <a href="./guide/finance.html">금융 페이지</a> <br>
-    <a href="./guide/error.html">에러페이지</a> <br>
+    <a href="./guide/error.html">에러페이지</a> <br> -->
 </div>
 </body>
 </html> 
