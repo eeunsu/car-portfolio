@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>견적페이지</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/estimate.css">
+    <script src="/scripts/jquery-3.7.1.min.js"></script>
+    <script src="/scripts/common.js"></script>
+</head>
+<body>
+    <div class="wrapper desktop menuOpen" id="wrapper" path="estimate">
+    <!-- 헤더 시작 -->
+    <div class="header">
+        <div class="inner">
+            <a href="/desk" class="menuHome">홈</a>
+            <button class="menuDesk" id="menuOpenDesk">메뉴</button>
+        </div>
+        <div class="menuMain" id="menuMain"> 
+            <div class="dimBg"></div>
+            <div class="menuBox">
+                <div class="menuTop">
+                    <button class="menuDesk" id="menuOpenDesk">메뉴</button>
+                    <a href="/desk" class="menuHome home">홈</a>
+                    <div class="info">
+                        <span class="name">홍길동 <i>님</i></span>
+                        <a class="logout" href="/">로그아웃</a>
+                    </div>
+                    <div class="icon">
+                        <button class="brightMode hide" id="changeBright">밝게</button> 
+                        <button class="darkMode" id="changeDark">어둡게</button>
+                        <button class="close" id="menuClose">닫기</button>
+                    </div>
+                </div>
+                <ul class="menuList">
+                    <li class="gnb newcar">
+                        <div class="title"><button>신차</button></div>
+                        <ul class="lnb">
+                            <li class="on"><a href="">모델정보</a></li>
+                            <li class=""><a href="">할부캐시백</a></li>
+                            <li class=""><a href="">비교하기</a></li>
+                            <li class=""><a href="">판매조건납기</a></li>
+                        </ul> 
+                    </li>
+                    <li class="gnb finance">
+                        <div class="title"><button>금융</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">할부비교</a></li>
+                            <li class=""><a href="">캐시백비교</a></li>
+                            <li class=""><a href="">프로모션</a></li>
+                            <li class=""><a href="">엑셀견적기</a></li>
+                            <li class=""><a href="">금융진행</a></li>
+                            <li class=""><a href="">리스렌트팁</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb customer">
+                        <div class="title"><button>고객</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">고객관리</a></li>
+                            <li class=""><a href="">차량관리</a></li>
+                            <li class=""><a href="">일정관리</a></li>
+                            <li class=""><a href="">문자발송</a></li>
+                            <li class=""><a href="">채널관리</a></li>
+                            <li class=""><a href="">상담팁</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb utility">
+                        <div class="title"><button>유틸리티</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">할부계산기</a></li>
+                            <li class=""><a href="">자동차세</a></li>
+                            <li class=""><a href="">개별소비세</a></li>
+                            <li class=""><a href="">등록비용</a></li>
+                            <li class=""><a href="">전기차보조금</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb info">
+                        <div class="title"><button class="">이용안내</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">공지사항</a></li>
+                            <li class=""><a href="">게시판</a></li>
+                            <li class=""><a href="">이용안내</a></li>
+                            <li class=""><a href="">이용약관</a></li>
+                            <li class=""><a href="">개인정보 취급방침</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb shopping">
+                        <div class="title"><button>쇼핑</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">상품 목록</a></li>
+                            <li class=""><a href="">주문 내역</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb mypage">
+                        <div class="title"><button class="">마이페이지</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">내정보</a></li>
+                            <li class=""><a href="">이용료 결제</a></li>
+                            <li class=""><a href="">포인트</a></li>
+                            <li class=""><a href="">찜목록</a></li>
+                            <li class=""><a href="">알림메세지 <span class="new">N</span></a></li>
+                            <li class=""><a href="">로그인 설정</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="menuFixed">
+            <ul>
+                <li><a href="javascript:;"><div class="home"></div><span>홈</span></a></li>
+                <li><a href="javascript:;" tab="newcar"><div class="newcar"></div><span>신차</span></a></li>
+                <li><a href="javascript:;" tab="finance"><div class="finance"></div><span>금융</span></a></li>
+                <li><a href="javascript:;" tab="customer"><div class="customer"></div><span>고객</span></a></li>
+                <li><button id="menuOpenFixed"><div class="menu"></div><span>전체메뉴</span></button></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 헤더 끝 -->
+
+    <!-- 본문 시작 -->
+    <div class="container">
+        <main>
+            <section>
+                <article>
+                    <div class="inner">
+                        <div class="mainTop">
+                            <div class="left">
+                            <h2>견적내기</h2>
+                                <form class="searchBoxForm" action="" method="POST">
+                                    <input type="text" name="search" id="nameCustomer" value="" placeholder="고객명">
+                                    <button id="btnEstmWorking" class="btnSearch">찾기</button>
+                                </form>
+                            </div>
+                            <div class="right">
+                               <button class="list btnEstmListOpen open" id=""><span class="name">목록</span><span class="count num">0</span></button>
+                            </div>
+                        </div>
+                        <!-- 견적 시작 -->
+
+                        <div class="estmViewport">
+                            <div class="estmBox">
+                                <div class="estmMain">
+                                    <!-- 안내창 -->
+                                    <div id="estmCount" class="estmCount">
+                                        <div class="detail">※ 공용 계정을 생성하고 여러명이 대량으로 사용하는 현상이 발견되어 부득이하게 이용 건수를 제한하게 되었습니다.<a href="/board/view/notice_10649" target="_blank">자세히 보기</a></div>
+                                        <div class="count">
+                                            <span class="title">이용 현황</span> : <span class="date">2025-10-28 이후 140 일 동안</span> 
+                                            <span class="set">이용 한도 <span class="cntSes">0</span> 건</span> 중 <span class="use"><span class="cntUes">1,854</span> 건 이용함</span>
+                                            <span class="end">만료일 2026-12-31 (291일 남음)</span>
+                                        </div>
+                                    </div>
+                                    <!-- 견적 목록 -->
+                                     <div class="estmList">
+                                        <ul id="estmList" style="display: block;">
+                                            <li estmno="1" class=""><button class="star">중요</button><span class="no num">1</span><button class="cont"><span class="name">더 뉴 아반떼 2026년형 가솔린 1.6 (개소세 5% 기준 ↘ 30% 인하  : 6.30 이전) 스마트</span><span class="desc">└ 차량가격 20,336,515원, 등록비용 1,296,040원</span></button><button class="del">삭제</button></li>
+                                            <li estmno="2" class="on"><button class="star">중요</button><span class="no num">2</span><button class="cont"><span class="name">더 뉴 아반떼 2026년형 가솔린 1.6 (개소세 5% 기준 ↘ 30% 인하  : 6.30 이전) 스마트</span><span class="desc">└ 차량가격 20,336,515원, 등록비용 1,296,040원</span></button><button class="del">삭제</button></li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- 견적 내기 -->
+                                     <div class="estmCell on" estmno="2" saveno="" openno="copy">
+                                        <div class="vehicle">
+                                            <div class="choice">
+                                                <ul class="box boxVehicleChoice">
+                                                    <li class="on" tab="brand">
+                                                        <div class="top">
+                                                            <button class="btnEstmVehicleTop">
+                                                                <div class="title">브랜드</div>
+                                                                <div class="data estmRslt_brandName">
+                                                                    <div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div>
+                                                                    <div class="name">현대</div>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="tab brandTab btnEstmVehicleTap">
+                                                            <button tab="kr">한국</button>
+                                                            <button tab="eu">유럽</button>
+                                                            <button tab="jp">일본</button>
+                                                            <button tab="us">미국</button>
+                                                            <button tab="cn">중국</button>
+                                                            <button tab="ev">전기(소형)</button>
+                                                        </div>
+
+                                                        <div class="cont brandCont brandSel">
+
+                                                            <div class="title" tab="kr">한국</div>
+                                                            <ul class="brandList">
+                                                                <li code="111" class="on"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">현대</div></button></li>
+                                                                <li code="112"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">제네시스</div></button></li>
+                                                                <li code="121"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">기아</div></button></li>
+                                                                <li code="131"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">쉐보레</div></button></li>
+                                                                <li code="132"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">GMC</div></button></li>
+                                                                <li code="141"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">KG모빌리티</div></button></li>
+                                                                <li code="151"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">르노코리아</div></button></li>
+                                                            </ul>
+
+                                                            <div class="title" tab="eu">유럽</div>
+                                                            <ul class="brandList">
+                                                                <li code="221"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">벤츠</div></button></li>
+                                                                <li code="211"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">BMW</div></button></li>
+                                                                <li code="232"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">아우디</div></button></li>
+                                                                <li code="231"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">폭스바겐</div></button></li>
+                                                                <li code="212"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">미니</div></button></li>
+                                                                <li code="241"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">볼보</div></button></li>
+                                                                <li code="242"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">폴스타</div></button></li>
+                                                                <li code="251"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">재규어</div></button></li>
+                                                                <li code="252"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">랜드로버</div></button></li>
+                                                                <li code="233"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">포르쉐</div></button></li>
+                                                            </ul>
+
+                                                            <div class="title" tab="jp">일본</div>
+                                                            <ul class="brandList">
+                                                                <li code="311"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">토요타</div></button></li>
+                                                                <li code="312"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">렉서스</div></button></li>
+                                                                <li code="331"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">혼다</div></button></li>
+                                                            </ul>
+
+                                                            <div class="title" tab="us">미국</div>
+                                                            <ul class="brandList">
+                                                                <li code="411"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">포드</div></button></li>
+                                                                <li code="412"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">링컨</div></button></li>
+                                                                <li code="422"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">지프</div></button></li>
+                                                                <li code="431"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">캐딜락</div></button></li>
+                                                                <li code="441"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">테슬라</div></button></li>
+                                                            </ul>
+
+                                                            <div class="title" tab="cn">중국</div>
+                                                            <ul class="brandList">
+                                                                <li code="511"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">BYD</div></button></li>
+                                                            </ul>
+
+                                                            <div class="title" tab="ev">전기(소형)</div>
+                                                            <ul class="brandList">
+                                                                <li code="171"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">대창모터스</div></button></li>
+                                                                <li code="181"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">디피코</div></button></li>
+                                                                <li code="191"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">쎄보모빌리티</div></button></li>
+                                                                <li code="166"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">제이스 모빌리티</div></button></li>
+                                                                <li code="167"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">EVKMC</div></button></li>
+                                                                <li code="176"><button><div class="logo"><img src="/images/logo/bmw_logo.png" alt=""></div><div class="name len2">마이브</div></button></li>
+                                                            </ul>
+
+                                                        </div>
+                                                    </li>
+                                                    <li class="" tab="model">
+                                                        <div class="top">
+                                                            <button class="btnEstmVehicleTop">
+                                                                <div class="title">모델</div>
+                                                                <div class="data estmRslt_modelName">
+                                                                    <div class="car"><img src="/images/logo/model_logo.png"></div>
+                                                                    <div class="name">더 뉴 아반떼</div>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="tab modelTab btnEstmVehicleTap">
+                                                            <button tab="P" kind="type">승용</button>
+                                                            <button tab="R" kind="type">RV</button>
+                                                            <button tab="B" kind="type">승합</button>
+                                                            <button tab="T" kind="type">화물</button>
+                                                            <button tab="E" kind="fuel">EV</button>
+                                                            <button tab="X" kind="fuel">HEV</button>
+                                                        </div>
+
+                                                        <div class="cont modelCont modelSel">
+
+                                                            <div class="title" tab="P">승용</div>
+                                                            <ul class="modelList">
+                                                                <li code="11414" class="state2 on"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">더 뉴 아반떼</div></button></li>
+                                                                <li code="11415" class="state2 x"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">더 뉴 아반떼 HEV</div></button></li>
+                                                                <li code="11574" class="state2"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">더 뉴 아반떼 N</div></button></li>
+                                                                <li code="11462" class="state2"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">쏘나타 디 엣지</div></button></li>
+                                                                <li code="11463" class="state2 x"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">쏘나타 디 엣지 HEV</div></button></li>
+                                                                <li code="11260" class="state2"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">디 올 뉴 그랜저</div></button></li>
+                                                                <li code="11294" class="state2 x"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">디 올 뉴 그랜저 HEV</div></button></li>
+                                                            </ul>
+
+                                                            <div class="title" tab="R">RV</div>
+                                                            <ul class="modelList">
+                                                                <li code="11716" class="state2"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">더 뉴 캐스퍼</div></button></li>
+                                                                <li code="11689" class="state2 e"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">캐스퍼 일렉트릭</div></button></li>
+                                                                <li code="11664" class="state2 e"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">더 뉴 아이오닉 5</div></button></li>
+                                                                <li code="11583" class="state2 e"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">아이오닉 5 N</div></button></li>
+                                                                <li code="10345" class="state2"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">베뉴</div></button></li>
+                                                                <li code="11396" class="state2"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">디 올 뉴 코나</div></button></li>
+                                                                <li code="11397" class="state2 x"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">디 올 뉴 코나 HEV</div></button></li>
+                                                            </ul>
+
+                                                            <div class="title" tab="B">승합</div>
+                                                            <ul class="modelList">
+                                                                <li code="11834" class="state2"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">더 뉴 스타리아</div></button></li>
+                                                                <li code="11835" class="state2 x"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">더 뉴 스타리아 HEV</div></button></li>
+                                                                <li code="10952" class="state3"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">스타리아</div></button></li>
+                                                            </ul>
+
+                                                            <div class="title" tab="T">화물</div>
+                                                            <ul class="modelList">
+                                                                <li code="10014" class="state2"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">포터2</div></button></li>
+                                                                <li code="10367" class="state2"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">포터2 특장차</div></button></li>
+                                                                <li code="10380" class="state2 e"><button><div class="car"><img src="/images/logo/model_logo.png"></div><div class="name">포터2 Electric</div></button></li>
+                                                            </ul>
+
+                                                        </div>
+                                                    </li>
+                                                    <li class="" tab="lineup">
+                                                        <div class="top">
+                                                            <button class="btnEstmVehicleTop">
+                                                                <div class="title">라인업</div>
+                                                                <div class="data estmRslt_lineupName"><div class="name">2026년형 가솔린 1.6 <span class="sub">(개소세 5% 기준 ↘ 30% 인하  : 6.30 이전)</span></div></div>
+                                                            </button>
+                                                        <div class="tab btnEstmVehicleTap"><button tab="2026">2026</button><button tab="2025">2025</button></div></div>
+                                                        <div class="cont lineupCont lineupSel"><div class="title" tab="2026">2026</div><ul class="lineupList" year="2026"><li code="116242" class="on"><button><div class="year">2026년형</div><div class="name"> 가솔린 1.6  <span class="sub">(개소세 5% 기준, 2025.04~)</span></div></button></li><li code="116243"><button><div class="year">2026년형</div><div class="name"> 가솔린 1.6 N Line  <span class="sub">(개소세 5% 기준, 2025.04~)</span></div></button></li><li code="116245"><button><div class="year">2026년형</div><div class="name"> LPi 1.6 일반 판매  <span class="sub">(개소세 5% 기준, 2025.04~)</span></div></button></li><li code="116246"><button><div class="year">2026년형</div><div class="name"> LPi 1.6 렌터카 <span class="sub">(2025.04~)</span></div></button></li><li code="116247"><button><div class="year">2026년형</div><div class="name"> LPi 1.6 장애인용 <span class="sub">(2025.04~)</span></div></button></li></ul><div class="title" tab="2025">2025</div><ul class="lineupList" year="2025"><li code="114947"><button><div class="year">2025년형</div><div class="name"> 가솔린 1.6  <span class="sub">(개소세 5% 기준, 2024.06~)</span></div></button></li><li code="114948"><button><div class="year">2025년형</div><div class="name"> 가솔린 1.6 N Line  <span class="sub">(개소세 5% 기준, 2024.06~)</span></div></button></li><li code="114949"><button><div class="year">2025년형</div><div class="name"> LPi 1.6 일반 판매  <span class="sub">(개소세 5% 기준, 2024.06~)</span></div></button></li><li code="114950"><button><div class="year">2025년형</div><div class="name"> LPi 1.6 렌터카 <span class="sub">(2024.06~)</span></div></button></li><li code="114951"><button><div class="year">2025년형</div><div class="name"> LPi 1.6 장애인용 <span class="sub">(2024.06~)</span></div></button></li></ul></div>
+                                                    </li>
+                                                    <li class="" tab="trim">
+                                                        <div class="top">
+                                                            <button class="btnEstmVehicleTop">
+                                                                <div class="title">트림</div> 
+                                                                <div class="data estmRslt_trimName"><div class="name">스마트</div></div> 
+                                                            </button>
+                                                        </div>
+                                                        <div class="cont trimCont trimSel"><ul class="trimList"><li code="1051825" class="on"><button><div class="name">스마트</div><div class="info">휘발유 15.0㎞/ℓ</div> <div class="price">20,650,000</div></button></li><li code="1051826"><button><div class="name">모던</div><div class="info">휘발유 14.8㎞/ℓ</div> <div class="price">23,910,000</div></button></li><li code="1051827"><button><div class="name">인스퍼레이션</div><div class="info">휘발유 14.8㎞/ℓ</div> <div class="price">27,590,000</div></button></li></ul></div>
+                                                    </li>
+                                                </ul>
+                                                <div class="buttonBox">
+                                                    <button class="gray btnVehicleCancel"><span>차량 선택 변경 취소</span></button>
+                                                </div>
+                                            </div>
+                                            <div class="choiced">
+                                                <div class="summary">
+                                                    <div class="btns estmRslt_btns"><button class="round itemSpecViewEstm" type="button" onclick="getEstmItemSpec()">제원 및 사양</button><button id="compareItem">사양비교</button><button class="round changeEstimateMode" mode="leaserent" model="11414" trim="1051825" option="" colorext="" colorint="">렌트•리스</button><button class="round btnEstmCopy" type="button" onclick="copyEstimate();">복사</button></div>
+                                                    <div class="price">
+                                                        <span class="title">기본가격</span>
+                                                        <span class="num estmRslt_trimPrice">20,650,000</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="btn"><button class="updown btnEstmVehicleOpen">변경</button></div>
+                                        </div>
+
+                                        <!-- 선택 바 -->
+                                         <div class="setting">
+                                            <div class="optBox">
+                                                <div class="top">옵션/색상</div>
+                                                <div class="cont">
+                                                    <div class="estmBar option">
+                                                        <div class="btn">
+                                                            <button class="btnEstmBarUpdown">
+                                                                <div class="title">옵션</div>
+                                                                <div class="choiced">
+                                                                    <div class="data estmRslt_optionData"><span class="blank">선택 없음</span></div>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                        <div class="list">
+                                                            <ul class="optionList optionCont optionSel"><li apply="A" price="380000" code="111297" photo="149158" dis=""><button><div class="data"><span class="name ">컨비니언스 <span class="icons optionHelp"><a href="javascript:void(0)" class="all"></a></span></span><span class="price">380,000</span></div><div class="info" style="display: none">■ 듀얼 풀오토 에어컨(오토디포그/미세먼지센서/공기청정모드/애프터블로우포함)</div></button></li><li apply="a" price="790000" code="108724" photo="149159,156059,156060" dis="sub" class="dis"><button><div class="data"><span class="name ">인포테인먼트 내비 <span class="icons optionHelp"><a href="javascript:void(0)" class="all"></a></span></span><span class="price">790,000</span></div><div class="info" style="display: none">■ 10.25인치 내비게이션(블루링크, 폰 프로젝션, 블루투스 핸즈프리, 인카페이먼트, 발레모드), 내비게이션 무선 업데이트, 앰비언트 무드램프</div></button></li><li apply="" price="200000" code="110436" photo="149160" dis=""><button><div class="data"><span class="name ">하이패스 <span class="icons optionHelp"><a href="javascript:void(0)" class="photo"></a></span></span><span class="price">200,000</span></div></button></li><li apply="" price="690000" code="111298" photo="149164,156061,149166,149165" dis=""><button><div class="data"><span class="name ">현대 스마트센스 <span class="icons optionHelp"><a href="javascript:void(0)" class="all"></a></span></span><span class="price">690,000</span></div><div class="info" style="display: none">■ 후측방 충돌 경고(주행), 후측방 충돌방지 보조(전진 출차), 후방 교차 충돌방지 보조, 안전 하차 경고</div></button></li><li apply="~" price="490000" code="108733" photo="149181" dis=""><button><div class="data"><span class="name ">17인치 알로이 휠 &amp; 타이어 Ⅰ <span class="icons optionHelp"><a href="javascript:void(0)" class="photo"></a></span></span><span class="price">490,000</span></div></button></li></ul>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="estmBar colorExt">
+                                                        <div class="btn">
+                                                            <button class="btnEstmBarUpdown">
+                                                                <div class="title">외장</div>
+                                                                <div class="choiced">
+                                                                    <div class="data estmRslt_colorExtData"><span class="blank">선택 없음</span></div>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                        <div class="list">
+                                                            <ul class="colorList colorExtCont colorExtSel"><li price="0" code="11127" rgb="696969/" dis=""><button><span class="colorChip"><span class="colorMain" style="background-color:#696969">&nbsp;</span></span><span class="name state3">플루이드 그레이 메탈릭(M6T)</span></button></li><li price="0" code="11290" rgb="aaadb2/" dis=""><button><span class="colorChip"><span class="colorMain" style="background-color:#aaadb2">&nbsp;</span></span><span class="name ">사이버 그레이 메탈릭(C5G)</span></button></li><li price="0" code="11409" rgb="eaeaea/" dis=""><button><span class="colorChip"><span class="colorMain" style="background-color:#eaeaea">&nbsp;</span></span><span class="name ">아틀라스 화이트(SAW)</span></button></li><li price="0" code="11715" rgb="3a3c3d/" dis=""><button><span class="colorChip"><span class="colorMain" style="background-color:#3a3c3d">&nbsp;</span></span><span class="name ">에코트로닉 그레이 펄(PE2)</span></button></li><li price="0" code="11846" rgb="70848b/" dis=""><button><span class="colorChip"><span class="colorMain" style="background-color:#70848b">&nbsp;</span></span><span class="name ">미라지 그린(RRR)</span></button></li><li price="0" code="11498" rgb="000000/" dis=""><button><span class="colorChip"><span class="colorMain" style="background-color:#000000">&nbsp;</span></span><span class="name ">어비스 블랙 펄(A2B)</span></button></li><li price="0" code="11289" rgb="464c45/" dis=""><button><span class="colorChip"><span class="colorMain" style="background-color:#464c45">&nbsp;</span></span><span class="name ">아마존 그레이 메탈릭(A5G)</span></button></li></ul>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                    <div class="estmBar colorInt">
+                                                        <div class="btn">
+                                                            <button class="btnEstmBarUpdown">
+                                                                <div class="title">내장</div>
+                                                                <div class="choiced">
+                                                                    <div class="data estmRslt_colorIntData"><span class="blank">선택 없음</span></div>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                        <div class="list">
+                                                            <ul class="colorList colorIntCont colorIntSel"><li price="0" code="10797" rgb="000000/" optionnot="108736" dis=""><button><span class="colorChip"><span class="colorMain" style="background-color:#000000">&nbsp;</span></span><span class="name ">블랙 원톤</span></button></li></ul>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="sum">
+                                                    <div class="total"><span class="title">옵션+색상</span><span class="price estmRslt_addPrice">0</span></div>
+                                                </div>
+                                            </div>
+                                            <div class="dcBox">
+                                                <div class="top">할인/면세/탁송</div>
+                                                <div class="cont">
+                                                    <div class="estmShip">
+                                                        <div class="title"><span class="salesTermTitle">예상납기</span></div>
+                                                        <div class="detail">
+                                                            <div class="buttonBox fastshipLink"><a href="/fastship/11414" target="_blank" class="navyLine"><span>선주문(224)</span></a><a href="/stock/domestic/11414" target="_blank" class="navyLine"><span>재고(5)</span></a></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="estmBar discount">
+                                                        <div class="btn">
+                                                            <button class="btnEstmBarUpdown">
+                                                                <div class="title">할인</div>
+                                                                <div class="choiced">
+                                                                    <div class="data estmRslt_discountData"><span class="blank">선택 없음</span></div>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                        <div class="list">
+                                                            <ul class="discountList discountCont discountSel">
+                                                                <li code1="10006" apply="" kind="P" star="X" dis="">
+                                                                    <div class="name">블루멤버스 포인트 선사용</div>
+                                                                    <ul class="sub">
+                                                                        <li code2="A" price="100000"><button><span class="require">10만포인트</span><span class="price">100,000</span></button></li><li code2="B" price="150000"><button><span class="require">15만포인트</span><span class="price">150,000</span></button></li>
+                                                                        <li code2="C" price="200000"><button><span class="require">20만포인트</span><span class="price">200,000</span></button></li><li code2="D" price="250000"><button><span class="require">25만포인트</span><span class="price">250,000</span></button></li>
+                                                                        </ul>
+                                                                    <div class="info">
+                                                                        ▣ 개인/개인사업자 고객 중 2회 이상 재구매고객 限 (신규 고객 제외)
+                                                                    <br>- 기존 보유중인 블루멤버스 포인트 합산 사용 가능 
+                                                                    <br>- 금번 구매회차 적립포인트가 해당구간 선사용 포인트에 미달할 경우 5만 포인트 차감금액 선택</div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="estmBar taxfree">
+                                                        <div class="btn">
+                                                            <button class="btnEstmBarUpdown">
+                                                                <div class="title">면세</div>
+                                                                <div class="choiced">
+                                                                    <div class="data">
+                                                                        <span class="name estmRslt_taxFreeTitle">면세(개소세 인하)</span>
+                                                                        <span class="price estmRslt_taxFreeCost">-313,485</span>
+                                                                    </div>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                        <div class="list">
+                                                            <div class="data taxfreeCheck">
+                                                                <span class="child3"><label><input type="checkbox" name="child3" value="V"><span>다자녀(3자녀)</span></label></span>
+                                                                <span class="child2"><label><input type="checkbox" name="child2" value="W"><span>다자녀(2자녀)</span></label></span> 
+                                                                <span class="diesel10"><label><input type="checkbox" name="diesel10" value="U"><span>노후차 교체</span></label></span> 
+                                                            </div>
+                                                            <ul class="subList cnt2 taxfreeSel">
+                                                                <li code="G0" class="on"><button>일반인 (해당없음)</button></li>
+                                                                <li code="D1"><button>장애인 (1~3급)</button></li>
+                                                                <li code="D2"><button>장애인 (시각4급)</button></li>
+                                                                <li code="D3"><button>장애인 (일반4급)</button></li>
+                                                                <li code="D4"><button>장애인 (5~6급)</button></li>
+                                                                <li code="D5"><button>장애인 (유공자)</button></li>
+                                                                <li code="D6"><button>장애인 (고엽제)</button></li>
+                                                                <li code="D7"><button>장애인 (광주민주)</button></li>
+                                                                <li code="C1"><button>영업용 (렌터카/택시)</button></li>
+                                                            </ul>
+                                                            <div class="btn"><button class="updown up btnEstmBarUpdown">접기</button></div>
+                                                        </div>
+                                                        <div class="check taxYearCheck">
+                                                            <span class="taxR"><label><input type="radio" name="" kind="taxR" value="R" checked=""><span>개소세 30% 인하(~26.6.30)</span></label></span>
+                                                            <span class="taxT"><label><input type="radio" name="" kind="taxT" value="T"><span>개소세 인하 종료(26.7.1~)</span></label></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="estmBar delivery">
+                                                        <div class="btn">
+                                                            <button class="btnEstmBarUpdown">
+                                                                <div class="title">탁송</div>
+                                                                <div class="choiced">
+                                                                    <div class="data estmRslt_deliveryData"><span class="blank">선택 없음</span></div>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                        <div class="list">
+                                                            <div class="data deliveryTab"><label><input type="radio" kind="deliveryType" value="CD" checked=""><span>배송</span></label><label><input type="radio" kind="deliveryType" value="MD"><span>본인출고</span></label><label><input type="radio" kind="deliveryType" value="SF"><span>직접입력</span></label></div>
+                                                            <div class="sub deliveryCont"><div class="deliveryWay" way="BD"><div class="estmSub deliveryType" type="CD"><div class="name"><button tab="sido" class="on">시도</button><button tab="sigungu">시군구</button><button tab="site">출고장</button></div><div class="sub"><ul class="subList deliverySel" tab="sido" type="sigungu"><li code="SU"><button>서울</button></li>
+                                                            <li code="KG"><button>경기</button></li>
+                                                            <li code="IC"><button>인천</button></li>
+                                                            <li code="KW"><button>강원</button></li>
+                                                            <li code="DJ"><button>대전</button></li>
+                                                            <li code="SJ"><button>세종</button></li>
+                                                            <li code="CB"><button>충북</button></li>
+                                                            <li code="CN"><button>충남</button></li>
+                                                            <li code="BS"><button>부산</button></li>
+                                                            <li code="DG"><button>대구</button></li>
+                                                            <li code="US"><button>울산</button></li>
+                                                            <li code="GB"><button>경북</button></li>
+                                                            <li code="GN"><button>경남</button></li>
+                                                            <li code="KJ"><button>광주</button></li>
+                                                            <li code="JB"><button>전북</button></li>
+                                                            <li code="JN"><button>전남</button></li>
+                                                            <li code="JJ"><button>제주</button></li>
+                                                            </ul>
+                                                            <ul class="subList deliverySel hide" tab="sigungu" type="site"></ul><ul class="subList deliverySel hide" tab="site" type="cost"></ul></div></div><div class="estmSub deliveryType hide" type="MD"><div class="name"><button tab="direct" class="on">출고장</button></div><div class="sub"><ul class="subList deliverySel" tab="direct" type="direct"></ul></div></div><div class="estmSub deliveryType hide self" type="SF"><input type="text" name="sfName" value="" placeholder="배송지/출고장"> <input type="text" class="numF numZ" name="sfCost" value="" placeholder="금액"> 원<button class="cancel">취소</button></div></div></div>
+                                                            <div class="btn"><button class="updown up btnEstmBarUpdown">접기</button></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="sum">
+                                                    <div class="sub"><span class="title">순수차량가격</span><span class="price estmRslt_vehicleCar">20,650,000</span></div>
+                                                    <div class="sub"><span class="title">세금계산서반영</span><span class="price estmRslt_vehicleVat">20,336,515</span></div>
+                                                    <div class="total"><span class="title">가격 합계</span><span class="price estmRslt_vehiclePay">20,336,515</span></div>
+                                                    <div class="taxMod" value="0"><button kind="+" class="btnTaxMod">+</button><button kind="-" class="btnTaxMod">-</button></div>
+                                                </div>
+                                            </div>
+                                            <div class="regBox">
+                                                <div class="top">등록/부대비용 <div class="btnBox"><button class="bond layerPopup" id="bondRateBtn">채권시세</button> <button class="agency layerPopup" id="agencyBtn">대행사</button></div></div>
+                                                <div class="cont">
+                                                    <div class="estmBar takesido">
+                                                        <div class="btn">
+                                                            <button class="btnEstmBarUpdown">
+                                                                <div class="title">등록지역</div>
+                                                                <div class="choiced">
+                                                                    <div class="data">
+                                                                        <span class="name estmRslt_takeSido">대전</span>
+                                                                    </div>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                        <div class="list">
+                                                            <ul class="subList cnt3 takeSidoSel"><li code="SU"><button>서울</button></li><li code="KG"><button>경기</button></li><li code="IC"><button>인천</button></li><li code="KW"><button>강원</button></li><li code="DJ" class="on"><button>대전</button></li><li code="SJ"><button>세종</button></li><li code="CB"><button>충북</button></li><li code="CN"><button>충남</button></li><li code="BS"><button>부산</button></li><li code="DG"><button>대구</button></li><li code="US"><button>울산</button></li><li code="GB"><button>경북</button></li><li code="GN"><button>경남</button></li><li code="CW"><button>창원</button></li><li code="KJ"><button>광주</button></li><li code="JB"><button>전북</button></li><li code="JN"><button>전남</button></li><li code="JJ"><button>제주</button></li></ul>
+                                                            <div class="btn"><button class="updown up btnEstmBarUpdown">접기</button></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="estmData">
+                                                        <div class="title">취득세</div>
+                                                        <div class="choice">
+                                                            <div class="data">
+                                                                <span class="desc estmRslt_takeRate">7%</span>
+                                                                <span class="extra5Check hide"> &nbsp; <label><input type="checkbox" name="extraO" value="O"><span>별도 옵션 포함</span></label></span>
+                                                                <span class="price estmRslt_takeTax">1,294,140</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="estmData">
+                                                        <div class="title">채권</div>
+                                                        <div class="choice bondTypeCheck">
+                                                            <div class="data">
+                                                            <span class="desc">
+                                                                    <label><input type="radio" name="" value="B"><span>매입</span></label> <span class="desc estmRslt_bondMemo">없음</span>
+                                                                </span>
+                                                                <span class="price estmRslt_bondBuy through">0</span>
+                                                            </div>
+                                                            <div class="data">
+                                                                <span class="desc">
+                                                                    <label><input type="radio" name="" value="S" checked=""><span>할인</span></label>
+                                                                    <input class="rateL numF" type="text" name="bondCut" value="">
+                                                                    %/원
+                                                                </span>
+                                                                <span class="price estmRslt_bondSale">0</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="estmData">
+                                                        <div class="title">기타</div>
+                                                        <div class="choice">
+                                                            <div class="data">
+                                                                <span class="desc wide"><span class="estmRslt_takeExtraTxt">인지대(0) / 번호판(0) / 대행료(0)</span> <button class="config setTakeExtra">설정</button></span>
+                                                                <span class="price hide"><input class="priceS estmRslt_takeExtra numF" type="text" name="takeExtra" value=""></span>
+                                                            </div>
+                                                            <div class="data takeInspect hide">
+                                                                <span class="desc">구조변경 검사 <label><input type="checkbox" name="inspectO" value="I"><span>포함</span></label></span>
+                                                                <span class="price"><input class="priceS estmRslt_takeInspect numF through" type="text" name="takeInspect" value=""></span>
+                                                            </div>
+                                                            <div class="data">
+                                                                <span class="desc">의무보험료</span>
+                                                                <span class="price"><input class="priceS estmRslt_deliveryInsure numF" type="text" name="takeInsure" value=""></span>
+                                                            </div>
+                                                            <!-- 아래 사용 확인 -->
+                                                            <div class="takeEtc delivery hide off">
+                                                                <span class="desc">탁송료</span>
+                                                                <span class="price estmRslt_deliveryTake">0</span>
+                                                            </div>
+                                                            <div class="takeEtc other hide off">
+                                                                <span class="desc">보험료 별도</span>
+                                                            </div>
+                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="estmBar downpay">
+                                                        <div class="btn">
+                                                            <button class="btnEstmBarUpdown">
+                                                                <div class="title">계약금</div>
+                                                                <div class="choiced">
+                                                                    <div class="data">
+                                                                        <span class="name estmRslt_downPay"></span>
+                                                                        <span class="price estmRslt_down">100,000</span>
+                                                                    </div>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                        <div class="list">
+                                                            <ul class="subList cnt3 downSel">
+                                                                <li code="0"><button>없음</button></li>
+                                                                <li code="100000"><button>10 만원</button></li>
+                                                                <li code="200000"><button>20 만원</button></li>
+                                                                <li code="300000"><button>30 만원</button></li>
+                                                                <li code="500000"><button>50 만원</button></li>
+                                                                <li code="1000000"><button>100 만원</button></li>
+                                                                <li code="1500000"><button>200 만원</button></li>
+                                                                <li code="" class="on"><button>기본값</button></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="sum">
+                                                    <div class="sub"><span class="title">등록 합계</span><span class="price estmRslt_takeSum">1,296,040</span></div>
+                                                    <div class="total"><span class="title">총 소요비용</span><span class="price estmRslt_costSum">21,632,555</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+                                    <!-- 금융선택 -->
+                                     <div class="compare">
+                                        <div class="fincCell">
+                                            <div class="top">
+                                                <div class="title">
+                                                    <button class="bar btnEstmGoods"><span class="no num'">1</span>제조사
+                                                        할부</button>
+                                                </div>
+                                                <div class="list">
+                                                    <ul class="subList cnt1">
+                                                        <li sido="IC"><button>카드캐시백</button></li>
+                                                        <li sido="KW" class="on"><button>제조사 제휴할부</button></li>
+                                                        <li sido="DJ"><button>금융사 일반할부</button></li>
+                                                        <li sido="SJ"><button>할부계산기</button></li>
+                                                        <li sido="CB"><button>오토리스</button></li>
+                                                        <li sido="CN"><button>장기렌트</button></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="config">
+                                                <div class="sub step0">
+                                                    <div class="bar">
+                                                        <div class="title">카드결제액</div>
+                                                        <div class="select half"><select name="cardP">
+                                                                <option value="100">29,600 만 원(전액)</option>
+                                                                <option value="self">직접입력</option>
+                                                            </select></div>
+                                                        <div class="right fincRslt_cardP">296,000,000</div>
+                                                        <div class="input right hide"><input class="price fincRslt_cardPSelf" type="text" name="cardP_self" value=""></div>
+                                                    </div>
+                                                    <div class="bar">
+                                                        <div class="title">정렬</div>
+                                                        <div class="full radio"> <label><input type="radio" name="" kind="order" value="B" checked=""><span>캐시백</span></label> <label><input type="radio" name="" kind="order" value="F"><span>수수료</span></label></div>
+                                                    </div>
+                                                </div>
+                                                <div class="btn"><button class="updown up">접기</button></div>
+                                            </div>
+                                            <div class="list">
+                                                <ul class="compList">
+                                                    <li finance="R1015" comp="39167040" cap="44760030" res="49" class="best">
+                                                        <button>
+                                                            <span class="logo">
+                                                                <img src="http://tau.carpan.co.kr/img/capital/1904-50.png" alt="iM 캐피탈">
+                                                                <span class="company">iM 캐피탈<a href="javascript:void(0)" class="help layerPopup">?</a></span>
+                                                            </span>
+                                                            <span class="name"> 장기렌터카</span>
+                                                            <span class="price num">815,980</span>
+                                                            <span class="gap"></span>
+                                                            <span class="rank">1</span>
+                                                            <div class="exception">선택형, 약정 2만km</div>
+                                                            <div class="info subIndex">
+                                                                잔가
+                                                                <span class="paysum">(49%) 22,271,000</span>
+                                                            </div>
+                                                        </button>
+
+                                                    </li>
+                                                    
+
+                                                    <li finance="R1002" comp="39890400" cap="44760030" res="46.5" class="on">
+                                                        <button>
+                                                            <span class="logo">
+                                                                <img src="http://tau.carpan.co.kr/img/capital/1936-50.png" alt="메리츠캐피탈">
+                                                                <span class="company">메리츠캐피탈 <a href="javascript:void(0)" class="help">?</a></span>
+                                                            </span>
+                                                            <span class="name">장기렌터카</span>
+                                                            <span class="price num">831,050</span>
+                                                            <span class="gap down">+723,360</span>
+                                                            <span class="rank">2</span>
+                                                            <div class="exception">선택형, 약정 2만km</div>
+                                                            <div class="info subIndex">
+                                                                잔가 <span class="paysum">(46.5%) 21,135,000</span>
+                                                            </div>
+                                                        </button>
+
+                                                    </li>
+
+                                                    <li finance="R1044" comp="40220784" cap="44760030" res="43" class="on">
+                                                        <button>
+                                                            <span class="logo">
+                                                                <img src="http://tau.carpan.co.kr/img/capital/3868-50.png" alt="우리금융캐피탈">
+                                                                <span class="company">우리금융캐피탈<a href="javascript:void(0)" class="help">?</a></span>
+                                                            </span>
+                                                            <span class="name">온라인 비교</span>
+                                                            <span class="price num">837,933</span>
+                                                            <span class="gap down">+1,053,744</span>
+                                                            <span class="rank">3</span>
+                                                            <div class="info subIndex">
+                                                                잔가 <span class="paysum">(43%) 19,544,000</span>
+                                                            </div>
+                                                        </button>
+
+                                                    </li>
+
+                                                    <li finance="R1043" comp="40286400" cap="44760030" res="46" class="">
+                                                        <button>
+                                                            <span class="logo">
+                                                                <img src="http://tau.carpan.co.kr/img/capital/1902-50.png" alt="우리카드">
+                                                                <span class="company">우리카드<a href="javascript:void(0)" class="help">?</a></span>
+                                                            </span>
+                                                            <span class="name">장기렌터카-고잔가</span>
+                                                            <span class="price num">839,300</span>
+                                                            <span class="gap up">+1,119,360</span>
+                                                            <span class="rank">4</span>
+                                                            <div class="info subIndex">
+                                                                잔가 <span class="paysum">(46%) 20,907,000</span>
+                                                            </div>
+                                                        </button>
+
+                                                    </li>
+
+                                                    <li finance="R1008" comp="41020320" cap="44760030" res="41" class="update">
+                                                        <button>
+                                                            <span class="logo">
+                                                                <img src="http://tau.carpan.co.kr/img/capital/1897-50.png" alt="신한카드">
+                                                                <span class="company">신한카드<a href="javascript:void(0)" class="help">?</a></span>
+                                                            </span>
+                                                            <span class="name">장기렌터카</span>
+                                                            <span class="price num">854,590</span>
+                                                            <span class="gap down">-1,853,280</span>
+                                                            <span class="rank">5</span>
+                                                            <div class="info subIndex">
+                                                                잔가 <span class="paysum">(41%) 18,645,000</span>
+                                                            </div>
+                                                        </button>
+
+                                                    </li>
+                                                    <li code="F132" comp="10000000000" class="failure">
+                                                        <button>
+                                                            <span class="logo"><img src="https://www.carpan.co.kr/img/capital/1940-50.png" alt="제조사 자체"><span class="company">제조사 자체<a href="javascript:void(0)" class="help">?</a></span></span> 
+                                                            <span class="name">거치형 오토할부</span> 
+                                                            <span class="info">거치형(12)</span> 
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="fincCell">
+                                            <div class="top">
+                                                <div class="title">
+
+                                                    <button class="bar btnEstmGoods"><span class="no num'">2</span>카드캐시백</button>
+                                                </div>
+                                                <div class="list">
+                                                    <ul class="subList cnt1">
+                                                        <li sido="IC" class="on"><button>카드캐시백</button></li>
+                                                        <li sido="KW"><button>제조사 제휴할부</button></li>
+                                                        <li sido="DJ"><button>금융사 일반할부</button></li>
+                                                        <li sido="SJ"><button>할부계산기</button></li>
+                                                        <li sido="CB"><button>오토리스</button></li>
+                                                        <li sido="CN"><button>장기렌트</button></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="config open notUp">
+                                                
+                                            </div>
+                                            <div class="list">
+                                                <ul class="compList">
+                                                    <li class="none">
+                                                        <div class="title">선택하신 조건에 맞는 상품이 없습니다.</div>
+                                                        <div class="noticeBox comment">* 금융사별 잔가등급이 없는 경우<br>* LPG 렌터카 있는데
+                                                            일반 LPG
+                                                            선택시<br>* 자동변속기가 아닌 경우<br>* 보험연령 21세 취급 제한된 경우<br>* 대리점 출고 불가인 경우
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="fincCell">
+                                            <div class="top">
+                                                <div class="title">
+                                                    <button class="bar btnEstmGoods"><span class="no num'">3</span>할부계산기</button>
+                                                </div>
+                                                <div class="list">
+                                                    <ul class="subList cnt1">
+                                                        <li sido="IC"><button>카드캐시백</button></li>
+                                                        <li sido="KW"><button>제조사 제휴할부</button></li>
+                                                        <li sido="DJ"><button>금융사 일반할부</button></li>
+                                                        <li sido="SJ" class="on"><button>할부계산기</button></li>
+                                                        <li sido="CB"><button>오토리스</button></li>
+                                                        <li sido="CN"><button>장기렌트</button></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="config open notUp">
+                                                <div class="sub on">
+                                                    <div class="bar">
+                                                        <div class="title">명칭</div>
+                                                        <div class="input full">
+                                                            <input class="name" type="text" name="nameFinc" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar">
+                                                        <div class="title">기간</div>
+                                                        <div class="select half">
+                                                            <select>
+                                                                <option>36개월</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="select right">
+                                                            <span class="pre">中 거치 </span>
+                                                            <select>
+                                                                <option>12개월</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar">
+                                                        <div class="title">금리</div>
+                                                        <div class="input half">
+                                                            <input class="rateL" type="text" name="takeInsure" value="3.6"><span class="unit">%</span>
+                                                        </div>
+                                                        <div class="input right">
+                                                            <span class="pre"> 거치</span> <input class="rateL" type="text" name="takeInsure" value=""><span class="unit">%</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar">
+                                                        <div class="title">원금</div>
+                                                        <div class="select half">
+                                                            <select>
+                                                                <option>선수율 15%</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="text right">
+                                                            45,145,000
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar">
+                                                        <div class="title">캐시백</div>
+                                                        <div class="input half">
+                                                            <input class="rateL" type="text" name="takeInsure" value="1.5"><span class="unit">%</span>
+                                                        </div>
+                                                        <div class="input right">
+                                                            <input class="price" type="text" name="takeInsure" value="174,500">
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar">
+                                                        <div class="title">선수금</div>
+                                                        <div class="text half fincRslt_payRate">15%</div>
+                                                        <div class="right fincRslt_prepay">12,309,190</div>
+                                                    </div>
+                                                </div>
+                                                <div class="btn"><button class="left saveConfig">설정저장</button><button class="right applyAll">전체적용</button></div>
+                                                <div class="pmt">
+                                                    <div class="title">월납입금</div>
+                                                    <div class="hold"><span class="desc">1~12회</span> <span class="data">17,300</span></div>
+                                                    <div class="main"><span class="desc">13~36회</span> <span class="data estmRslt_pmt">247,525</span></div>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+        
+                        <!-- 이상 페이지 내부 파일 -->
+                        <!-- 이하 footer 파일 적용 -->
+                        <div class="popup noticePopup" id="frameAlert">
+                            <div class="dimBg"></div>
+                            <div class="frame">
+                                <div class="content"></div>
+                                <div class="buttonBox" btnlen="1"></div>
+                            </div>
+                        </div>
+
+                        <div class="popup layerPopup" id="framePopup">
+                            <div class="dimBg"></div>
+                            <div class="frame">
+                                <div class="head">
+                                    <h3></h3>
+                                    <button class="close">닫기</button>
+                                </div>
+                                <div class="content"></div>
+                                <div class="buttonBox" btnlen="2"></div>
+                            </div>
+                        </div>
+                        <div class="popup layerPopup" id="framePopup">
+                            <div class="dimBg"></div>
+                            <div class="frame">
+                                <div class="head">
+                                    <h3></h3>
+                                    <button class="close">닫기</button>
+                                </div>
+                                <div class="content"></div>
+                                <div class="buttonBox" btnlen="3"></div>
+                            </div>
+                        </div> 
+                    </div>
+                    
+                </article>
+            </section>
+        </main>
+
+    </div>
+    <!-- 본문 끝 -->
+
+    
+    <!-- 푸터 시작 -->
+    <div class="footer">
+        <div class="inner">
+            푸터 영역
+        </div>
+    </div>
+    <!-- 푸터 끝 -->
+
+
+
+</div>
+
+<script>
+
+    // UI 및 기본 설정
+    estmNo = 2;	// Box 생성 번호
+    estmNow = 1;	// 현재 번호
+    fincNow = new Object();	 // 금융 비교 번호
+    estmSelf = 100;	// 현재 번호
+
+    estmViewLeft = 0; // 앱환경에서 선택된 차량 모델 정보 저장
+
+    estmCode = new Object();	// 견적 선택 코드
+    estmConf = new Object();	// 견적 선택 정보 (기존 input 대체)
+    fincConf = new Object();		// 금융 선택 정보
+    estmDocu = new Object();		// 기본값/견적서 설정
+
+    otherBrand = false;	// 타사 견적시 true, docuSalesInfo 에서 제외
+
+    estmData = new Object();	// 견적 데이터
+    fincData = new Object();	// 금융 데이터
+
+    estmRslt = new Object();	// 견적 데이터 임시 사용
+    estmCfg = new Object();		// 견적 계산시 임시 사용 정보
+
+    estmCountModel = ",";	// 모델 카운트
+    estmCountMsg = "";		// 모델 카운트 메세지
+    estmChangeKind = "";	// 변경 이벤트 정의
+
+    msgPopup = "";		// 메세지
+    alertPopupMsg = "";	// 팝업 유무
+
+    //온라인견적 플로팅
+    $(document).on("click", ".floatingEstm .title", function () {
+        $(".adEstmBox").toggleClass("open");
+    });
+
+
+    // 견적 목록 접기/펼치기
+    $(document).on("click", ".btnEstmListOpen", function () {
+        if ($("#estmList").css("display") == "none") {
+            $("#estmList").css("display", "block");
+            $(this).addClass("open");
+        } else {
+            $("#estmList").css("display", "none");
+            $(this).removeClass("open");
+        }
+    });
+    // 견적서 열기
+    $(document).on("click", ".btnOpenDocu", function () {
+        $(".wrapper").addClass("wide");
+        $(".estmBox").addClass("open");
+        var top = $("#estmDocu").offset().top;
+        $('html, body').animate({ scrollTop: top }, "fast");
+        $(".btnOpenDocu").addClass("hide");
+        $(".btnCloseDocu").removeClass("hide");
+        $(".wrapper").removeClass("menuOpen");
+        $("#menuMain").removeClass("open");
+        if(estmStart['mode']!="compare" && deviceType != "desktop"){
+            window.estmSwipe?.goTo(2);
+        }
+    });
+    $(document).on("click", ".btnCloseDocu", function () {
+        $(".wrapper").removeClass("wide");
+        $(".estmBox").removeClass("open");
+        $('html, body').animate({ scrollTop: 0 }, "fast");
+        $(".btnOpenDocu").removeClass("hide");
+        $(".btnCloseDocu").addClass("hide");
+        if(getCookie('menu') == 'open'){
+            $(".wrapper").addClass("menuOpen");
+            $("#menuMain").addClass("open");
+        }
+        if(estmStart['mode']!="compare" && deviceType != "desktop"){
+            window.estmSwipe?.goTo(1);
+        }
+    });
+    // 견적 차량 탭 폭 조절절
+    $(document).on("click", ".btnEstmVehicleTab", function () {
+        $(this).closest("ul").children("li").removeClass("on");
+        $(this).closest("li").addClass("on");
+    });
+    // 선택 Bar 열기
+    $(document).on("click", ".estmBar .btn button", function () {
+        if ($(this).closest(".estmBar").hasClass("open")) {
+            $(this).closest(".estmBar").removeClass("open");
+        } else {
+            $(this).closest(".estmBar").addClass("open");
+        }
+    });
+    // 세부선택 열기 
+    $(document).on("click", ".estmSub .name button", function () {
+        var tab = $(this).attr("tab");
+        if ($(this).closest(".estmSub").find(".sub [tab='" + tab + "']").css("display") == "none") {
+            $(this).closest(".estmSub").find(".sub").children().css("display", "none");
+            $(this).closest(".estmSub").find(".sub [tab='" + tab + "']").css("display", "flex");
+            $(this).closest(".estmSub").find(".sub").css("display", "block");
+        } else {
+            $(this).closest(".estmSub").find(".sub").children().css("display", "none");
+            $(this).closest(".estmSub").find(".sub").css("display", "none");
+        }
+    });
+    // 상품 선택 열기 
+    $(document).on("click", ".fincCell .top button.bar", function () {
+        if ($(this).closest(".top").hasClass("open")) {
+            $(this).closest(".top").removeClass("open");
+        } else {
+            $(this).closest(".top").addClass("open");
+        }
+    });
+    // 상품 설정 열기
+    $(document).on("click", ".fincCell .summary button", function () {
+        if ($(this).closest(".fincCell").find(".config").hasClass("open")) {
+            $(this).closest(".fincCell").find(".config").removeClass("open")
+        } else {
+            $(this).closest(".fincCell").find(".config").addClass("open")
+        }
+    });
+    // 상품 설정 닫기
+    $(document).on("click", ".fincCell .config .btn button", function () {
+        if ($(this).closest(".fincCell").find(".config").hasClass("open")) {
+            $(this).closest(".fincCell").find(".config").removeClass("open")
+        } else {
+            $(this).closest(".fincCell").find(".config").addClass("open")
+        }
+    });
+
+    // 상품 비교 선택
+    $(document).on("click", ".estmCell .fincCell .top button.diff", function () {
+        if ($(this).hasClass("on")) {
+            $(this).removeClass("on");
+        } else if ($(this).hasClass("auto")) {
+            $(this).removeClass("auto");
+            $(this).addClass("on");
+        } else {
+            $(this).addClass("auto");
+        }
+    });
+    // 상품 비교 선택
+    $(document).on("click", ".estmCell .fincCell .top button.checked", function () {
+        console.log(222)
+        if ($(this).hasClass("on")) {
+            $(this).removeClass("on");
+        } else {
+            $(this).addClass("on");
+        }
+    });
+
+    // 비교 개별 선택
+    $(document).on("click", ".estmCell .fincCell .compList button", function () {
+        if ($(this).parent().hasClass("on")) {
+            $(this).parent().removeClass("on");
+        } else {
+            $(this).parent().addClass("on");
+        }
+    });
+    // 견적서 열기
+    $(document).on("click", ".btnOpenDocu", function () {
+        $(".wrapper").addClass("wide");
+        $(".estmBox").addClass("open");
+        var top = $("#estmDocu").offset().top;
+        $('html, body').animate({ scrollTop: top }, "fast");
+        $(".btnOpenDocu").addClass("hide");
+        $(".btnCloseDocu").removeClass("hide");
+        if(estmStart['mode']!="compare" && deviceType != "desktop"){
+            window.estmSwipe?.goTo(2);
+        }
+    });
+    $(document).on("click", ".btnCloseDocu", function () {
+        $(".wrapper").removeClass("wide");
+        $(".estmBox").removeClass("open");
+        $('html, body').animate({ scrollTop: 0 }, "fast");
+        $(".btnOpenDocu").removeClass("hide");
+        $(".btnCloseDocu").addClass("hide");
+        if(estmStart['mode']!="compare" && deviceType != "desktop"){
+            window.estmSwipe?.goTo(1);
+        }
+    });
+    // 차량 상세 선택(견적 탭 선택)
+    $(document).on("click", ".btnEstmVehicleTap button", function () {
+        var tab = $(this).attr("tab");
+        var box = $(this).closest("li").attr("tab");
+        if ($(this).hasClass("on")) {
+            $(this).removeClass("on");
+            if (box == "model" && (tab == "E" || tab == "X")) {
+                $("#estmBody .estmCell[estmNo='" + estmNow + "'] .modelList li").removeClass("hide");
+                if ($(this).parent().find("button.on[kind='type']").length) setScrollTab(box, $(this).parent().find("button.on[kind='type']").attr("tab"));
+                else setScrollTab(box, "top");
+            } else {
+                $(this).closest("li").find(".cont .title").removeClass("on");
+                setScrollTab(box, "top");
+            }
+        } else {
+            if (box == "model") {
+                if (tab == "E" || tab == "X") {
+                    $("#estmBody .estmCell[estmNo='" + estmNow + "'] .modelList li").addClass("hide");
+                    $obj = $("#estmBody .estmCell[estmNo='" + estmNow + "'] .modelList li." + tab.toLowerCase()).removeClass("hide");
+                    $(this).parent().find("button[kind='fuel']").removeClass("on");
+                    $(this).addClass("on");
+                    if ($(this).parent().find("button.on[kind='type']").length) setScrollTab(box, $(this).parent().find("button.on[kind='type']").attr("tab"));
+                    else setScrollTab(box, "top");
+                } else {
+                    $(this).parent().find("button[kind='type']").removeClass("on");
+                    $(this).addClass("on");
+                    $(this).closest("li").find(".cont .title").removeClass("on");
+                    $(this).closest("li").find(".cont .title[tab='" + tab + "']").addClass("on");
+                    setScrollTab(box, tab);
+                }
+            } else {
+                $(this).siblings().removeClass("on");
+                $(this).addClass("on");
+                $(this).closest("li").find(".cont .title").removeClass("on");
+                $(this).closest("li").find(".cont .title[tab='" + tab + "']").addClass("on");
+                setScrollTab(box, tab);
+            }
+        }
+    });
+    // 차량정보 선택(견적 카데고리 선택)
+    $(document).on("click", ".btnEstmVehicleTop", function () {
+        $obj = $("#estmBody .estmCell[estmNo='" + estmNow + "']");
+        if (!$(".estmCell .vehicle").hasClass("open")) {
+            $(".estmCell .vehicle").addClass("open");
+            $(".btnEstmVehicleOpen").text("접기");
+        }
+        $(this).closest("li").siblings().removeClass("on");
+        $(this).closest("li").addClass("on");
+        setScrollChoice("brand");
+        setScrollChoice("model");
+        setScrollChoice("lineup");
+        setScrollChoice("trim");
+    });
+
+    // 차량 상세 선택(견적 탭 선택)
+    $(document).on("click", ".btnEstmVehicleTap button", function () {
+        var tab = $(this).attr("tab");
+        var box = $(this).closest("li").attr("tab");
+        if ($(this).hasClass("on")) {
+            $(this).removeClass("on");
+            if (box == "model" && (tab == "E" || tab == "X")) {
+                $("#estmBody .estmCell[estmNo='" + estmNow + "'] .modelList li").removeClass("hide");
+                if ($(this).parent().find("button.on[kind='type']").length) setScrollTab(box, $(this).parent().find("button.on[kind='type']").attr("tab"));
+                else setScrollTab(box, "top");
+            } else {
+                $(this).closest("li").find(".cont .title").removeClass("on");
+                setScrollTab(box, "top");
+            }
+        } else {
+            if (box == "model") {
+                if (tab == "E" || tab == "X") {
+                    $("#estmBody .estmCell[estmNo='" + estmNow + "'] .modelList li").addClass("hide");
+                    $obj = $("#estmBody .estmCell[estmNo='" + estmNow + "'] .modelList li." + tab.toLowerCase()).removeClass("hide");
+                    $(this).parent().find("button[kind='fuel']").removeClass("on");
+                    $(this).addClass("on");
+                    if ($(this).parent().find("button.on[kind='type']").length) setScrollTab(box, $(this).parent().find("button.on[kind='type']").attr("tab"));
+                    else setScrollTab(box, "top");
+                } else {
+                    $(this).parent().find("button[kind='type']").removeClass("on");
+                    $(this).addClass("on");
+                    $(this).closest("li").find(".cont .title").removeClass("on");
+                    $(this).closest("li").find(".cont .title[tab='" + tab + "']").addClass("on");
+                    setScrollTab(box, tab);
+                }
+            } else {
+                $(this).siblings().removeClass("on");
+                $(this).addClass("on");
+                $(this).closest("li").find(".cont .title").removeClass("on");
+                $(this).closest("li").find(".cont .title[tab='" + tab + "']").addClass("on");
+                setScrollTab(box, tab);
+            }
+        }
+    });
+
+    // 모델 선택 열기/닫기
+    $(document).on("click", ".btnEstmVehicleOpen", function () {
+        if ($(this).closest(".vehicle").hasClass("open")) {
+            $(this).closest(".vehicle").find(".boxVehicleChoice > li").removeClass("on");
+            $(this).closest(".vehicle").removeClass("open");
+            $(this).text("변경");
+        } else {
+            $(this).closest(".vehicle").find(".boxVehicleChoice > li[tab='trim']").addClass("on");
+            $(this).closest(".vehicle").addClass("open");
+            $(this).text("접기");
+        }
+    });
+
+    //닫기 버튼
+    function popupClose() {
+        $(this).closest('.popup').css('display', 'none');
+    }
+
+
+
+    //팝업
+    function openPopupView(w, id) {
+        var $el = $('#' + id);
+        var winWidth = $(window).width();
+        var winHeight = $(window).height();
+        if (winWidth - 20 < w) w = winWidth - 20;
+        $el.css('display', 'block');
+        $el.find('.content').css('overflow-y', 'auto');
+        $el.find('.content').css('height', 'unset');
+        $el.find('.frame').css('width', w + 'px');
+        var btnLen = $el.find('.buttonBox button').length;
+        $el.find('.buttonBox').attr("btnLen", btnLen);
+        var h = $el.find('.frame').outerHeight();
+        if (winHeight - 60 < h) {
+            h = winHeight - 60;
+            if (id == 'frameAlert') h2 = h - 50;
+            else if (id == 'framePopup' && btnLen) h2 = h - 100;
+            else if (id == 'framePopup') h2 = h - 50;
+            $el.find('.content').css('overflow-y', 'auto');
+            $el.find('.content').css('max-height', h2 + 'px');
+        }
+        // $el.find('.frame').draggable();
+        $el.css('display', 'none');
+        $el.css('display', 'block');
+    }
+
+    $(document).on("click", ".popup .head .close,.popup .buttonBox .check,.popup .buttonBox .cancel", function () {
+        $(this).closest(".popup").fadeOut();
+        e.preventDefault();
+        e.stopPropagation();
+    });
+    $(document).on("click", "#framePopup", function (e) {
+        $(this).fadeOut();
+        e.stopPropagation()
+    });
+    $(document).on("click", ".popup .frame, .popup .content, .popup input, .popup button", function (e) {
+        e.stopPropagation()
+    });
+
+    //noticePopup
+    $(document).on('click', '.noticePopup', function () {
+        $("#frameAlert .head h3").html("스마트스트림 가솔린 1.6 엔진");
+        if ($(this).hasClass('alert')) {
+            var btn = ``;
+            var str = `
+
+            <div class="infoBox">
+                <div class="box">
+                    <img src="https://www.carpan.co.kr/img/model/202508/154302.jpg" alt="스마트스트림 가솔린 1.6 엔진">
+                    <span class="title">스마트스트림 가솔린 1.6 엔진</span>
+                </div>
+                <div class="descBox">
+                    <span class="descTitle">용어설명(엔진)</span>
+                    <span class="desc">연료의 화학 에너지를 폭발시켜 열에너지로 바꾸고, 이 힘으로 피스톤을 움직여 바퀴를 돌릴 수 있게 기계적인 운동 에너지로 변환시키는 장치, 자동차의 심장과 같은 역할을 한다. 기본적인 작동 원리는 연료와 공기를 빨아들여 압축하고 점화시켜 폭발시킨 후 배기가스를 내보내는 흡입, 압축, 폭발, 배기 4행정 사이클을 반복한다. 엔진의 종류로는 크게 휘발유를 사용하는 가솔린, 경유를 사용하는 디젤, LPG, 수소 엔진으로 나눠지며 작동 방식이나 구조에 따라 자연흡기, 터보차저, 직분사, 간접 분사 등으로 분류된다. 엔진과 전기 모터가 함께 사용될 경우 하이브리드로 불린다.</span>
+                </div>
+            </div>
+
+    `;
+        }
+        $("#frameAlert .content").html(str);
+        $("#frameAlert .buttonBox").html(btn);
+        openPopupView(400, "frameAlert");
+    });
+
+    //layerPopup
+    $(document).on('click', '.layerPopup', function () {
+        $("#framePopup .head h3").html("등록 대행사");
+        if ($(this).hasClass('agency')) {
+            var btn = ``;
+            var str = `
+    <div class="agencyBox">
+        <div class="selectBox">
+            <div class="title">지역선택</div>
+            <select name="sido">
+                <option value="SU">서울</option><option value="KG">경기</option><option value="IC">인천</option><option value="KW">강원</option><option value="DJ">대전</option><option value="SJ">세종</option><option value="CB">충북</option><option value="CN">충남</option><option value="BS">부산</option><option value="DG">대구</option><option value="US">울산</option><option value="GB">경북</option><option value="GN">경남</option><option value="KJ">광주</option><option value="JB">전북</option><option value="JN">전남</option><option value="JJ">제주</option>
+            </select>
+        </div>
+        <div class="index">
+            <span class="sigungu">지역</span>
+            <span class="name">사업소명</span>
+            <span class="phone">전화번호</span>
+        </div>
+        <ul class="listBox">
+            <li><span class="sigungu">강서구</span><span class="name">삼오사</span> <span class="phone">010-7525-7929</span></li>
+            <li><span class="sigungu">강서구</span><span class="name">오복사</span> <span class="phone">02-111-0001</span></li>
+            <li><span class="sigungu">강서구</span><span class="name">서울 차량대행</span> <span class="phone">02-111-0001</span></li>
+            <li class="blank">리스트가 없습니다</li>
+        </ul>
+    </div>
+    `
+        } if ($(this).hasClass('bond')) {
+            $("#framePopup .head h3").html("채권시세");
+            var btn = ``;
+            var str = `
+            <div class="bondCutBox" id="bondCutBox">
+                <div class="index">
+                    <span class="date">기준일</span>
+                    <span class="seoul">서울도시철도<br>(7년/2.5%)</span>
+                    <span class="other">지방도시철도<br>(5년/2.5%)</span>
+                    <span class="local">지역개발채권<br>(5년/2%)</span>
+                </div>
+                <ul>
+                    <li><button rate="13.89/9.69/9.69"><span class="date">2026-03-10 (화)</span><span class="seoul">13.89 %</span><span class="other">9.69 %</span><span class="local">9.69 %</span></button></li>
+                    <li><button rate="13.04/9.02/9.02"><span class="date">2026-03-09 (월)</span><span class="seoul">13.04 %</span><span class="other">9.02 %</span><span class="local">9.02 %</span></button></li>
+                    <li><button rate="12.77/8.78/8.78"><span class="date">2026-03-06 (금)</span><span class="seoul">12.77 %</span><span class="other">8.78 %</span><span class="local">8.78 %</span></button></li>
+                    <li><button rate="12.96/8.92/8.92"><span class="date">2026-03-05 (목)</span><span class="seoul">12.96 %</span><span class="other">8.92 %</span><span class="local">8.92 %</span></button></li>
+                    <li><button rate="12.77/8.80/8.80"><span class="date">2026-03-04 (수)</span><span class="seoul">12.77 %</span><span class="other">8.80 %</span><span class="local">8.80 %</span></button></li>
+                    <li><button rate="11.88/8.14/8.14"><span class="date">2026-03-03 (화)</span><span class="seoul">11.88 %</span><span class="other">8.14 %</span><span class="local">8.14 %</span></button></li>
+                </ul>
+                <div class="noticeBox comment">
+                    ▣ <b>서울도시철도 채권</b> : <b style="color:red;">7년만기 2.5%</b> 복리 (기존유지)<br> ▣ <b>지방도시철도 채권</b> : <b style="color:red;">5년만기 2.5%</b> 복리 (기존유지)<br> └ 부산, 대구, 창원, 제주, 경기 <b>✪</b> <br>◈ <b>지역개발 채권</b> : <b style="color:red;">5년만기 2%</b> 복리 (<b>2.5% → 2%</b> 변경)<br> └ 대전, 세종, 충북, 충남, 광주, 전북, 전남, 경북, 경남, 강원, 인천<br>2025년 8월 1일부터 지역개발채권 금리가 기존 <b>2.5% → 2%</b>로 변경되어, 지방도시철도 채권과 지역개발채권이 별도로 분리되어 제공됩니다.<br>지자체별로 금리가 변경되지않은 지자체( <b>✪</b> )가 있으니 각 지자체별 확인이 필요하고, 실제 시세와는 차이가 있을 수 있습니다.</ul></div>
+                </div>
+            `
+        } 
+
+        if ($(this).hasClass('spec')) {
+        $("#framePopup .head h3").html("상세 사양");
+            var btn = ``;
+            var str = `
+    <div class="specBox" id="specBox">
+    <div class="tablist"> <button tab="specification" class="on">사양</button> <button tab="spec" class="">제원</button>    </div>
+    <h3>사양</h3>
+        <dl>
+            <div class="data">
+                <dt>파워트레인 및 성능</dt>
+                <dd>
+                    <button class="photo noticePopup alert" code="100000">스마트스트림 가솔린 1.6 엔진</button>
+                    <span code="100144">디스크 브레이크</span>
+                    <span class="photo" code="100001">스마트스트림 IVT 변속기</span>
+                    <button class="photo" code="100009">통합 주행 모드</button>
+                </dd>    
+            </div>
+            <div class="data">
+                <dt>외관</dt>
+                <dd>
+                    <button class="photo" code="100002">Full LED(MFR 타입) 헤드램프</button>
+                    <button class="photo" code="100010">리어 콤비 램프</button>
+                    <button class="photo" code="100230">방향지시등</button>
+                    <button class="photo" code="100146">주간 주행등(LED(DRL, 포지셔닝 포함))</button> 
+                    <button class="photo" code="100081">보조제동등</button>
+                    <button class="photo" code="100079">15인치 알로이 휠 &amp; 타이어 옵션 17인치</button>
+                    <button class="photo" code="100163">라디에이터 그릴(네오트로닉 블랙)</button>
+                    <button class="photo" code="100005">아웃사이드 미러(열선, 전동접이, 전동조절, LED 방향지시등)</button>
+                    <button class="photo" code="100319">도어 포켓 라이팅(앞)</button>
+                </dd>
+            </div>
+            <div class="data">
+                <dt>안전</dt>
+                <dd>
+                    <button class="photo" code="100015">에어백 시스템(8개 : 1열 어드밴스드/사이드, 2열 사이드, 전복 대응 커튼)</button>
+                    <button class="photo" code="100027">차로 이탈방지 보조</button>
+                    <button class="photo" code="100029">하이빔 보조</button>
+                    <button class="photo" code="100034">지능형 속도 제한 보조</button>
+                    <button class="photo" code="100031">전방 충돌방지 보조(차량/보행자/자전거 탑승자/교차로 대향차/정면 대향차)</button>
+                    <button class="photo" code="100077">유아용 시트 고정 장치(ISOFIX)(2열 2개)</button>
+                    <button class="photo" code="100227">소화기</button>
+                    <button class="photo" code="100047">차로 유지 보조</button> 
+                    <button class="photo" code="100220">타이어 임시 수리장치(타이어 응급처치 키트)</button>
+                    <button class="photo" code="100160">타이어 공기압 경보 장치(TPMS)(개별)</button>
+                    <button class="photo" code="100162">세이프티 언락</button>
+                    <button class="photo" code="100030">운전자 주의 경고</button>
+                    <button class="photo" code="101526">앞차 출발 경고(FVSW)</button>
+                </dd>
+            </div>
+            <div class="data">
+                <dt>편의</dt>
+                <dd>
+                    <button class="photo" code="100470">스마트키 원격시동</button>
+                    <button class="photo" code="101154">버튼시동 &amp; 스마트키 시스템</button>
+                    <button class="photo" code="100302">에어컨(@ 듀얼 풀오토 옵션)</button>
+                    <button class="photo" code="100021">룸미러(ECM)</button>
+                    <button class="photo" code="100422">에어컨 필터(마이크로 에어 필터)</button>
+                    <button class="photo" code="100088">스티어링 휠(수동식 틸트 &amp; 텔레스코픽)</button>
+                    <button class="photo" code="100175">크루즈 컨트롤</button>
+                    <button class="photo" code="100172">오토라이트 컨트롤</button>
+                    <button class="photo" code="100048">후방 모니터(조향 연동, 주행 중 후방 뷰)</button>
+                    <button class="photo" code="100490">스마트 트렁크</button>
+                    <button class="photo" code="100244">파워윈도우</button>
+                    <button class="photo" code="100173">USB 충전기(C타입(1열 1개, 2열 2개))</button>
+                    <button class="photo" code="100314">스티어링 휠 리모컨</button>
+                    <button class="photo" code="100325">웰컴시스템</button>
+                    <button class="photo" code="100051">주차 거리 경고(전방, 후방)</button>
+                    <button class="photo" code="100037">후석 승객 알림</button>
+                    <button class="photo" code="100122">하이패스(옵션)</button>
+                </dd>
+            </div>
+            <div class="data">
+                <dt>시트</dt>
+                <dd>
+                    <button class="photo" code="100908">2열(센터 제외) 높이조절식 헤드레스트</button>
+                    <button class="" code="100053">시트(인조가죽)</button>
+                    <button class="photo" code="100268">운전석 수동 시트 높이조절장치</button>
+                </dd>
+            </div>
+            <div class="data">
+                <dt>인포테인먼트</dt>
+                <dd>
+                    <button class="photo" code="100250">디스플레이 오디오(8인치(6스피커, 라디오, MP3, 블루투스 핸즈프리, 무선 폰 프로젝션 포함))</button>
+                </dd>
+            </div>
+            <div class="data">
+                <dt>내장</dt>
+                <dd>
+                    <button class="photo" code="100018">클러스터(4.2인치 컬러 LCD)</button>
+                    <button class="" code="100187">인조가죽 적용 내장(도어 센터트림)</button>
+                    <button class="photo" code="100611">선바이저(거울, 슬라이딩)</button>
+                    <button class="photo" code="100091">실내등(룸램프)</button>
+                </dd>
+            </div>
+            
+        </dl>
+    </div>
+    `
+        }
+        if ($(this).hasClass('help')) {
+            var btn = `<button class="navy btnOpenPromotion">프로모션 보기</button>`;
+            var str = `
+        <ul class="financeView"><li class="name"><span class="title">명칭</span> <span class="data">우리BC카드</span></li><li><span class="title">선수금 캐시백</span> <span class="tableBox"><table><tbody><tr><th>구분</th><th>캐시백</th></tr><tr><td>1000만 원 이상</td><td>1.3%</td></tr></tbody></table></span></li></ul>
+        <div class="promotion hide"><span class="tableBox"><b>※ 인센티브</b><br>
+        <br><table><tbody><tr><th>결제금액</th><th>1천만원↑</th></tr><tr><td class="title">기존</td><td>0.3%</td></tr>
+        </tbody></table><br>
+        <b>※해당월 말일까지 결제조건</b></span></div>
+        `
+        }
+        $("#framePopup .content").html(str);
+        $("#framePopup .buttonBox").html(btn);
+        openPopupView(400, "framePopup");
+    });
+        // 프로모션 보기
+        $(document).on("click", ".btnOpenPromotion", function () {
+            $obj = $(this).closest(".frame").find(".promotion");
+            if($obj.css("display")!="none"){
+                $(this).text("프로모션 보기").removeClass("fold");
+            }else{
+                $(this).text("프로모션 접기").addClass("fold");
+            }
+            $obj.slideToggle("fast", function(){
+                openPopupView(600, "frameLayer");
+            });
+        });
+
+        //견적서 여러장일때 열고 닫기
+        $(document).on("click", ".docuList > button", function () {
+        $(this)
+            .toggleClass("down")
+            .next(".docuItem")
+            .stop()
+            .slideToggle(200);
+        });
+
+</script>
+</body>
+</html>

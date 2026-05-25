@@ -1,0 +1,674 @@
+@charset "utf-8";
+
+/* 이용현황 */
+.estmCount {padding: 15px; margin-bottom: 15px; border-radius: 10px; background-color: var(--bg-white); border: 1px solid var(--gray-300); word-break: keep-all;}
+.estmCount .detail { position: relative; padding-top: 30px; font-weight: 700; color: var(--main-font);}
+.estmCount .detail a { position: absolute; top: 0; left: 0; padding: 1px 8px; border: 1px solid var(--primary-navy); background-color: var(--primary-navy); color: var(--white); border-radius: 5px; font-size: 12px; }
+.estmCount .count {margin-top: 5px; color: var(--gray-500);}
+.estmCount .count .set {font-weight: 700; color: var(--primary-navy);}
+.estmCount .count .use {font-weight: 700; color: var(--primary-sub);}
+
+/* 견적 목록 */
+.estmList ul { display: flex; flex-direction: column; flex-wrap: nowrap; align-items: flex-start; margin-bottom: 15px; background-color: var(--bg-white); border: 1px solid var(--gray-300); border-radius: 10px; overflow: hidden; }
+.estmList li {width: 100%; position: relative; padding: 15px; border-bottom: 1px dashed var(--gray-300); display: flex; flex-direction: row; flex-wrap: wrap; gap: 5px; align-items: center;}
+.estmList li:last-child {border-bottom: none;}
+.estmList li button.star {width: 30px; height: 30px; background: url(../images/icons/icon_star_outline.svg) no-repeat center; background-size: 75%; font-size: 0; line-height: 0; overflow: hidden; text-indent: -9999px;}
+.estmList li button.star.on {background: url(../images/icons/icon_star_on.svg) no-repeat center; background-size: 75%;}
+.estmList li span.num {color: var(--gray-500);}
+.estmList li.on span.num, .estmList li.on span.name {font-weight: 700; color: var(--primary-sub)} 
+.estmList li button.del { position: absolute; top: 15px; right: 10px; width: 30px; height: 30px; background: url(../images/icons/icon_trash.svg) no-repeat center; background-size: 60%; font-size: 0; line-height: 0; overflow: hidden; text-indent: -9999px;}
+.estmList li button.cont { width: 100%; display: flex; flex-direction: column; flex-wrap: wrap; align-items: flex-start; gap: 3px; }
+.estmList li button.cont span {text-align: left;}
+.estmList li button.cont span.name {font-weight: 700;}
+.estmList li button.cont span.desc {color: var(--gray-500);}
+
+@media screen and (min-width: 1000px) {
+    .estmCount .detail { padding-top: 0;}
+    .estmCount .detail a {left: unset; right: 0;}
+    .estmList li button.star { position: absolute; left: 7px; bottom: 10px; }
+    .estmList li span.num { position: absolute; top: 15px; left: 17px; }
+    .estmList li button.cont {padding-left: 30px;}
+}
+/* 견적 구성 */
+.estmBox:not(.hide) {display: flex; flex-direction: column; flex-wrap: nowrap; gap: 30px;}
+.estmBox.start .setting, .estmBox.start .compare, .estmBox.start .btnOpenSlide, .estmBox.start .estmDocu { display: none;}
+.estmBox .estmMain {width: 100%;}
+
+/* estmViewport 예외처리 */
+.estmViewport { overflow-x: clip; width: 100%; position: relative; z-index: 1; }
+.estmViewport .estmBox:not(.hide) { flex-direction: row; gap: 0; }
+.estmStep { flex: 0 0 100%; width: 100%; }
+.wrapper.PC .estmViewport .estmBox:not(.hide) {flex-direction: column;} 
+.wrapper.PC .estmStep.estmModel {display: none;}
+
+@media screen and (min-width: 1900px) { 
+    .estmBox.open { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 0; } 
+    .estmBox.open .estmMain {flex: 1;}
+    .estmBox.open .estmDocu {flex: 1;}
+    .wrapper.PC .estmViewport .estmBox:not(.hide) {flex-direction: row;} 
+}
+/* 화면 표시 */
+.estmCell:not(.on) { display: none; }
+/* 차량 선택 */
+.estmCell .vehicle { position: relative; }
+.estmCell .vehicle .choice .box { width: 100%; display: flex; flex-direction: column; flex-wrap: nowrap; align-items: flex-start; gap: 10px; background-color: var(--bg-white); border-radius: 10px; overflow: hidden; padding: 10px; }
+.estmCell .vehicle .choice .box > li { width: 100%; position: relative; }
+.estmCell .vehicle .choice .box li .top { position: relative; background-color: var(--gray-50); border-radius: 10px;}
+.estmCell .vehicle .choice .box li .top button { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; position: relative; padding: 10px 15px; width: 100%; text-align: left; gap: 10px;}
+.estmCell .vehicle .choice .box li .top button::after {position: absolute; content: ''; width: 20px; height: 20px; top: 50%; right: 10px; transform: translateY(-50%); background: url(../images/icons/icon_arrowdown.svg) no-repeat center/contain;}
+.estmCell .vehicle .choice .box li.on .top button::after { transform: translateY(-50%) rotate(180deg);}
+.estmCell .vehicle .choice .box li .top button .title {width: 40px; color: var(--primary-navy);}
+.estmCell .vehicle .choice .box li:last-child .top button {padding-right: 60px;}
+.estmCell .vehicle .choice .box li .tab { display: none;} 
+.estmCell .vehicle .choice .box li .cont { display: none;} 
+.estmCell .vehicle.open .choice .box li.on .cont { display: flex; flex-direction: column;}
+.estmCell .vehicle .choice .box li .cont .title { border-top: 1px solid var(--gray-300); font-size: 13px; font-weight: 500; color: var(--gray-500); padding: 10px;}
+.estmCell .vehicle .choice .box li .cont .title:first-child { border-top: none; }
+.estmCell .vehicle .choice .box li .cont .blank { color: var(--gray-400); text-align: center; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
+.estmCell .vehicle .choice .box li .cont .brandList, .estmCell .vehicle .choice .box li .cont .modelList, .estmCell .vehicle .choice .box li .cont .lineupList {margin-bottom: 10px;}
+.estmCell .vehicle .choice .top .data {width: calc(100% - 50px); display: flex;flex-wrap: wrap; align-items: center; gap: 5px; padding-right: 20px; }
+.estmCell .vehicle .choice .top .data.estmRslt_lineupName .year {width: 100%; font-size: 12px; color: var(--gray-500);}
+.estmCell .vehicle .choice .top .data .name {color: var(--main-font); font-weight: 700;}
+.estmCell .vehicle .choice .top .data .name .sub {color: var(--gray-500); font-size: 12px; display: block;}
+.estmCell .vehicle .choice .top .data .logo {display: flex; max-width: 40px;}
+.estmCell .vehicle .choice .top .data .logo img {width: 100%;}
+.estmCell .vehicle .choice .top .data .car {display: flex; max-width: 40px;}
+.estmCell .vehicle .choice .top .data .car img {width: 100%;}
+.estmCell .vehicle .choice .top .data .info { display: none; }
+.estmCell .vehicle .choice .top .data .price { display: none; }
+.estmCell .vehicle .choice .buttonBox {display: none;}
+.estmCell .vehicle .btn {display: none;}
+.estmCell .vehicle .modelList li.e::before { content: ''; top: 5px; left: 5px; width: 20px; height: 20px; padding: 0; background: transparent url(../images/icons/icon_electronic.png) no-repeat center / contain;}
+.estmCell .vehicle .modelList li.x::before { content: ''; top: 5px; left: 5px; width: 20px; height: 20px; padding: 0; background: transparent url(../images/icons/icon_eco.png) no-repeat center / contain;}
+/* choiced */ 
+.estmCell .vehicle .choiced { display: block; }
+.estmCell .vehicle .choiced .box { display: flex; justify-content: space-between; }
+.estmCell .vehicle .choiced .box li .cont .logo img { width: 60px;}
+.estmCell .vehicle .choiced .box li .cont .car img { width: 100px; }
+.estmCell .vehicle .choiced .summary {position: relative; margin-top: 10px;}
+.estmCell .vehicle .choiced .summary::after {content: ''; display: block; height: 0; clear: both; visibility: hidden; }
+.estmCell .vehicle .choiced .summary .btns { float: left; display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 10px; border-radius: 5px; margin-bottom: 10px; }
+.estmCell .vehicle .choiced .summary .price { float: right; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 10px; }
+.estmCell .vehicle .choiced .summary .price span {font-size: 20px; font-weight: 600; color: var(--main-font);}
+.estmCell .vehicle .choiced .summary .price span.num { position: relative; color: var(--primary-sub); font-weight: 700;}
+.estmCell .vehicle .choiced .summary .price span.num::after {content: ' 원';}
+.estmCell .vehicle .choiced .summary button, .estmCell .vehicle .choiced .summary a {padding: 3px 9px; font-weight: 600; border-radius: 5px; font-size: 12px; background-color: var(--bg-white); color: var(--gray-500); }
+/* 모델 예외처리 */
+.wrapper[path^="estimate"] .modelList {align-items: flex-start;}
+.wrapper[path^="estimate"] .modelList li button .car, .wrapper[path^="estimate"] .modelList li a .car {padding: 15px 10px 10px 10px; border-radius: 10px;}
+.wrapper[path^="estimate"] .modelList li button .car img, .wrapper[path^="estimate"] .modelList li a .car img {max-width: 100px;} 
+ 
+/* 라인업 */
+.lineupList { display: flex; flex-direction: column; flex-wrap: nowrap; align-items: flex-start; gap: 10px; }
+.lineupList li {position: relative; width: 100%;}
+.lineupList li button {width: 100%; padding: 10px; border-radius: 10px;}
+.lineupList li button .year {text-align: left; font-size: 12px; color: var(--gray-500);}
+.lineupList li button .name { width: 100%; position: relative; text-align: left; word-break: keep-all; color: var(--gray-500);}
+.lineupList li button .name .sub { float: right; text-align: right; font-size: 12px; }
+.lineupList li.on button { border: 1px solid var(--primary-sub); background-color: var(--primary-sub-back);}
+.lineupList li.on button .name { color: var(--primary-sub);}
+.lineupList li.state3::after { content: "재고 한정"; position: absolute; top: 9px; right: 10px; background-color: var(--gray-200); padding: 2px 6px; border-radius: 5px; font-size: 10px; color: var(--main-font);}
+/* 트림 */
+.trimList { display: flex; flex-direction: column; flex-wrap: nowrap; align-items: flex-start; gap: 10px; margin-top: 10px;}
+.trimList li {position: relative; width: 100%;}
+.trimList li button { color: var(--gray-500); padding: 10px; width: 100%; border-radius: 10px; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: center; }
+.trimList li button .name {width: 100%; text-align: left; word-break: keep-all;}
+.trimList li button .info {width: 55%; text-align: left; font-size: 12px;}
+.trimList li button .price {width: 45%; text-align: right;}
+.trimList li.on button { border: 1px solid var(--primary-sub); background-color: var(--primary-sub-back); color: var(--primary-sub);} 
+.trimList li.state3::after { content: "재고 한정"; position: absolute; top: 3px; right: 10px; background-color: var(--gray-200); padding: 2px 6px; border-radius: 5px; font-size: 10px; color: var(--main-font);}
+.trimList li.state3 button {padding: 20px 10px 10px 10px;}
+
+@media screen and (min-width: 600px) { 
+    .lineupList li button .name .sub {width: auto;}
+} 
+@media screen and (min-width: 1000px) {
+    .estmCell .vehicle .modelList li.state3::after {border-radius: 5px; padding: 2px 6px; top: 0; right: 0; left: unset;}
+    .estmCell .vehicle .modelList li.e::before {top: 3px; right: 3px;}
+    .estmCell .vehicle .modelList li.x::before {top: 3px; right: 3px;}
+    .estmCell .vehicle .choice .box {flex-direction: row; flex-wrap: nowrap; align-items: stretch; border: 1px solid var(--gray-300); border-radius: 10px; padding: 0; overflow: hidden;}
+    .estmCell .vehicle .choice .box > li {width: 25%; display: flex;}
+    .estmCell .vehicle .choice .box li .cont {height: 350px; padding: 0 10px; overflow-y: auto; }
+    .estmCell .vehicle .choice .box li .top { position: relative; flex: 1; background-color: var(--bg);}
+    .estmCell .vehicle .choice .box li:last-child .top::after{position: relative;}
+    .estmCell .vehicle .choice .box li .top::after {position: relative;}
+    .estmCell .vehicle .choice .box li .top button { flex-direction: column; align-items: flex-start; flex-wrap: nowrap; height: 100%; background-color: var(--bg-white);}
+    .estmCell .vehicle .choice .box li .top button::after {position: relative; content: none;}
+    .estmCell .vehicle .choice .box li .top button .title {width: auto;}
+    .estmCell .vehicle .choice .box li.on .top button::after {position: relative; content: none;}
+    .estmCell .vehicle .choice .box li:first-child .cont {display: none;}
+    .estmCell .vehicle .btn { display: block; position: absolute; right: 10px; top: 10px;}
+    .estmCell .vehicle .btn button.updown { position: absolute; top: 50%; transform: translateY(50%) rotate(180deg); right: 0; width: 40px; height: 40px; background: url(../images/icons/icon_arrowup_white.svg) no-repeat center; background-size: 40%; border-radius: 30px; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; background-color: var(--primary-navy); font-size: 0; line-height: 0; overflow: hidden; text-indent: -9999px;}
+    .estmCell .vehicle .choiced .summary .btns {margin-bottom: 0;}
+    .estmCell .vehicle .choice .buttonBox {display: block; width: 100%; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); }
+    .estmCell .vehicle .choice .buttonBox button {display: none;}
+    .estmCell .vehicle .choice .top .data {padding: 0; width: 100%;}
+    /* open일 경우 */
+    .wrapper[path^="estimate"] .modelList li, .wrapper[path$="compare"] .modelList li {width: calc(25% - 12.5px);}
+    .wrapper[path^="estimate"] .brandList li, .wrapper[path$="compare"] .brandList li {width: calc(25% - 7.5px);}
+    .estmCell .vehicle.open .choice .box { border-bottom: 1px solid var(--gray-300); padding-bottom: 20px; gap: 0;} 
+    .estmCell .vehicle.open .choice .box > li {width: 20%; display: block;}
+    .estmCell .vehicle.open .choice .box > li.on {width: 40%;} 
+    .estmCell .vehicle.open .choice .box li .top .data { display: none; } 
+    .estmCell .vehicle.open .choice .box li .top button {flex-direction: row; width: 100%; height: auto; background-color: var(--gray-50); border-radius: 0;}
+    .estmCell .vehicle.open .choice .box li.on .top button {background-color: var(--bg-white);} 
+    .estmCell .vehicle.open .choice .box li.on .top { background-color: var(--bg-white);}
+    .estmCell .vehicle.open .choice .box li.on .tab { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 5px; position: absolute; top: 8px; right: 15px;}
+    .estmCell .vehicle.open .choice .box li.on .tab button {padding: 3px 9px; color: var(--gray-500); border-radius: 30px; border: 1px solid var(--gray-300); font-size: 12px;}
+    .estmCell .vehicle.open .choice .box li.on .tab button.on {background-color: var(--gray-100); border-color: var(--gray-100); color: var(--main-font); }
+    .estmCell .vehicle.open .choice .box li .cont { display: block; border-top: 1px solid var(--gray-300);}
+    .estmCell .vehicle.open .choice .box li.on .cont {border-top: 0;}
+    .estmCell .vehicle.open .btn { top: -6px; }
+    .estmCell .vehicle.open .btn button.updown {background: url(../images/icons/icon_arrowup_white.svg) no-repeat center; background-size: 40%; background-color: var(--primary-navy); border-radius: 30px; transform: rotate(360deg); box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;} 
+    .estmCell .vehicle.open .choice .buttonBox button:not(.hide) {display: block; width: 100%; border-radius: 0 0 10px 10px; border: 1px solid var(--gray-300); background-color: var(--bg); color: var(--main-font); padding: 5px 10px; font-size: 14px;}
+    .estmCell .vehicle.open .choice .buttonBox button:not(.hide):hover {background-color: var(--gray-100);}
+    .estmCell .vehicle.open .choiced {display: none;} 
+    /* hover */
+    .wrapper.desktop .estmCell .vehicle.open .choice .box li .top button:hover {background-color: var(--gray-100);}  
+    .wrapper.desktop .estmCell .vehicle.open .choice .box li.on .top button:hover {background-color: var(--bg-white);}    
+    .wrapper.desktop .estmCell .vehicle.open .choice .box li.on .tab button:hover {background-color: var(--gray-50);}
+    .wrapper.desktop .estmCell .vehicle.open .choice .box li.on .tab button.on:hover {background-color: var(--gray-100); border-color: var(--gray-100); color: var(--main-font);}
+    /* 예외처리 */
+    .estmCell .vehicle .choice .box li:not(.on) .brandList {flex-direction: column; flex-wrap: nowrap; align-items: flex-start;}
+    .estmCell .vehicle .choice .box li:not(.on) .brandList li {width: 100%;}
+    .estmCell .vehicle .choice .box li:not(.on) .brandList li button {width: 100%; flex-direction: row; justify-content: flex-start; gap: 10px;}
+    .estmCell .vehicle .choice .box li:not(.on) .brandList li button .logo {max-width: 45px;}
+    .estmCell .vehicle .choice .box li:not(.on) .modelList {flex-direction: column; flex-wrap: nowrap; align-items: flex-start;}
+    .estmCell .vehicle .choice .box li:not(.on) .modelList li {width: 100%;}
+    .estmCell .vehicle .choice .box li:not(.on) .modelList li button {width: 100%; flex-direction: row; justify-content: flex-start; padding: 10px; gap: 0;}
+    .estmCell .vehicle .choice .box li:not(.on) .modelList li button .name {text-align: left;}
+    .estmCell .vehicle .choice .box li:not(.on) .modelList li.state3::after {top: 50%; transform: translateY(-50%); right: 0; left: unset;}
+    .estmCell .vehicle .choice .box li:not(.on) .modelList li button .car {width: 50px; background: transparent; padding: 0;}
+    .estmCell .vehicle .choice .box li:not(.on) .modelList li.e::before {top: 0; left: 0;}
+    .estmCell .vehicle .choice .box li:not(.on) .modelList li.x::before {top: 0; left: 0;}
+    .estmCell .vehicle .choice .box li:not(.on) .lineupList li {padding: 0;}
+    .estmCell .vehicle .choice .box li:not(.on) .lineupList li button .name {font-size: 13px; text-align: left; letter-spacing: -.5px;}
+    .estmCell .vehicle .choice .box li:not(.on) .trimList li button {justify-content: space-between; font-size: 13px; letter-spacing: -.5px;}
+    .estmCell .vehicle .choice .box li:not(.on) .trimList li button .info, .estmCell .vehicle .choice .box li:not(.on) .trimList li button .price {width: auto; letter-spacing: -.5px;}
+    .estmCell .vehicle .choice .cont::-webkit-scrollbar {width: 5px;} 
+    .estmCell .vehicle .choice .cont::-webkit-scrollbar-track {background-color: transparent;}
+    .estmCell .vehicle .choice .cont::-webkit-scrollbar-thumb {background-color: var(--gray-300);}
+    .estmCell .vehicle .choice .cont::-webkit-scrollbar-track, .estmCell .vehicle .choice .cont::-webkit-scrollbar-thumb {border-radius: 30px;}
+    /* 견적 화면 처리 */
+    .estmBox.start .estmCell .vehicle .choice .box li .cont {height: 600px;}
+    .estmBox.start .estmCell .vehicle .btn { display: none;}
+    /* 라인업 */
+    /* .lineupList li.state3::after {top: 4px;} */
+    /* 트림 */
+    .trimList li.state3::after {top: 4px;}
+}
+
+/* 옵션 - setting */ 
+.estmCell .setting { display: flex; flex-direction: column; flex-wrap: nowrap; margin-top: 30px; gap: 30px;}
+.estmCell .setting > div { width: 100%; display: flex; flex-direction: column; flex-wrap: nowrap; color: var(--main-font); border: 1px solid var(--gray-300); border-radius: 10px; background-color: var(--bg-white);}
+.estmCell .setting > div .sum { position: relative; border-radius: 0 0 10px 10px; padding: 15px; background-color: var(--gray-100);}
+.estmCell .setting > div .sum div:not(.taxMod) { display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; align-items: center; font-weight: 500; }
+.estmCell .setting > div .sum .total span {font-size: 18px; font-weight: 700;}
+.estmCell .setting > div .sum .total .price { color: var(--primary-sub);}
+.estmCell .setting > div .cont {position: relative;/*  padding: 0 10px; */}
+.estmCell .setting .top { position: relative; border: 1px solid var(--primary-navy); color: var(--white); background-color: var(--primary-navy); padding: 8px 20px; border-radius: 10px 10px 0 0; text-align: left; font-size: 16px; font-weight: 700;}
+.estmCell .setting .top .btnBox { position: absolute; top: 50%; transform: translateY(-50%); right: 20px; display: flex; align-items: center; gap: 10px;} 
+.estmCell .setting .top .btnBox button { border-bottom: 1px solid var(--gray-400); color: var(--gray-400); font-size: 12px;}
+.estmCell .btn {display: flex; flex-wrap: wrap; justify-content: center; align-items: center; }
+.estmCell .btn .updown { width: 35px; height: 35px; background: url(../images/icons/icon_arrowup_white.svg) no-repeat center; background-size: 40%; background-color: var(--primary-navy); border-radius: 30px; transform: rotate(360deg);font-size: 0; line-height: 0; overflow: hidden; text-indent: -9999px;} 
+.estmCell .taxMod { position: absolute; left: 83px; bottom: 18px; }
+.estmCell .taxMod button { font-size: 12px; margin-left: 5px; border: 1px solid var(--gray-100); width: 30px; background: var(--bg-white); border-radius: 30px;}
+.estmCell .taxMod button.on {border: 1px solid var(--primary-navy); background-color: var(--primary-navy); color: var(--white);}
+/* 선택 Bar */
+.estmBar { border-bottom: 1px solid var(--gray-300); }
+.estmBar:last-child {border-bottom: none;}  
+.estmBar > .btn button { position: relative; width: 100%; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: flex-start; justify-content: flex-start; padding: 12px 35px 12px 10px;}
+.estmBar > .btn button::after {position: absolute; content: ''; width: 18px; height: 18px; top: 13px; right: 8px; background: url(../images/icons/icon_arrowdown.svg) no-repeat center/contain;}
+.estmBar.open > .btn button::after {background: url(../images/icons/icon_arrowdown_navy.svg) no-repeat center/contain; transform: rotate(180deg);}
+.estmBar .btn button .title {width: 60px; color: var(--gray-500); text-align: left; font-size: 13px; font-weight: 400;}
+.estmBar .btn button .choiced {width: calc(100% - 60px); display: flex; flex-direction: column; align-items: flex-start; flex-wrap: nowrap; }
+.estmBar .btn button .choiced .data { display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: flex-start; align-items: baseline; width: 100%; font-size: 13px;}
+.estmBar .btn button .choiced .data .count, .estmBar .btn button .choiced .data .name {width: 60%; text-align: left;font-weight: 400; font-size: 13px;}
+.estmBar .btn button .choiced .data .price {width: 40%; text-align: right; font-weight: 700; }
+.estmBar .btn button .choiced .sub:not(.hide) {width: 100%; display: flex; flex-direction: column; align-items: flex-start; flex-wrap: nowrap; margin-top: 5px; }
+.estmBar .btn button .choiced .sub li { width: 100%; display: flex; justify-content: flex-start; flex-direction: row; flex-wrap: nowrap; align-items: baseline;}
+.estmBar .btn button .choiced .sub li span {color: var(--gray-500); font-size: 13px; letter-spacing: -.5px; font-weight: 400;}
+.estmBar .btn button .choiced .sub li span.name {width: 70%; text-align: left;}
+.estmBar .btn button .choiced .sub li span.price {width: 30%; text-align: right;}
+.estmBar .list { display: none; position: relative; }
+.estmBar .list .info { width: 100%; color: var(--gray-400); font-size: 13px; }
+.estmBar .list .data:not(.hide) { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: baseline; gap: 10px;}
+.estmBar ul li.self button {padding: 10px 10px 30px 40px;}
+.estmBar ul li.self .btnDelSelf {position: absolute; bottom: 4px; right: 3px; color: var(--gray-400); font-size: 12px; padding: 3px 9px; } 
+/* 면세 */
+.estmBar.taxfree .subList {margin-top: 10px;}
+.estmBar.taxfree.open .taxYearCheck {display: none;}
+.estmBar .check { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 5px; padding: 0 0 10px 0;}
+.estmBar .check span { width: calc(100% - 70px); font-size: 13px;}
+.estmBar .check span label {width: 100%;} 
+.estmBar .list .data.taxfreeCheck {margin-bottom: 10px;}
+/* open일 경우 */
+.estmBar.open .btn .sub { display: none; }
+.estmBar.open > .btn button {border: 1px solid var(--primary-navy); border-bottom: 0; /* border-radius: 10px 10px 0 0;  */background-color: var(--bg);}
+.estmBar.open .btn button .choiced .sub { display: none; }
+.estmBar.open .list { display: block; position: absolute; padding: 10px; width: 100%; left: 0; border: 1px solid var(--primary-navy); border-top: none; border-radius: 0 0 10px 10px; background-color: var(--bg-white); z-index: 11;}
+.estmBar.open .list .btn {padding-top: 10px;}
+.estmBar.open .list .title { position: relative; color: var(--navy-font); padding-left: 13px; font-weight: 700; font-size: 15px;}
+.estmBar.open .list .title::before { position: absolute; content: ''; top: 50%; left: 3px; transform: translateY(-50%); background-color: var(--navy-font); width: 3px; height: 65%; border-radius: 2px;} 
+.estmBar.open .list::-webkit-scrollbar { width: 5px;}
+.estmBar.open .list::-webkit-scrollbar-track { background-color: transparent;}
+.estmBar.open .list::-webkit-scrollbar-thumb { background-color: var(--gray-300);}
+.estmBar.open .list::-webkit-scrollbar-track, .estmBar.open .list::-webkit-scrollbar-thumb { border-radius: 30px; }
+/* 색상 선택*/
+.estmBar.colorExt .btn button .choiced .data .name, .estmBar.colorInt .btn button .choiced .data .name {width: 65%; text-align: left;}
+.estmBar .btn button .choiced .data .colorChip { position: relative; display: flex; flex-direction: column; padding-right: 5px;}
+.estmBar .btn button .choiced .data .colorChip .colorMain {position: relative; display: inline-block; width: 26px; height: 26px; border: 1px solid var(--gray-300); border-radius: 50%;}
+.estmBar .btn button .choiced .data .colorChip .colorSub { position: absolute; display: inline-block; width: 26px; height: 13px; border-radius: 30px 30px 0 0; border: 1px solid var(--gray-300); border-bottom: none;}
+.colorList { width: 100%; display: flex; flex-direction: column; flex-wrap: nowrap; align-items: flex-start; gap: 10px;}
+.colorList li {width: 100%; position: relative;}
+.colorList li button {position: relative; width: 100%; display: flex; flex-direction: row; justify-content: flex-start; align-items: center; padding: 10px 10px 15px 10px; border: 1px solid transparent; border-radius: 10px;}
+.colorList li.on button {background-color: var(--orange-100); border: 1px solid var(--primary-sub);}
+.colorList li.on button .name, .colorList li.on button .price {color: var(--primary-sub)}
+.colorList li button .colorChip { position: relative; display: flex; flex-direction: column;}
+.colorList li button .colorChip .colorMain {position: relative; display: inline-block; width: 36px; height: 36px; border: 1px solid var(--gray-300); border-radius: 50%;}
+.colorList li button .colorChip .colorSub { position: absolute; display: inline-block; width: 36px; height: 18px; border-radius: 30px 30px 0 0; border: 1px solid var(--gray-300); border-bottom: none;}
+.colorList li button .colorPrice { display: flex; justify-content: space-between; flex-direction: row; flex-wrap: nowrap; align-items: baseline; width: 100%; }
+.colorList li button .name {width: 100%; text-align: left; padding-left: 10px; font-size: 13px;}
+.colorList li.selNot button { width: 100%; background-color: var(--gray-100); border-radius: 10px; padding: 8px 0; text-align: center; justify-content: center; color: var(--gray-500); font-weight: 500;}
+.colorList li.dis button { background-color: var(--gray-100); opacity: .7;}
+.colorList li.dis button::after { position: absolute; right: 10px; bottom: 0; font-size: 12px; color: #50677d; }
+.colorList li.dis[dis='optionJoin'] button::after { content: '연계된 옵션 선택 필요'; }
+.colorList li.dis[dis='optionNot'] button::after { content: '선택된 옵션 선택 필요'; }
+.colorList li.dis[dis='intNot'] button::after { content: '선택된 내장 조합 불가'; }
+.colorList li.dis[dis='extNot'] button::after { content: '선택된 외장 조합 불가'; }
+/* 옵션 목록 */ 
+.optionList { width: 100%; display: flex; flex-direction: column; flex-wrap: nowrap; align-items: flex-start; padding-bottom: 10px; gap: 5px;}
+.optionList li { width: 100%; position: relative; }
+.optionList li button, .optionList li label { position: relative; width: 100%; display: flex; justify-content: flex-start; flex-direction: row;  flex-wrap: wrap; border-radius: 10px; align-items: center; padding: 10px 10px 20px 40px; gap: 3px;}
+.optionList li button::before, .optionList li label::before {position: absolute; content: ''; top: 10px; left: 10px; width: 20px; height: 20px; background: url(../images/icons/icon_checkBox_outline.svg) no-repeat center/contain; border-radius: 3px;}
+.optionList li.on button::before, .optionList li.on label::before {background: url(../images/icons/icon_checkBox_on.svg) no-repeat center/contain;}
+.optionList li button .data, .optionList li label .data {position: relative; width: 100%; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: baseline;}
+.optionList li button .data .name, .optionList li label .data .name { width: 65%; text-align: left; display: flex; align-items: flex-start;}
+.optionList li button .data .name .icons {display: flex;}
+.optionList li button .data .name .icons .help {width: 30px; height: 20px; background: url(../images/icons/icon_help.svg) no-repeat center left; background-size: 50%; margin-left: 3px;font-size: 0; line-height: 0; overflow: hidden; text-indent: -9999px;}
+.optionList li button .data .name .icons .photo {width: 30px; height: 20px; background: url(../images/icons/icon_image_gray.svg) no-repeat center left; background-size: 50%; margin-left: 3px;font-size: 0; line-height: 0; overflow: hidden; text-indent: -9999px;}
+.optionList li button .data .name .icons .all {width: 48px; height: 20px; background: url(../images/icons/icon_infoImage.svg) no-repeat center left; background-size: 65%; margin-left: 3px; font-size: 0; line-height: 0; overflow: hidden; text-indent: -9999px;}
+.optionList li button .data .price, .optionList li label .data .price { width: 35%; text-align: right; font-weight: 700;}
+.optionList li button .info, .optionList li label .info { color: var(--gray-500); text-align: left; font-size: 13px; letter-spacing: -.1px; }
+.optionList li.dis button {background-color: var(--gray-50); opacity: .7; }
+.optionList li.dis button::before {display: none;}
+.optionList li.dis button::after { position: absolute; right: 10px; bottom: 5px; font-size: 12px; color: #50677d;}
+.optionList li.dis button {padding: 10px 10px 20px 40px;}
+.optionList li.dis[dis='sub'] button::after, .optionList li.dis[dis='sub'] label::after { content: '연계된 옵션 선택 필요';}
+.optionList li.dis[dis='sub2'] button::after, .optionList li.dis[dis='sub2'] label::after { content: '선택된 옵션 선택 필요';}
+.optionList li.dis[dis='anti'] button::after, .optionList li.dis[dis='anti'] label::after { content: '선택된 옵션 조합 불가';}
+.optionList li.dis[dis='intNot'] button::after, .optionList li.dis[dis='intNot'] label::after { content: '선택된 내장 조합 불가';}
+.optionList li.dis[dis='extNot'] button::after, .optionList li.dis[dis='extNot'] label::after { content: '선택된 외장 조합 불가';}
+.optionList li.default button {padding-bottom: 20px; }
+.optionList li.default button::after { position: absolute; right: 10px; bottom: 5px; font-size: 12px; color: var(--primary-blue); content: '필수 선택 옵션';}
+/* 용품 */
+.partsList { display: flex; flex-direction: column; flex-wrap: nowrap; align-items: flex-start; gap: 10px; }
+.partsList li { width: 100%; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: flex-start; }
+.partsList li > div.name {width: 70px;color: var(--gray-500);font-weight: 400; font-size: 13px; }
+.partsList li > div:not(.name) {width: calc(100% - 70px); position: relative; }
+.partsList li .select {width: calc(100% - 70px);}
+.partsList li select, .partsList li input[type='text'] { width: 100%;}
+.partsList li .pre {position: absolute; top: 50%; left: 8px; transform: translateY(-50%); z-index: 1;}
+.partsList li button {position: absolute; right: 8px; top: 50%; transform: translateY(-50%);}
+.partsList li .select:not(.self) input, .partsList li .select:not(.self) button { display: none;}
+/* 직접 입력 */
+.estmSelf { position: relative; display: flex; flex-direction: column; flex-wrap: nowrap; align-items: flex-start; gap: 10px; background-color: var(--gray-50); padding: 10px; border-radius: 10px; margin-top: 10px }
+.estmSelf > div { width: 100%; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: flex-start; }
+.estmSelf > div .name {width: 40px; color: var(--gray-500); font-weight: 500;}
+.estmSelf > div select, .estmSelf > div input { width: calc(80% - 40px); border-bottom: 1px solid var(--gray-300); border-radius: 0; background-color: var(--gray-50);}
+.estmSelf > div .explan {width: 20%; text-align: right; font-size: 12px; font-weight: 500; color: var(--primary-sub); white-space: nowrap;}
+.estmSelf > div.price {position: relative;}
+.estmSelf > div.price input[type="text"] {padding: 8px 25px 8px 10px}
+.estmSelf > div.price span.unit {position: absolute; right: 25%; top: 50%; transform: translateY(-50%);}
+.estmSelf .buttonBox { width: auto; position: absolute; bottom: 10px; right: 10px;} 
+.estmSelf .buttonBox button { padding: 5px 10px; font-size: 12px;}
+/* 예상 납기일 */
+.estmShip:not(.hide) { display: flex; flex-wrap: wrap; align-items: stretch; padding: 12px 10px; width: 100%; border-bottom: 1px solid var(--gray-300);} 
+.estmShip .title { width: 60px; display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; align-items: baseline; color: var(--gray-500); font-size: 13px;} 
+.estmShip .detail .buttonBox {width: auto; justify-content: flex-end;} 
+.estmShip .detail .buttonBox a, .estmShip .detail .buttonBox button { padding: 2px 6px; font-size: 12px; border-radius: 5px; flex: unset;}
+.estmShip .detail {width: calc(100% - 60px);}
+.estmShip .detail .sub { width: 100%; display: flex; flex-direction: column; flex-wrap: wrap; align-items: flex-start; gap: 3px;}
+.estmShip .detail .sub li { position: relative; width:100%; display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; color: var(--gray-500); font-size: 13px; gap: 0 5px; letter-spacing: -.5px; }
+.estmShip .detail .sub li.focus {color: var(--primary-sub);font-weight: 700;}
+.estmShip .detail .sub li .ref {font-size: 12px; color: var(--gray-500);}
+.estmShip.two {gap: 0;}
+.estmShip.two .right {width: calc(100% - 60px);}
+.estmShip.two .buttonBox {justify-content: flex-start; margin-bottom: 10px;}
+.estmShip.two .title {width: 60px; align-items: baseline;}
+
+/* 데이터 표시 */
+.estmData { padding: 10px; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: baseline; border-bottom: 1px solid var(--gray-300); }
+.estmData:last-child {border-bottom: none;}
+.estmData .title {width: 55px; text-align: left; color: var(--gray-500); font-weight: 400; font-size: 13px; }
+.estmData .choice { width: calc(100% - 55px); display: flex; flex-direction: column; flex-wrap: nowrap; gap: 5px; }
+.estmData .choice .data:not(.hide) { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 10px;}
+.estmData .choice .data input[type="text"] {max-width: 75px; padding: 5px; font-weight: 700;}
+.estmData .choice .data .desc:not(.wide) { text-align: left; width: calc(65% - 5px);}
+.estmData .choice .data .desc button {font-size: 12px; color: var(--white); background-color: var(--primary-navy); padding: 2px 6px; border-radius: 3px;}
+.estmData .choice .data .desc .setTakeExtra { padding: 0; border-radius: 0; position: absolute; margin-left: 3px; width: 18px; height: 18px; background: url(../images/icons/icon_setting.svg) no-repeat center bottom; background-size: 85%; text-indent: -9999px; font-size: 0;}
+.estmData .choice .data .price { text-align: right; width: calc(35% - 5px); font-weight: 700;}
+/* 할인 */
+.discountList {display: flex; flex-direction: column; flex-wrap: nowrap; align-items: flex-start;}
+.discountList > li { position: relative; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; width: 100%; border-bottom: 1px solid var(--gray-300); padding: 10px 0;}
+.discountList > li:first-child {padding-top: 0;}
+.discountList > li .name { position: relative; padding-left: 10px; font-weight: 700; color: var(--navy-font); display: flex; align-items: center;}
+.discountList > li .name::before { position: absolute; content: ''; top: 50%; left: 0; transform: translateY(-50%); background-color: var(--navy-font); width: 3px; height: 65%; border-radius: 2px;}
+.discountList > li .name .help {width: 25px; height: 25px; background: url(../images/icons/icon_help.svg) no-repeat center; background-size: 65%; font-size: 0; line-height: 0; overflow: hidden; text-indent: -9999px;}
+.discountList > li .sub {width: 100%; display: flex; flex-direction: column; flex-wrap: wrap; gap: 5px;}
+.discountList > li .sub li {position: relative;}
+.discountList > li .sub li button {position: relative; width: 100%; padding: 10px 10px 10px 40px;}
+.discountList > li .sub li button .require {float: left;}
+.discountList > li .sub li button .price {float: right;}
+.discountList > li .sub li button::before {position: absolute; content: ''; top: 10px; left: 10px; width: 20px; height: 20px; background: url(../images/icons/icon_radio_outline.svg) no-repeat center/contain;}
+.discountList > li .sub li.on button::before {background: url(../images/icons/icon_radio_on.svg) no-repeat center/contain;}
+.discountList > li .sub li.on button {color: var(--primary-sub);}
+.discountList > li.self .sub li button {padding: 10px 10px 30px 35px;}
+.estmBar .discountList li.self .btnDelSelf {bottom: 15px; right: 10px;} 
+.discountList > li.dis button {padding: 10px 10px 20px 40px;}
+.discountList > li.dis .sub button {opacity: .7; background-color: var(--gray-100); padding: 10px 10px 20px 40px; border-radius: 5px; }
+.discountList > li.dis .sub li button::before {position: relative;}
+.discountList > li.dis::before {display: none;} 
+.discountList > li.dis .sub button::after { position: absolute; right: 10px; bottom: 5px; font-size: 12px; color: var(--primary-red);}
+.discountList > li.dis[dis='sub'] .sub button::after { content: '연계된 할인 선택 필요';}
+.discountList > li.dis[dis='anti'] .sub button::after { content: '선택된 할인 조합 불가';}
+.discountList > li.notice {gap: 10px; text-align: center; font-weight: 500;}
+.discountList > li.notice .buttonBox a {max-width: 150px;}
+/* 전기차 지자체 보조금 */
+.discountList > li .selBtn .list {display: none;}
+.discountList > li .selBtn .list.open {display: flex;}
+.discountList > li.hide {display: none;}
+.discountList > li .box.cnt2 {width: 100%; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 10px;}
+.discountList > li .box.cnt2 .selBtn {width: calc(50% - 6.6px);} 
+.discountList > li .box.cnt2 .selBtn .discountBtn { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; position: relative; padding: 5px; }
+.discountList > li .box.cnt2 .selBtn .discountBtn::after {position: absolute; content: ''; top: 50%; right: 10px; transform: translateY(-50%); width: 18px; height: 18px; background: url(../images/icons/icon_arrowdown.svg) no-repeat center/contain;}
+.discountList > li .box.cnt2 .selBtn .discountBtn.open::after {transform: translateY(-50%) rotate(180deg);}
+/* 세부 선택 */
+.estmSub {margin-top: 10px;}
+.estmSub .name { width: 100%; display: flex; justify-content: flex-start; position: relative; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 10px;}
+.estmSub .name button { width: 100%; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; position: relative; padding: 8px; border-bottom: 1px solid var(--gray-300); }
+.estmSub .name button::after {position: absolute; content: ''; top: 50%; right: 10px; transform: translateY(-50%); width: 18px; height: 18px; background: url(../images/icons/icon_arrowdown.svg) no-repeat center/contain;}
+.estmSub .name button.on::after {transform: translateY(-50%) rotate(180deg);}
+.estmSub .name.cnt3 button {width: calc(33.3% - 6.6px);} 
+.estmSub .sub { /*display: none;*/ padding-top: 10px; }
+.estmSub.deliveryType.self:not(.hide) { display: flex; align-items: center; gap: 10px;}
+.estmSub.deliveryType.self input { width: 100%; min-width: 90px;}
+.estmSub.deliveryType.self .cancel {background-color: var(--gray-100); padding: 6px 9px; font-size: 12px; border-radius: 7px; white-space: nowrap;}
+.estmCell .subList:not(.hide) { width: 100%; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: center; gap: 10px; background-color: var(--bg-white);}
+.estmCell .subList li { width: calc(50% - 5px);} 
+.estmCell .subList li button { width: 100%; font-size: 13px; padding: 7px; border-radius: 7px; word-break: keep-all; background-color: var(--gray-50);}
+.estmCell .subList li.on button {background-color: var(--primary-navy); color: var(--white); border-color: var(--primary-navy);} 
+.estmCell .subList.cnt2 li { width: calc(50% - 5px); }
+.estmCell .subList.cnt3 li { width: calc(33.3% - 6.6px); } 
+/* 금융선택 */
+.estmCell .compare {display: flex; align-items: flex-start; gap: 10px; margin-top: 30px; color: var(--main-font); overflow-x: auto;}
+.estmCell .compare .fincCell { flex: 0 0 calc((100% - 20px) / 3); min-width: 300px; background-color: var(--bg-white); border-radius: 12px; overflow: hidden; border: 1px solid var(--gray-300);}  
+.estmCell .compare .fincCell .top { position: relative; }
+.estmCell .compare .fincCell .top .title { border: 1px solid var(--primary-navy); background-color: var(--primary-navy); color: var(--white); padding: 8px; border-radius: 10px 10px 0 0; }
+.estmCell .compare .fincCell .top .title span.no {font-size: 16px; font-weight: 700; margin-right: 10px;}
+.estmCell .compare .fincCell .top .title .diff {position: absolute; top: 0; left: 2px; }
+.estmCell .compare .fincCell .top .title .bar {position: relative; width: 100%; text-align: left; font-size: 16px; font-weight: 700; color: var(--white); }
+.estmCell .compare .fincCell .top .title .bar::after {position: absolute; content: ''; top: 50%; right: 10px; width: 18px; height: 18px; transform: translateY(-50%); background: url(../images/icons/icon_arrowdown_white.svg) no-repeat center/contain;}
+.estmCell .compare .fincCell .top.open .title .bar::after {background: url(../images/icons/icon_arrowdown_orange.svg) no-repeat center/contain; transform: translateY(-50%) rotate(180deg);}
+.estmCell .compare .fincCell .top.open .subList {padding: 10px;} 
+.estmCell .compare .fincCell .summary {}
+.estmCell .compare .fincCell .summary button {position: relative; min-height: 50px; font-weight: 700; border-bottom: 1px solid var(--gray-300); display: flex; flex-direction: row; flex-wrap: wrap; gap: 0 10px; align-items: center; justify-content: center; width: 100%; padding: 10px 40px 10px 10px;}
+.estmCell .compare .fincCell .summary button::after {position: absolute; content: ''; top: 50%; right: 20px; transform: translateY(-50%); width: 18px; height: 18px; background: url(../images/icons/icon_arrowdown.svg) no-repeat center/contain;}
+.estmCell .compare .fincCell .summary button:hover::after {background: url(../images/icons/icon_arrowdown_orange.svg) no-repeat center/contain;}
+.estmCell .compare .fincCell:has(.config.open) .summary button::after { background: url(../images/icons/icon_arrowdown_orange.svg) no-repeat center/contain; transform: translateY(-50%) rotate(180deg); }
+.estmCell .compare .fincCell:has(.config.open) .summary button {background-color: var(--gray-100); border: 1px solid var(--primary-navy); border-bottom: none; border-top: none;}
+.estmCell .compare .fincCell .config { display: none; position: relative; border-bottom: 1px solid var(--gray-300);}
+.estmCell .compare .fincCell .config.open { display: block; border: 1px solid var(--primary-navy); border-radius: 0 0 10px 10px; border-top: 0;}
+.estmCell .compare .fincCell .config.open.notUp {border: none; border-bottom: 1px solid var(--gray-300);}  /*{padding: 10px;} updown 버튼 없는 경우 */ 
+.estmCell .compare .fincCell .config .sub {display: flex; flex-direction: column;} 
+.estmCell .compare .fincCell .config .sub.step1 {margin-top: 10px;}
+.estmCell .compare .fincCell .config .bar:not(.hide) {width: 100%; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-end; gap: 5px 10px; padding: 10px;}
+.estmCell .compare .fincCell .config .bar .title {width: 60px; color: var(--gray-500); font-size: 13px; } 
+.estmCell .compare .fincCell .config .bar > :not(.title) { width:calc(100% - 70px); }
+.estmCell .compare .fincCell .config .bar .full {width: calc(100% - 70px);}  
+.estmCell .compare .fincCell .config .bar .radio, .estmCell .compare .fincCell .config .bar .check {display: flex; flex-wrap: wrap; gap: 5px 10px;}
+.estmCell .compare .fincCell .config .bar .check input[type="checkbox"] + span {font-size: 12px; padding-left: 18px;}
+.estmCell .compare .fincCell .config .bar .check input[type="checkbox"] + span:before {width: 15px; height: 15px;}
+.estmCell .compare .fincCell .config .bar .half {width: calc(50% - 40px); position: relative;} 
+.estmCell .compare .fincCell .config .bar .right {width: calc(50% - 40px); text-align: right; position: relative; font-weight: 700;}
+.estmCell .compare .fincCell .config .bar .right.text {padding-right: 5px;} 
+.estmCell .compare .fincCell .config .bar select { width: 100%; padding: 8px 25px 8px 10px; font-size: 13px; }
+.estmCell .compare .fincCell .config .bar .half select, .estmBox .estmCell .compare .fincCell .config .bar .full select { width: 100%; padding: 8px 25px 8px 10px; }  
+.estmCell .compare .fincCell .config .bar .detailView { padding: 5px 20px; background-color: var(--bg-white); border: 1px solid var(--gray-300); border-radius: 5px; font-size: 12px;}
+.estmCell .compare .fincCell .config.fincConf .btnRadio { /* display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 10px; */ flex-wrap: nowrap;} 
+.estmCell .compare .fincCell .config.fincConf .btnRadio label {flex: 1;}
+.estmCell .compare .fincCell .config.fincConf .btnRadio label input[type="radio"] + span { border-radius: 7px; padding: 5px; justify-content: center;}
+.estmCell .compare .fincCell .config .bar input[type="text"] { width: 100%; padding: 8px 25px 8px 10px; font-weight: 500; text-align: left; } 
+.estmCell .compare .fincCell .config .bar .pre {position: absolute; top: 50%; right: 25px; transform: translateY(-50%); z-index: 1; font-size: 10px; color: var(--gray-500); font-weight: 400; letter-spacing: -.5px;}
+.estmCell .compare .fincCell .config .bar .pre.cancel {right: 35px;}
+.estmCell .compare .fincCell .config .bar .unit {position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: var(--gray-500); font-size: 10px; }
+.estmCell .compare .fincCell .config .pmt { width: 100%; display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; border-radius: 0 0 10px 10px; padding: 15px; background-color: var(--gray-100); }
+.estmCell .compare .fincCell .config .pmt .title { width: 100%; font-weight: 700; }
+.estmCell .compare .fincCell .config .pmt .desc {font-size: 12px; color: var(--gray-500);}
+.estmCell .compare .fincCell .config .pmt .hold { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; width: 50%; gap: 5px; }
+.estmCell .compare .fincCell .config .pmt .main { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-end; width: 50%; gap: 5px;}
+.estmCell .compare .fincCell .config .pmt .data { color: var(--primary-sub); font-weight: 700; font-size: 16px; }
+.estmCell .compare .fincCell .config .btn:not(.hide) { position: relative; padding: 10px; z-index: 1; border-radius: 10px; min-height: 55px;}
+.estmCell .compare .fincCell .config .btn .left, .estmCell .compare .fincCell .config .btn .right {padding: 5px 20px; background-color: var(--bg-white); border: 1px solid var(--gray-300); border-radius: 5px; font-size: 12px;}
+.estmCell .compare .fincCell .config .btn .left {position: absolute; left: 10px;}
+.estmCell .compare .fincCell .config .btn .right {position: absolute; right: 10px;}
+.estmCell .compare .fincCell .config .btn .left:hover, .estmCell .compare .fincCell .config .btn .right:hover {background-color: var(--gray-50);}
+.estmCell .compare .fincCell .top .list { display: none; }
+.estmCell .compare .fincCell .top.open .list { display: block; }
+.estmCell .compare .subList li.on button {background-color: var(--primary-navy);}
+/* 직접 입력 예외처리 */
+.estmCell .compare .fincCell .config .bar .select:not(.self) input, .estmCell .compare .fincCell .config .bar .select:not(.self) .unit, .estmCell .compare .fincCell .config .bar .select:not(.self) button { display: none;}
+.estmCell .compare .fincCell .config .bar .select.self select {display: none;}
+/* 금융리스트 */
+.compList {display: flex; flex-direction: column; align-items: flex-start; flex-wrap: nowrap; background-color: var(--bg-white);}
+.compList li {position: relative; width: 100%; border-bottom: 1px solid var(--gray-300); background: var(--bg-white); }
+.compList li:last-child {border-bottom: none;}
+.compList li > button { position: relative; width: 100%; font-weight: 400; display: flex; justify-content: space-between; align-items: center; border: 1px solid transparent; padding: 65px 10px 10px 10px;}
+.compList li:not(.failure).on {border: 1px solid var(--primary-sub); background-color: var(--orange-100); border-radius: 1px; margin-top: -1px; z-index: 1;}
+.compList li:last-child:not(.failure).on {border-radius: 0 0 12px 12px;}
+.compList li:not(.failure).on > button {padding: 65px 10px 10px 10px;}  
+.compList li .rank {font-size: 15px; position: absolute; top: 10px; left: 10px; font-weight: 700;}
+.compList li .logo { position: absolute; top: 35px; left: 10px; display: flex; align-items: center;} 
+.compList li .logo img { width: 25px; height: 25px; padding: 2px; background-color: transparent; border-radius: 50%;}
+.compList li .logo .company { display: flex; align-items: center; padding-left: 4px; font-weight: 700; letter-spacing: .5px;}
+.compList li .help { width: 30px; height: 30px; background: url(../images/icons/icon_help.svg) no-repeat center; background-size: 60%; font-size: 0; line-height: 0; text-indent: -9999px;}
+.compList li .name { width: 40%; letter-spacing: -.5px; text-align: left; font-size: 13px; color: var(--gray-500); }  
+.compList li .exception {position: absolute; top: 10px; left: 30px; background-color: var(--primary-sub-back); font-size: 12px; color: var(--primary-sub); font-weight: 600; padding: 1px 8px; border-radius: 30px;}
+.compList li .price { position: absolute; top: 35px; right: 10px; font-weight: 700; font-size: 18px;}
+.compList li .price .sub { font-weight: 400; font-size: 12px; padding-right: 5px;}
+.compList li .info { display: flex; flex-wrap: wrap; justify-content: flex-end; color: var(--gray-500); } 
+.compList li .gap { position: absolute; top: 15px; right: 10px; font-size: 12px;} 
+.compList li .gap.up { color: #E35D6A;} 
+.compList li .gap.down { color: var(--primary-sub);}
+.compList li.on > button::before { background: url(../images/icons/icon_checked_on.svg) no-repeat center; background-size: 60%;}
+.compList li.on button .rank {color: var(--primary-sub); }
+.compList li.failure { background-color: var(--gray-50); opacity: .6;}
+.compList li.failure > button, .compList li.failure > div {padding: 35px 10px 30px 10px;}
+.compList li.failure .logo { top: 7px; left: 7px;} 
+.compList li.failure .name { top: unset; left: 10px;}
+.compList li.failure .info { position: absolute; top: 10px; right: 10px;}
+.compList li.failure .memo { position: absolute; top: 10px; right: 10px; color: var(--primary-sub); font-size: 12px;}
+.compList li.failure .help {top: 8px; left: 90px;} 
+.compList li.failure .fold {display: none;} 
+.compList li.folding { height: 30px; background: var(--gray-100); border-radius: 5px; opacity: .6;}
+.compList li.folding .fold {font-size: 0; text-align: right;}
+.compList li.folding .fold::before { content: '펼치기'; font-size: 12px;}
+.compList li.folding span, .compList li.folding .help {display: none;}
+.compList li.folding > button {display: none;}
+.compList li.folding > button::before {position: unset; background: none;}
+.compList li.none {border: none;}
+.compList li.none .title:not(.hide) { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; width: 100%; text-align: center; color: var(--gray-500); font-weight: 700; position: relative; padding: 30px 0; background-color: transparent; word-break: keep-all; }
+.compList li.none .title::before {content: ''; width: 30px; height: 30px; background: url(../images/icons/icon_blank.svg) no-repeat center / contain;;}
+.compList li.none .desc {padding: 15px; border-radius: 10px; background-color: var(--gray-50); font-size: 13px; font-weight: 500;}
+.compList li .noticeBox {margin: 10px; width: auto;}
+
+
+/* 금융상품 팝업 */
+.popup .content .financeView {display: flex; flex-direction: column; flex-wrap: nowrap; justify-content: flex-start; align-items: flex-start;}
+.popup .content .financeView li { width: 100%; display: flex; padding: 10px 0; border-bottom: 1px solid var(--gray-300); }
+.popup .content .financeView li:last-child {border-bottom: none; padding-bottom: 0;}
+.popup .content .financeView li > .title {width: 100px; font-weight: 700; color: var(--navy-font); font-size: 13px;}
+.popup .content .financeView li .data {font-weight: 500; display: block;} 
+.popup .content .financeView li :not(.title) {width: calc(100% - 100px);}
+.popup .content .financeView li .tableBox table {width: 100%;}
+.popup .content .financeView li .tableBox table tr th {padding: 3px 10px;} 
+.popup .content .financeView li .tableBox table tr td {padding: 3px 10px;}
+.popup .content .promotion:not(.hide) {display: flex; flex-direction: column; flex-wrap: nowrap; padding-top: 10px; gap: 10px;}
+.popup .content .promotion {margin-top: 15px;}
+.popup .content .promotion .tableBox table tr:not(:last-child) {border-bottom: 1px dashed var(--gray-300);}
+.popup .content .promotion .tableBox table tr th {padding: 3px;}
+.popup .content .promotion .tableBox table .title {padding: 3px; font-size: 13px; background-color: var(--gray-50);}
+.popup .content .promotion .tableBox table tr td {font-size: 13px; }
+.popup .btnOpenPromotion {position: relative;}
+.popup .btnOpenPromotion::after {position: absolute; content: ''; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; background: url(../images/icons/icon_arrowdown_white.svg) no-repeat center/contain;}
+.popup .btnOpenPromotion.fold::after {transform: translateY(-50%) rotate(180deg);}
+
+/* 사양 팝업 (모델, 견적 동일 사용) */
+.popup .content .specBox dl .data {align-items: flex-start;} 
+.popup .content .specBox dl .data dd {color: var(--gray-500); font-size: 13px;}
+.popup .content .specBox dl .data dd button { text-align: left; text-decoration: underline solid #d1d1d1; text-underline-offset: 2px; font-size: 13px; color: var(--gray-500);} 
+.popup .content .specBox dl .data dd button:hover {color: var(--main-font); text-decoration-color: var(--gray-400);}
+.popup .content .infoBox {display: flex; flex-wrap: wrap; gap: 10px; text-align: left;}
+.popup .content .infoBox .box {width: 100%; text-align: center;}
+.popup .content .infoBox .box .title {display: block; width: 100%; font-size: 12px; color: var(--gray-500);}
+.popup .content .infoBox .descTitle { position: relative; display: block; margin-bottom: 5px; width: 100%; font-weight: 700; color: var(--navy-font); padding-left: 24px; font-size: 13px; text-align: left;}
+.popup .content .infoBox .descTitle::before {content: ''; position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 18px; height: 18px; background: url(../images/icons/icon_info_navy.svg) no-repeat center/contain; } 
+.popup .content .infoBox .descBox .desc {color: var(--gray-500); display: block; font-size: 13px;}
+ 
+/* 온라인견적 */
+.floatingEstm { display: none; position: fixed; bottom: 185px; right: 15px; z-index: 48; }
+.floatingEstm .title {position: relative; background-color: var(--bg-white); padding: 10px; border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 5px;}
+.floatingEstm .adEstmBox {display: none; position: absolute; bottom: calc(100% + 10px); right: 0;}
+.floatingEstm .adEstmBox.open {display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;}
+.floatingEstm .adEstmBox a, .floatingEstm .adEstmBox button { display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--gray-300); background-color: var(--bg-white); border-radius: 50%;}
+.floatingEstm .adEstmBox a .logo, .floatingEstm .adEstmBox button .logo {display: flex; align-items: center; gap: 10px;}
+.floatingEstm .adEstmBox a .logo img, .floatingEstm .adEstmBox button .logo img {max-width: 40px; background-color: var(--white); padding: 5px; border-radius: 50%;}
+.floatingEstm .adEstmBox a .logo .company, .floatingEstm .adEstmBox button .logo .company {font-weight: 700; font-size: 13px; letter-spacing: -.5px; color: var(--main-font);}
+.floatingEstm .adEstmBox a .btn, .floatingEstm .adEstmBox button .btn { white-space: nowrap; background-color: var(--gray-100); padding: 3px 9px; font-size: 12px; color: var(--main-font); font-weight: 600; border-radius: 7px;}
+ 
+@media screen and (min-width: 1000px) {
+    .wrapper[path="estimate_leaserent"] .estmCell .setting .dcBox .sum {min-height: auto;}
+    .estmCell .setting {flex-direction: row; gap: 10px;}
+    .estmCell .setting > div {width: calc(33.3% - 6.6px); flex: 1; justify-content: space-between;}
+    .estmCell .setting .optBox .sum {min-height: auto;}
+    .estmCell .setting > div .cont {flex: 1;}
+    .estmCell .setting > div .sum {display: flex; flex-direction: column; justify-content: space-between; min-height: 105px;}
+    .floatingEstm {display: block;}
+    .popup .content .specBox dl .data {gap: 10px;}
+    .popup .content .specBox dl .data dd {width: calc(100% - 80px);}
+}
+
+/* desktop기준 hover */
+.wrapper.desktop .estmList li:hover {background-color: var(--gray-50);}
+.wrapper.desktop .brandList li button:hover, .wrapper.desktop .lineupList li button:hover, .wrapper.desktop .trimList li button:hover {background-color: var(--gray-50);}
+.wrapper.desktop .estmCell .vehicle .choice .box li:not(.on) .modelList li:hover button {background-color: var(--gray-50);}
+.wrapper.desktop .estmCell .vehicle .choice .box li:not(.on) .modelList li.on:hover button {background-color: var(--primary-sub-back);}
+.wrapper.desktop .brandList li.on button:hover, .wrapper.desktop .lineupList li.on button:hover, .wrapper.desktop .trimList li.on button:hover {background-color: var(--primary-sub-back);}
+.wrapper.desktop .estmBar > .btn button:hover::after {background: url(../images/icons/icon_arrowdown_navy.svg) no-repeat center/contain;}
+.wrapper.desktop .optionList li button:hover, .wrapper.desktop .discountList > li .sub li button:hover {background-color: var(--bg); border-radius: 10px;}
+.wrapper.desktop .optionList li.dis button:hover,.wrapper.desktop .optionList li.dis label:hover, .wrapper.desktop .colorList li.dis button:hover, .wrapper.desktop .discountList > li.dis .sub button:hover {background-color: var(--gray-50); }
+.wrapper.desktop .estmSub .name button:hover::after {background: url(../images/icons/icon_arrowdown_navy.svg) no-repeat center/contain;}
+.wrapper.desktop .estmCell .subList li:hover button {background-color: var(--gray-100); border-color: var(--gray-100);}
+.wrapper.desktop .estmCell .subList li.on:hover button {background-color: var(--primary-darknavy); color: var(--white); border-color: var(--primary-darknavy);}
+.wrapper.desktop .estmCell .compare .fincCell .top .title button.bar:hover::after {background: url(../images/icons/icon_arrowdown_white.svg) no-repeat center/contain;}
+.wrapper.desktop .compList li:not(.failure):hover button {background-color: var(--gray-50);} 
+.wrapper.desktop .compList li:not(.failure).on:hover button {background-color: var(--primary-sub-back);} 
+
+/* 견적 설정 */
+#formConfig .tabCont > div:not(.on) { display: none; }
+#formConfig .tabCont .inputBox .name {width: 100px; font-size: 13px; color: var(--gray-500);}
+#formConfig .tabCont .inputBox {flex: 1;}
+#formConfig .tabCont .inputBox input {width: calc(100% - 110px);}
+#formConfig .tabCont .total {width: 100%; text-align: right; display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: space-between;}
+#formConfig .tabCont .total .sel {display: flex; align-items: center; gap: 10px;}
+#formConfig .tabCont .total .price { font-size: 16px; font-weight: 700; color: var(--primary-sub);}
+#formConfig .tabCont .total .price .num {margin: 0 3px 0 10px;} 
+#formConfig .tabCont .selectBox {width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+#formConfig .tabCont .selectBox::after {content: url('../images/icons/icon_arrowdown.svg'); margin-bottom: -10px;}
+@media screen and (min-width: 600px) {
+    #formConfig .tabCont .inputBox .name {width: auto;} 
+    #formConfig .tabCont .selectBox {width: auto; flex-direction: row; flex-wrap: nowrap;}
+    #formConfig .tabCont .selectBox::after {margin-bottom: 0; transform: rotate(-90deg); margin-left: 10px;}
+}
+
+/* 견적 저장 */
+#formEstmSave .inputBox {flex: 1;} 
+#formEstmSave dl .data.connectBox { position: relative; gap: 10px;}
+#formEstmSave dl .data.connectBox dt {display: flex; justify-content: space-between; align-items: center;}
+#formEstmSave dl .data .btn { display: flex; gap: 5px;}
+#formEstmSave dl .data .btn a { font-size: 12px; background-color: var(--gray-100); border: 1px solid var(--gray-100); padding: 3px 9px; border-radius: 5px; font-weight: 500;}
+           
+/* 견적서 */    
+.btnOpenSlide:not(.hide) { width: 70px; height: 70px; position: fixed; bottom: 75px; right: 15px; display: flex; align-items: center; justify-content: center; z-index: 48;}
+.btnOpenSlide .btnOpenDocu {position: relative; width: 100%; height: 100%; border-radius: 10px; border-radius: 10px; background-color: var(--primary-sub); color: var(--white); padding-top: 26px; opacity: .9; box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 5px;}
+.btnOpenSlide .btnOpenDocu::before {position: absolute; content: ''; top: 12px; left: 50%; transform: translateX(-50%); width: 24px; height: 24px; background: url(../images/icons/navigation/icon_estimate_white.svg) no-repeat center/contain;}
+.btnCloseDocu:not(.hide) {width: 70px; height: 70px; position: fixed; bottom: 75px; right: 15px; display: flex; align-items: center; justify-content: center; z-index: 48; background-color: var(--gray-50); color: var(--gray-400); padding-top: 26px; box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 5px; border-radius: 10px;}
+.btnCloseDocu::before {position: absolute; content: ''; top: 12px; left: 50%; transform: translateX(-50%); width: 24px; height: 24px; background: url(../images/icons/icon_close_dark.svg) no-repeat center/contain;}
+.estmBox.open .btnOpenSlide { display: none; }
+.estmDocu:not(.hide) { width: 100%; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 15px;}
+.estmDocu .tablist { border-bottom: 1px solid var(--gray-200); gap: 5px;} 
+.estmDocu .tabBox {display: flex; flex-direction: column; flex-wrap: nowrap; align-items: flex-end; gap: 15px; width: 100%; max-width: 770px; margin: 0 auto;} 
+.estmDocu .tabBox .doculist { width: 100%; text-align: right;}
+.estmDocu .tabBox .doculist label {margin-right: 10px;}  
+.estmDocu .docuBox { max-width: 770px; margin: 0 auto;}
+.estmDocu .buttonBox { max-width: 770px; margin: 0 auto;}
+.estmDocu .buttonBox .sendBox:not(.hide) {display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 5px;}
+.estmDocu .buttonBox .urlBox {position: relative;}
+.estmDocu .buttonBox .urlBox .urlCopy { position: absolute; width: 20px; height: 20px; top: 50%; transform: translateY(-50%); right: 36px; border: none; background: url(../images/icons/icon_copy.svg) no-repeat center/contain; text-indent: -9999px; font-size: 0;}
+.estmDocu .buttonBox .urlBox .urlOpen {position: absolute; width: 20px; height: 20px; top: 50%; transform: translateY(-50%); right: 8px; border: none; background: url(../images/icons/icon_open.svg) no-repeat center/contain; text-indent: -9999px; font-size: 0;}
+.estmDocu .buttonBox .urlBox input {padding: 8px 60px 8px 8px; border: 1px solid var(--gray-300); background-color: var(--gray-50); }
+.estmDocu .buttonBox .kakao { width: 30px; height: 30px; border-radius: 7px; background: url(../images/sns/icon_kakao.svg) no-repeat center/contain; font-size: 0; text-indent: -9999px; border: none; padding: 0; }
+.estmDocu .buttonBox button {padding: 4px 8px; border-radius: 7px; font-size: 12px; flex: unset; }
+.estmDocu .buttonBox .gray {background-color: var(--gray-200); border-color: var(--gray-200);}
+.estmDocu .infoBox {width: 100%; justify-content: flex-end; max-width: 770px; margin: 0 auto;}
+.estmDocu .infoBox.btnRadio label input[type="radio"] + span {background-color: var(--bg-white);}
+.estmDocu .infoBox.btnRadio label input[type="radio"]:checked + span {background-color: var(--orange-100);}
+.estmDocu .infoBox select {border: 1px solid var(--gray-300); border-radius: 30px; background-color: var(--bg-white);}
+.estmDocu button[tab='checked'] {background: url(../images/icons/icon_checked_line.svg) no-repeat left center; background-size: 22px; padding-left: 25px; }
+.estmDocu button[tab='checked'].on {background: url(../images/icons/icon_checked_on.svg) no-repeat left center; background-size: 22px; }
+.estmDocu button[tab='diff'] {background: url(../images/icons/icon_diff_line.svg) no-repeat left center; background-size: 22px; padding-left: 25px; }
+.estmDocu button[tab='diff'].on {background: url(../images/icons/icon_diff_on.svg) no-repeat left center; background-size: 22px;}
+.estmDocu button[tab='multi'] { background: url(../images/icons/icon_star_on.svg) no-repeat left center; background-size: 22px; padding-left: 25px; }
+.estmDocu .docuList { width: 100%; margin-top: 15px; background-color: var(--bg-white); border-radius: 10px; border: 1px solid var(--gray-300);}
+.estmDocu .docuList > .title { position: relative; padding: 15px; width: 100%; text-align: left; }
+.estmDocu .docuList > .title::after {position: absolute; content: ''; top: 50%; right: 15px; transform: translateY(-50%); width: 24px; height: 24px; background: url(../images/icons/icon_arrowdown.svg) no-repeat center/contain; }
+.estmDocu .docuList > .title.down::after {transform: translateY(-50%) rotate(180deg);}
+.estmDocu .docuList .docuPhoto, .estmDocu .docuList .docuItem {border: none; display: none; padding: 0 15px 15px 15px; text-align: left; font-size: 13px; color: #333;}
+.estmDocu .docuList.viewPage .docuPhoto, .estmDocu .docuList.viewPage .docuItem { border: 0 none; }
+/* 제원 */
+.estmDocu .docuList .subject { position: relative; color: var(--navy-font); margin: 15px 0 5px;} 
+.estmDocu .docuList .spec { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 10px; } 
+.estmDocu .docuList .spec > div {width: 100%;}
+.estmDocu .docuList .spec .name {text-align: center; background-color: var(--gray-100); color: var(--navy-font); padding: 6px; font-weight: 700; border-radius: 10px; }
+.estmDocu .docuList .spec dl {display: flex; flex-direction: row; flex-wrap: wrap; align-items: stretch; padding: 0; gap: 0; color: var(--gray-500);}
+.estmDocu .docuList .spec dl dt { font-size: 13px; text-align: center; border-bottom: 1px solid var(--gray-300); width: 40%; padding: 6px; word-break: keep-all; letter-spacing: -.5px;}
+.estmDocu .docuList .spec dl dd { font-size: 13px; width: 60%; padding: 6px; text-align: center; border-bottom: 1px solid var(--gray-300);}
+.estmDocu .docuList .spec .left dl:nth-of-type(1) {margin-bottom: 10px;}
+.wrapper.desktop .estmDocu .buttonBox .urlBox .urlCopy:hover {background-color: transparent; border: none;}
+.wrapper.desktop .estmDocu .buttonBox .urlBox .urlOpen:hover {background-color: transparent; border: none;}
+.wrapper.desktop .estmDocu .buttonBox .kakao:hover {border: none;}
+
+/* 팝업 - 견적 */
+.popup .content .docuMain {padding: 0; border: none;}
+
+@media screen and (min-width: 600px) {
+    .estmDocu .docuList .spec > div {width: calc(50% - 5px);}
+    #formEstmSave dl .data.connectBox {gap: 5px; padding-right: 150px;}
+    #formEstmSave dl .data.connectBox dt .btn {position: absolute; top: 50%; right: 10px; transform: translateY(-50%); }
+} 
+
+@media screen and (min-width: 1000px) {
+    .estmDocu .tablist {gap: 25px;}
+    .btnOpenSlide:not(.hide), .btnCloseDocu:not(.hide) {bottom: 15px;}
+    .btnOpenSlide button{width: 150px;}  
+} 
+
+@media screen and (min-width: 1900px) {
+    .wrapper.PC.wide .mainTop {width: calc(50% + 15px);}
+    .wrapper.PC.wide .estmViewport {overflow: visible;}
+    .wrapper.PC.wide .estmBox.open .estmDocu {margin-top: -65px;}
+}
+
+
+
+

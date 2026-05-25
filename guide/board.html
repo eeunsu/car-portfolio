@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>게시판 페이지</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/styles/main.css">
+<script src="/scripts/jquery-3.7.1.min.js"></script>
+<script src="/scripts/common.js"></script>
+</head>
+<body>
+<div class="wrapper desktop " id="wrapper">
+    <!-- 헤더 시작 -->
+    <div class="header">
+        <div class="inner">
+            <a href="/desk" class="menuHome">홈</a>
+            <button class="menuDesk" id="menuOpenDesk">메뉴</button>
+        </div>
+        <div class="menuMain" id="menuMain"> 
+            <div class="dimBg"></div>
+            <div class="menuBox">
+                <div class="menuTop">
+                    <button class="menuDesk" id="menuOpenDesk">메뉴</button>
+                    <a href="/desk" class="menuHome home">홈</a>
+                    <div class="info">
+                        <span class="name">홍길동 <i>님</i></span>
+                        <a class="logout" href="/">로그아웃</a>
+                    </div>
+                    <div class="icon">
+                        <button class="brightMode hide" id="changeBright">밝게</button> 
+                        <button class="darkMode" id="changeDark">어둡게</button>
+                        <button class="close" id="menuClose">닫기</button>
+                    </div>
+                </div>
+                <ul class="menuList">
+                    <li class="gnb newcar">
+                        <div class="title"><button>신차</button></div>
+                        <ul class="lnb">
+                            <li class="on"><a href="">모델정보</a></li>
+                            <li class=""><a href="">할부캐시백</a></li>
+                            <li class=""><a href="">비교하기</a></li>
+                            <li class=""><a href="">판매조건납기</a></li>
+                        </ul> 
+                    </li>
+                    <li class="gnb finance">
+                        <div class="title"><button>금융</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">할부비교</a></li>
+                            <li class=""><a href="">캐시백비교</a></li>
+                            <li class=""><a href="">프로모션</a></li>
+                            <li class=""><a href="">엑셀견적기</a></li>
+                            <li class=""><a href="">금융진행</a></li>
+                            <li class=""><a href="">리스렌트팁</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb customer">
+                        <div class="title"><button>고객</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">고객관리</a></li>
+                            <li class=""><a href="">차량관리</a></li>
+                            <li class=""><a href="">일정관리</a></li>
+                            <li class=""><a href="">문자발송</a></li>
+                            <li class=""><a href="">채널관리</a></li>
+                            <li class=""><a href="">상담팁</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb utility">
+                        <div class="title"><button>유틸리티</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">할부계산기</a></li>
+                            <li class=""><a href="">자동차세</a></li>
+                            <li class=""><a href="">개별소비세</a></li>
+                            <li class=""><a href="">등록비용</a></li>
+                            <li class=""><a href="">전기차보조금</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb info">
+                        <div class="title"><button class="">이용안내</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">공지사항</a></li>
+                            <li class=""><a href="">게시판</a></li>
+                            <li class=""><a href="">이용안내</a></li>
+                            <li class=""><a href="">이용약관</a></li>
+                            <li class=""><a href="">개인정보 취급방침</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb shopping">
+                        <div class="title"><button>쇼핑</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">상품 목록</a></li>
+                            <li class=""><a href="">주문 내역</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb mypage">
+                        <div class="title"><button class="">마이페이지</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">내정보</a></li>
+                            <li class=""><a href="">이용료 결제</a></li>
+                            <li class=""><a href="">포인트</a></li>
+                            <li class=""><a href="">찜목록</a></li>
+                            <li class=""><a href="">알림메세지 <span class="new">N</span></a></li>
+                            <li class=""><a href="">로그인 설정</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="menuFixed">
+            <ul>
+                <li><a href="javascript:;"><div class="home"></div><span>홈</span></a></li>
+                <li><a href="javascript:;" tab="newcar"><div class="newcar"></div><span>신차</span></a></li>
+                <li><a href="javascript:;" tab="finance"><div class="finance"></div><span>금융</span></a></li>
+                <li><a href="javascript:;" tab="customer"><div class="customer"></div><span>고객</span></a></li>
+                <li><button id="menuOpenFixed"><div class="menu"></div><span>전체메뉴</span></button></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 헤더 끝 -->
+
+    <!-- 본문 시작 -->
+    <div class="container">
+        <main>
+            <section>
+                <article>
+                    <div class="inner">
+                        <div class="mainTop">
+                            <div class="left">
+                                <h2>쉽고 빠른, 상담에 최적화된 견적!</h2>
+                            </div>
+                            <div class="right">
+                               <a href="/board/index/freeboard" class="list">목록</a>
+                            </div>
+                        </div>
+
+                        <div class="boardBox">
+                            <div class="index">
+                            <span class="theme">분류</span>
+                            <span class="subject">제목</span>
+                            <span class="who">작성자</span>
+                            <span class="date">등록일</span>
+                            </div>
+                            <ul class="boardList">
+                            <li class="notice">
+                                <a href="/board/10290">
+                                <span class="theme">공지</span>
+
+                                <span class="subject">
+                                    <span>게시판 이용 안내</span>
+                                    <span class="cmnt">(1)</span>
+
+                                </span>
+                                <span class="who">운영자</span>
+                                <span class="date">2018-11-07</span>
+                                </a>
+                            </li>
+
+                            
+
+                            <li class="">
+                                <a href="/board/15237">
+
+                                <span class="theme">[홍보]</span>
+
+                                <span class="subject">
+                                    <span>기아자동차 역삼대리점 영업사원 모집합니다. </span>
+
+                                </span>
+                                <span class="who">박인찬</span>
+                                <span class="date">2024-12-08</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/board/15213">
+
+                                <span class="theme">[개선]</span>
+
+                                <span class="subject">
+                                    <span>싼타페 하브 옵션 선택 문제인 거 같아서요.</span>
+
+                                    <span class="cmnt">(1)</span>
+
+                                </span>
+                                <span class="who">김병찬</span>
+                                <span class="date">2024-12-02</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/board/14991">
+
+                                <span class="theme">[개선]</span>
+
+                                <span class="subject">
+                                    <span>카니발 견적 빠르게 수정 부탁드려요</span>
+
+                                    <span class="cmnt">(2)</span>
+
+                                </span>
+                                <span class="who">녕차</span>
+                                <span class="date">2024-10-15</span>
+                                </a>
+                            </li>
+
+                            <li class="now">
+                                <a href="/board/14657">
+
+                                <span class="theme">[질문]</span>
+
+                                <span class="subject">
+                                    <span>신한카드 견적기 브랜드 문의</span>
+
+                                    <span class="cmnt">(3)</span>
+
+                                </span>
+                                <span class="who"></span>
+                                <span class="date">2024-07-31</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/board/14575">
+
+                                <span class="theme">[개선]</span>
+
+                                <span class="subject">
+                                    <span>렌트/리스 온라인 참고용</span>
+
+                                    <span class="cmnt">(1)</span>
+
+                                </span>
+                                <span class="who">.</span>
+                                <span class="date">2024-07-10</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/board/14539">
+
+                                <span class="theme">[개선]</span>
+
+                                <span class="subject">
+                                    <span>kb 21세조건 이용가능한데 왜 안되는걸로 되있는거죠?</span>
+
+                                    <span class="cmnt">(1)</span>
+
+                                </span>
+                                <span class="who">이영준</span>
+                                <span class="date">2024-07-04</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/board/14470">
+
+                                <span class="theme">[개선]</span>
+
+                                <span class="subject">
+                                    <span>카다로그 및 차량가격표 원본 url 오류가 납니다</span>
+
+                                    <span class="cmnt">(1)</span>
+
+                                </span>
+                                <span class="who">ᆞ최민성</span>
+                                <span class="date">2024-06-23</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/board/14366">
+
+                                <span class="theme">[개선]</span>
+
+                                <span class="subject">
+                                    <span>기아 ev3 견적 업데이트 해주세요</span>
+
+                                    <span class="cmnt">(1)</span>
+
+                                </span>
+                                <span class="who">판매왕가즈아</span>
+                                <span class="date">2024-06-04</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/board/14175">
+
+                                <span class="theme">[개선]</span>
+
+                                <span class="subject">
+                                    <span>아래글의 오류요, 아이폰 오류 해결 어려울까요 ㅠ ㅠ</span>
+
+                                    <span class="cmnt">(1)</span>
+
+                                </span>
+                                <span class="who">기아자동차 채관훈</span>
+                                <span class="date">2024-04-22</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/board/14155">
+
+                                <span class="theme">[개선]</span>
+
+                                <span class="subject">
+                                    <span>아이폰으로 카판 신차견적 누르면 오류가 뜹니다</span>
+
+                                    <span class="cmnt">(1)</span>
+
+                                </span>
+                                <span class="who">기아자동차 채관훈</span>
+                                <span class="date">2024-04-16</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/board/14095">
+
+                                <span class="theme">[개선]</span>
+
+                                <span class="subject">
+                                    <span>롯데 캐피탈 국산오토리스 60개월 잔가 수정</span>
+
+                                    <span class="cmnt">(1)</span>
+
+                                </span>
+                                <span class="who">강순복</span>
+                                <span class="date">2024-04-04</span>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/board/13787">
+
+                                <span class="theme">[개선]</span>
+
+                                <span class="subject">
+                                    <span>현대기아 탁송료인상</span>
+
+                                    <span class="cmnt">(1)</span>
+
+                                </span>
+                                <span class="who">녕차</span>
+                                <span class="date">2024-01-03</span>
+                                </a>
+                            </li>
+
+                            
+
+                            </ul>
+                            <div class="paging">
+                            <button page="1" class="first">&nbsp;<span>처음</span></button>
+                            <button page="2" class="prev">&nbsp;<span>이전</span></button>
+                            <button page="1" class="now"><span>1</span></button>
+                            <button page="2"><span>2</span></button>
+                            <button page="3"><span>3</span></button>
+                            <button page="4"><span>4</span></button>
+                            <button page="5"><span>5</span></button>
+                            <button page="2" class="next">&nbsp;<span>다음</span></button>
+                            <button page="6" class="last">&nbsp;<span>마지막</span></button>
+                            </div>
+                            <div class="moreButton edit"><a href="javascript:;">작성하기</a></div>
+
+
+                            <!-- boardView -->
+                            <div class="boardView">
+                            <div class="content">
+                                <div class="top">
+                                <span class="theme">[개선]</span>
+                                <span class="subject">견적서에 탁송료 표시가 이상합니다</span>
+                                </div>
+                                <div class="writer">
+                                <span class="who">
+                                    <span class="sns_autologin">호가***</span>
+                                </span>
+                                <span class="date">2019-08-18 18:50</span>
+                                </div>
+                                <div class="view">
+                                2가지 개선 사항 요청드립니다.
+                                <br>
+                                <br>1. 탁송료가 계좌입금인지, 인도금인지 표시가 자꾸 왔다갔다 하니
+                                <br>견적서 옵션에서 아예 탁송료를 분리하되 카드결제가 가능한지, 계좌로 입금해야하는지
+                                <br>분리해서 선택할 수 있도록 하면 좋겠습니다
+                                <br>
+                                <br>2. 비교 견적 시 - 의 갯수가 다르네요~
+                                <br>
+                                <br>보시고 수정해주셨으면 합니다.
+                                </div>
+
+                                <!-- <div class="photo">
+                                                    <img src="https://www.carpan.co.kr/img/photo/201908/4441.jpg" alt="탁송료 분리 부분에
+                                                    1. 탁송료 분리 (카드 가능)
+                                                    2. 탁송료 완전 분리 (계좌 입금)
+                                                    이런 식으로 구분 됐으면 좋겠습니다">
+                                                    <div class="caption">
+                                                        탁송료 분리 부분에
+                                                        1. 탁송료 분리 (카드 가능)
+                                                        2. 탁송료 완전 분리 (계좌 입금)
+                                                        이런 식으로 구분 됐으면 좋겠습니다
+                                                    </div>
+                                                </div> -->
+
+                                <!-- <div class="photo"><img src="https://www.carpan.co.kr/img/photo/201908/4442.jpg" alt="양쪽 비교견적에 \&quot;탁송료\&quot; 부분에서
+                                                    1. 탁송료가 카드 결제 포함인지, 계좌 입금인지 여부가 멋대로 표시됩니다.
+                                                    2.  \' - \' 의 갯수가 다릅니다">
+                                                    <div class="caption">양쪽 비교견적에 \"탁송료\" 부분에서
+                                                        1. 탁송료가 카드 결제 포함인지, 계좌 입금인지 여부가 멋대로 표시됩니다.
+                                                        2. \' - \' 의 갯수가 다릅니다</div>
+                                                </div> -->
+
+                                <div class="file"><a class="down" href="/api/down/9cogkVT">2024년 하반기 전기자동차 보급사업 모집 변경 공고(한국환경공단).pdf</a></div>
+                                <div class="file"><a class="down" href="/api/down/9cogkVT">2024년 하반기 전기자동차 보급사업 모집 변경 공고(한국환경공단).pdf</a></div>
+                                <div class="file"><a class="down" href="/api/down/9cogkVT">2024년 하반기 전기자동차 보급사업 모집 변경 공고(한국환경공단).pdf</a></div>
+
+                                <div class="buttonBox">
+                                <a href="/board/edit/notice_15741" class="navy">수정하기</a>
+
+                                <form id="formBoard" action="/board/action/notice" method="POST">
+                                    <input type="hidden" name="idx" value="15741">
+                                    <input type="hidden" name="act" value="">
+                                    
+                                    <button act="pushup" msg="추천으로 지정" class="navy">추천지정</button>
+                                    <button act="blind" msg="노출을 중지" class="navyLine">노출중지</button>
+                                    <button act="del" msg="삭제를" class="gray">삭제하기</button>
+                                    <select name="theme" class="gray">
+                                    <option value="P">이용요금</option>
+                                    <option value="E">견적내기</option>
+                                    <option value="C">리스렌트</option>
+                                    <option value="O" selected="">기타</option>
+                                    </select>
+                                </form>
+                                </div>
+                            </div>
+
+                            <!-- commentBox -->
+                            <div class="commentBox">
+                                <form action="/api/comment" method="POST" id="formComment">
+                                <input type="hidden" name="table" value="Board">
+                                <input type="hidden" name="code" value="10571">
+                                <input type="hidden" name="depth" value="">
+                                <input type="hidden" name="link" value="">
+                                <input type="hidden" name="idx" value="">
+                                <input type="hidden" name="act" value="add">
+                                <div class="comment">
+                                    <div class="textBox">
+                                    <div class="writer">
+                                        <span class="who">
+                                        <span class="sns_carpan">운영자</span>
+                                        </span>
+                                    </div>
+                                    <div class="btnRadio">
+                                        <label><input type="radio" name="open" value="1" checked=""><span>공개</span></label>
+                                        <label><input type="radio" name="open" value="0"><span>비공개</span></label>
+                                    </div>
+                                    <textarea name="message" placeholder="댓글을 입력해 주세요."></textarea>
+                                    <div class="sendInfo">
+                                        <div class="length"><span id="commentLen" class="commentLen">0</span> /
+                                        <span id="commentMax">500</span> Byte
+                                        </div>
+                                        <div class="btn">
+                                        <div class="g-recaptcha" data-sitekey="6Le2Dl0UAAAAAPa-zwf61j7uFJaNPGLwr5-sJqSe"></div>
+                                        <button act="add">등록하기</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="comment disabled">
+                                    <div class="textBox">
+                                    <div class="writer">
+                                        <span class="who">
+                                        <span class="sns_carpan">운영자</span>
+                                        </span>
+                                    </div>
+                                    <div class="btnRadio">
+                                        <label><input type="radio" name="open" value="1" checked=""><span>공개</span></label>
+                                        <label><input type="radio" name="open" value="0"><span>비공개</span></label>
+                                    </div>
+                                    <textarea name="message" placeholder="댓글을 입력해 주세요."></textarea>
+                                    <div class="sendInfo">
+                                        <div class="length"><span id="commentLen" class="commentLen">0</span> /
+                                        <span id="commentMax">500</span> Byte
+                                        </div>
+                                        <div class="btn">
+                                        <div class="g-recaptcha" data-sitekey="6Le2Dl0UAAAAAPa-zwf61j7uFJaNPGLwr5-sJqSe"></div>
+                                        <button act="add">등록하기</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="alert hide">
+                                    <span>
+                                        회원님의 댓글 이용이 제한되어 있습니다. <br> 문의 주시기 바랍니다. <br> 1일 댓글 허용 한도 (20개)가 소진되었습니다.
+                                    </span>
+                                    </div>
+                                    <div class="alert login ">
+                                    SNS 계정으로 간편하게 로그인하여 <br> 댓글을 남기실 수 있습니다.
+                                    <div class="buttonBox">
+                                        <button type="button" class="red">로그인</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </form>
+
+
+                                <div class="division" id="orderComment">
+                                <div class="comCount">
+                                    <span>댓글</span>
+                                    <span class="cnt">3</span>
+                                </div>
+                                <div class="orderList">
+                                    <button class="on">최신순</button>
+                                    <button>과거순</button>
+                                </div>
+                                </div>
+
+                                <ul class="list" id="commentList" order="">
+                                <li class="depth0">
+                                    <div class="writer">
+                                    <span class="who">
+                                        <span class="sns_carpan">운영자</span>
+                                        <span class="author">작성자</span>
+                                    </span>
+                                    <span class="date">2024-07-31</span>
+                                    </div>
+                                    <div class="message" id="message_10610" secret="1">'카마스터를 위한 판매지원 시스템 카판' 입니다.
+                                    <br>
+                                    <br>사용 개선 사항을 남겨주셔서 정말 감사합니다.
+                                    <br>오류사항 문제에 대해서는 개발팀에 전달하였습니다. 빠른 시간내 수정하도록 하겠습니다.
+                                    <br>
+                                    <br>'카마스터를 위한 판매지원 시스템 카판' 이였습니다. 감사합니다.
+                                    </div>
+                                    <div class="admin"><button class="blindComment" article="10801">블라인드</button>
+                                    </div>
+                                    <div class="user">
+                                    <button class=" modifyComment" article="10807">수정</button>
+                                    <button class=" deleteComment" article="10807">삭제</button>
+                                    <button class=" replayComment" article="Board_10571_1_10610">답글 쓰기</button>
+                                    </div>
+                                    <form action="">
+                                    <div class="comment">
+                                        <div class="textBox">
+                                        <div class="writer">
+                                            <span class="who">
+                                            <span class="sns_carpan">운영자</span>
+                                            </span>
+                                        </div>
+                                        <div class="btnRadio">
+                                            <label><input type="radio" name="open" value="1" checked=""><span>공개</span></label>
+                                            <label><input type="radio" name="open" value="0"><span>비공개</span></label>
+                                        </div>
+                                        <textarea name="message" placeholder="댓글을 입력해 주세요."></textarea>
+                                        <div class="sendInfo">
+                                            <div class="length"><span id="commentLen" class="commentLen">0</span> /
+                                            <span id="commentMax">500</span> Byte
+                                            </div>
+                                            <div class="btn">
+                                            <div class="g-recaptcha" data-sitekey="6Le2Dl0UAAAAAPa-zwf61j7uFJaNPGLwr5-sJqSe"></div>
+                                            <button act="add">등록하기</button>
+                                            </div>
+                                        </div>
+                                        <div class="closeBtn">
+                                            <button class="close">닫기 버튼</button>
+                                        </div>
+                                        <!-- <div class="buttonBox">
+                                            <button class="gray">접기</button>
+                                        </div> -->
+                                        </div>
+                                    </div>
+                                    </form>
+                                </li>
+                                <li class="depth0 delete" group=""><div class="alert">삭제된 댓글입니다.</div><div class="writer"><span class="who"><span class="sns_phone  ">장모치와와</span> <span class="date ">2025-10-16</span></span></div><div class="message" id="message_10835" secret="1">ㅇㅇㅇㅇ</div><div class="admin"><button class="openComment" article="10835">복구하기</button></div><div class="user"><button class="line replayComment" article="Board_15624_1_10835">답글 쓰기</button></div></li>
+                                <li class="depth0 secret" group=""><div class="alert">비공개 댓글입니다.</div><div class="writer"><span class="who"><span class="sns_phone  ">장모치와와</span> <span class="date ">2025-07-14</span></span></div><div class="message" id="message_10829" secret="0">테스트ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div><div class="user"><button class="line replayComment" article="Board_15624_1_10829">답글 쓰기</button></div></li>
+                                <li class="depth1">
+                                    <div class="writer">
+                                    <span class="who">
+                                        <span class="sns_naver me">***</span>
+                                    </span>
+                                    <span class="date">2024-07-31</span>
+                                    </div>
+                                    <div class="message" id="message_10788" secret="1">답변감사합니다 그럼 볼보 견적기는 따로 받을 수 없는걸까요?</div>
+                                    <div class="user"><button class="replayComment" article="Board_14657_2_10788">답글 쓰기</button></div>
+                                    <form action="">
+                                    <div class="comment">
+                                        <div class="textBox">
+                                        <div class="writer">
+                                            <span class="who">
+                                            <span class="sns_carpan">운영자</span>
+                                            </span>
+                                        </div>
+                                        <div class="btnRadio">
+                                            <label><input type="radio" name="open" value="1" checked=""><span>공개</span></label>
+                                            <label><input type="radio" name="open" value="0"><span>비공개</span></label>
+                                        </div>
+                                        <textarea name="message" placeholder="댓글을 입력해 주세요."></textarea>
+                                        <div class="sendInfo">
+                                            <div class="length"><span id="commentLen" class="commentLen">0</span> /
+                                            <span id="commentMax">500</span> Byte
+                                            </div>
+                                            <div class="btn">
+                                            <div class="g-recaptcha" data-sitekey="6Le2Dl0UAAAAAPa-zwf61j7uFJaNPGLwr5-sJqSe"></div>
+                                            <button act="add">등록하기</button>
+                                            </div>
+                                        </div>
+                                        <div class="closeBtn">
+                                            <button class="close">닫기 버튼</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </li>
+                                <li class="depth2">
+                                    <div class="writer">
+                                    <span class="who">
+                                        <span class="sns_carpan">운영자</span>
+                                        <span class="author">작성자</span>
+                                    </span>
+                                    <span class="date">2024-07-31</span>
+                                    </div>
+                                    <div class="message" id="message_10788" secret="1">연락주시면 전달 드리겠습니다</div>
+                                    <div class="user"><button class=" replayComment" article="Board_14657_2_10788">답글 쓰기</button></div>
+                                    <form action="">
+                                    <div class="comment">
+                                        <div class="textBox">
+                                        <div class="writer">
+                                            <span class="who">
+                                            <span class="sns_carpan">운영자</span>
+                                            </span>
+                                        </div>
+                                        <div class="btnRadio">
+                                            <label><input type="radio" name="open" value="1" checked=""><span>공개</span></label>
+                                            <label><input type="radio" name="open" value="0"><span>비공개</span></label>
+                                        </div>
+                                        <textarea name="message" placeholder="댓글을 입력해 주세요."></textarea>
+                                        <div class="sendInfo">
+                                            <div class="length"><span id="commentLen" class="commentLen">0</span> /
+                                            <span id="commentMax">500</span> Byte
+                                            </div>
+                                            <div class="btn">
+                                            <div class="g-recaptcha" data-sitekey="6Le2Dl0UAAAAAPa-zwf61j7uFJaNPGLwr5-sJqSe"></div>
+                                            <button act="add">등록하기</button>
+                                            </div>
+                                        </div>
+                                        <div class="closeBtn">
+                                            <button class="close">닫기 버튼</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </li>
+                                <li class="depth0">
+                                    <div class="writer">
+                                    <span class="who">
+                                        <span class="sns_carpan">운영자</span>
+                                        <span class="author">작성자</span>
+                                    </span>
+                                    <span class="date">2024-07-31</span>
+                                    </div>
+                                    <div class="message" id="message_10612" secret="1">비교견적에서 탁송료 지역에 -- 두개 붙는 오류
+                                    수정하였습니다. <br>캐시백 선택시 탁송료의 카드 가능여부나 계좌입금 표시는 제조사별로 카드결제 가능한 브랜드 확인하여 카드가능 또는
+                                    계좌입금으로 표시하도록 수정하겠습니다.
+                                    </div>
+                                    <div class="admin"><button class="blindComment" article="10801">블라인드</button>
+                                    </div>
+                                    <div class="user">
+                                    <button class=" modifyComment" article="10807">수정</button>
+                                    <button class=" deleteComment" article="10807">삭제</button>
+                                    <button class=" replayComment" article="Board_10571_1_10610">답글 쓰기</button>
+                                    </div>
+                                </li>
+                                <li class="depth2 blind" group="">
+                                    <div class="alert">블라인드 처리된 댓글입니다.</div>
+                                </li>
+                                </ul>
+                                <div class="nodata">
+                                현재 작성된 댓글이 없습니다. <br> 첫 댓글을 남겨주세요.
+                                </div>
+                            </div>
+                            </div>
+
+                        </div>
+
+                        <br>
+                        <br>
+                        <!-- 글쓰기 -->
+                         <section>
+                            <div class="boardEdit">
+                                <form action="/" method="post">
+                                <div class="desc">
+                                    <span class="necessary">*</span>
+                                    <span>필수 항목을 모두 입력해 주세요.</span>
+                                </div>
+                                <dl>
+                                    <div class="data">
+                                    <dt>
+                                        <span>주제</span>
+                                        <span class="necessary">*</span>
+                                    </dt>
+                                    <dd>
+                                        <div class="btnRadio">
+                                        <label><input type="radio" name="theme" value="Q" checked=""><span>질문</span></label>
+                                        <label><input type="radio" name="theme" value="A"><span>홍보</span></label>
+                                        <label><input type="radio" name="theme" value="R"><span>추천</span></label>
+                                        <label><input type="radio" name="theme" value="F"><span>FAQ</span></label>
+                                        <label><input type="radio" name="theme" value="T"><span>TIP</span></label>
+                                        <label><input type="radio" name="theme" value="N"><span>뉴스</span></label>
+                                        <label><input type="radio" name="theme" value="S"><span>개선</span></label>
+                                        <label><input type="radio" name="theme" value="0"><span>기타</span></label>
+                                        </div>
+                                    </dd>
+                                    </div>
+                                    <div class="data">
+                                    <dt>
+                                        <span>제목</span>
+                                        <span class="necessary">*</span>
+                                    </dt>
+                                    <dd>
+                                        <input type="text" placeholder="제목을 입력해 주세요." maxlength="50">
+                                    </dd>
+                                    </div>
+                                    <div class="data">
+                                    <dt>
+                                        <span>형식</span>
+                                        <span class="necessary">*</span>
+                                    </dt>
+                                    <dd>
+                                        <div class="btnRadio">
+                                        <label><input type="radio" name="format" value="text" checked=""><span>text</span></label>
+                                        <label><input type="radio" name="format" value="html"><span>html</span></label>
+                                        </div>
+                                    </dd>
+                                    </div>
+                                    <div class="data">
+                                    <dt>
+                                        <span>내용</span>
+                                        <span class="necessary">*</span>
+                                    </dt>
+                                    <dd>
+                                        <textarea name="message" placeholder="내용을 입력해 주세요."></textarea>
+                                    </dd>
+                                    </div>
+                                    <div class="data">
+                                    <dt>첨부</dt>
+                                    <dd>
+                                        <div id="attachAdd" class="attachBtn">
+                                        <button kind="photo" name="이미지" >이미지</button>
+                                        <button kind="youtube" name="유튜브">유튜브</button>
+                                        <button kind="website" name="사이트" >사이트</button>
+                                        <button kind="file" name="파일">파일</button>
+                                        </div>
+                                        <ul class="attachList" id="attachList">
+                                        <li>
+                                            <div class="top">
+                                            <div class="title">이미지</div>
+                                            </div>
+                                            <div class="detail">
+                                            <input type="hidden" value="add" name="attachAct[]">
+                                            <input type="hidden" value="" name="attachIdx[]">
+                                            <input type="hidden" value="photo" name="attachKind[]">
+                                            <div class="filebox">
+                                                <div>첨부파일</div>
+                                                <input id="imgfile" class="uploadName" type="file" value="" name="attachFile[]">
+                                                <label for="imgfile">파일찾기</label>(형식 : jpg, jpeg, png, gif)
+                                                <input type="file" value="" name="attachUrl[]" placeholder="url 입력">
+                                            </div>
+                                            </div>
+                                            <div class="button">
+                                            <button class="icon up">위로이동</button> <button class="icon down">아래로이동</button> <button class="icon delete">삭제</button>
+                                            </div>
+                                            <div class="subj"><textarea name="attachSubject[]" placeholder="이미지 설명 (100자 이내)"></textarea></div>
+                                        </li>
+                                        <li>
+                                            <div class="top">
+                                            <div class="title">유튜브</div>
+                                            <!-- <div class="btn"><button class="del">삭제</button><button class="plus">추가</button></div> -->
+                                            </div>
+                                            <div class="detail">
+                                            <input type="hidden" value="add" name="attachAct[]">
+                                            <input type="hidden" value="" name="attachIdx[]">
+                                            <input type="hidden" value="youtube" name="attachKind[]">
+                                            <input type="file" value="" name="attachFile[]" placeholder="파일선택" style="display:none;">
+                                            <input type="text" value="" name="attachUrl[]" placeholder="url 입력">
+                                            </div>
+                                            <div class="button">
+                                            <button class="icon up">∧</button> <button class="icon down">∨</button> <button class="icon delete">×</button>
+                                            </div>
+                                            <div class="subj"><input type="text" value="" name="attachSubject[]" placeholder="제목 (50자 이내)"></div>
+                                        </li>
+                                        <li>
+                                            <div class="top">
+                                            <div class="title">사이트</div>
+                                            <!-- <div class="btn"><button class="del">삭제</button><button class="plus">추가</button></div> -->
+                                            </div>
+                                            <div class="detail">
+                                            <input type="hidden" value="add" name="attachAct[]">
+                                            <input type="hidden" value="" name="attachIdx[]">
+                                            <input type="hidden" value="website" name="attachKind[]">
+                                            <input type="file" value="" name="attachFile[]" placeholder="파일선택" style="display:none;">
+                                            <input type="text" value="" name="attachUrl[]" placeholder="url 입력">
+                                            </div>
+                                            <div class="button">
+                                            <button class="icon up">∧</button> <button class="icon down">∨</button> <button class="icon delete">×</button>
+                                            </div>
+                                            <div class="subj"><input type="text" value="" name="attachSubject[]" placeholder="제목 (50자 이내)"></div>
+                                        </li>
+                                        <li>
+                                            <div class="top">
+                                            <div class="title">파일</div>
+                                            <!-- <div class="btn"><button class="del">삭제</button><button class="plus">추가</button></div> -->
+                                            </div>
+                                            <div class="detail">
+                                            <input type="hidden" value="add" name="attachAct[]">
+                                            <input type="hidden" value="" name="attachIdx[]">
+                                            <input type="hidden" value="file" name="attachKind[]">
+                                            <div class="filebox">
+                                                <div>첨부파일</div>
+                                                <input id="imgfile" class="uploadName" type="file" value="" name="attachFile[]">
+                                                <label for="imgfile">파일찾기</label>
+                                                <input type="file" value="" name="attachUrl[]" placeholder="url 입력">
+                                            </div>
+                                            </div>
+                                            <div class="button">
+                                            <button class="icon up">∧</button> <button class="icon down">∨</button> <button class="icon delete">×</button>
+                                            </div>
+                                            <input type="hidden" name="attachSubject[]">
+                                        </li>
+                                        </ul>
+                                    </dd>
+                                    </div>
+                                </dl>
+
+                                <div class="infoBox">
+                                    <div class="noticeBox alert">※ 광고글이나 사회 통념상 허용되지 않는 내용이 포함되어 있는 경우 예고없이 삭제될 수 있습니다. <br> 허용되지 않는 글을 지속적으로 올릴 경우 글쓰기 권한이 정지될 수 있습니다.</div>
+                                    <div class="check">
+                                    <label><input type="checkbox" name="agreeC" value="yes"><span>카판 게시판 운영 정책에 동의<span class="necessary">*</span></span></label>
+                                    <div class="buttonBox"><a href="/service/provision" target="_blank" class="gray">이용약관 보기 → </a></div>
+                                    </div>
+                                    <ul class="infoList">
+                                    <li>- 게시판 운영 목적과 관련이 없는 게시물은 예고 없이 삭제될 수 있으며, 반복적으로 게시할 경우 글쓰기 권한이 정지됩니다.</li>
+                                    <li>- 저작권이 있는 게시물의 경우 저작권자의 허락 없이 게시할 경우 삭제될 수 있으며, 법적인 처벌을 받을 수 있습니다.</li>
+                                    <li>- 게시글 내용에 개인정보나 욕설, 음란물 등 미풍양속에 저해되는 내용이 포함된 경우 삭제될 수 있습니다.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="buttonBox">
+                                    <input type="hidden" name="idx" value="">
+                                    <input type="hidden" name="act" value="add">
+                                    <button>입력하기</button>
+                                </div>
+                                </form>
+                            </div>
+                        </section>
+
+
+
+                        
+                        
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+</div>
+    <!-- 본문 끝 -->
+
+    
+    <!-- 푸터 시작 -->
+    <div class="footer">
+        <div class="inner">
+            푸터 영역
+        </div>
+    </div>
+    <!-- 푸터 끝 -->
+
+
+
+</div>
+</body>
+</html>

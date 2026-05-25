@@ -1,0 +1,826 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>메뉴 + 홈 페이지</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/styles/main.css">
+<script src="/scripts/jquery-3.7.1.min.js"></script>
+<script src="/scripts/common.js"></script>
+</head>
+<body>
+<div class="wrapper desktop " id="wrapper">
+    <!-- 헤더 시작 -->
+    <div class="header">
+        <div class="inner">
+            <a href="/desk" class="menuHome">홈</a>
+            <button class="menuDesk" id="menuOpenDesk">메뉴</button>
+        </div>
+        <div class="menuMain" id="menuMain"> 
+            <div class="dimBg"></div>
+            <div class="menuBox">
+                <div class="menuTop">
+                    <button class="menuDesk" id="menuOpenDesk">메뉴</button>
+                    <a href="/desk" class="menuHome home">홈</a>
+                    <div class="info">
+                        <span class="name">홍길동 <i>님</i></span>
+                        <a class="logout" href="/">로그아웃</a>
+                    </div>
+                    <div class="icon">
+                        <button class="brightMode hide" id="changeBright">밝게</button> 
+                        <button class="darkMode" id="changeDark">어둡게</button>
+                        <button class="close" id="menuClose">닫기</button>
+                    </div>
+                </div>
+                <ul class="menuList">
+                    <li class="gnb newcar">
+                        <div class="title"><button>신차</button></div>
+                        <ul class="lnb">
+                            <li class="on"><a href="">모델정보</a></li>
+                            <li class=""><a href="">할부캐시백</a></li>
+                            <li class=""><a href="">비교하기</a></li>
+                            <li class=""><a href="">판매조건납기</a></li>
+                        </ul> 
+                    </li>
+                    <li class="gnb finance">
+                        <div class="title"><button>금융</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">할부비교</a></li>
+                            <li class=""><a href="">캐시백비교</a></li>
+                            <li class=""><a href="">프로모션</a></li>
+                            <li class=""><a href="">엑셀견적기</a></li>
+                            <li class=""><a href="">금융진행</a></li>
+                            <li class=""><a href="">리스렌트팁</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb customer">
+                        <div class="title"><button>고객</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">고객관리</a></li>
+                            <li class=""><a href="">차량관리</a></li>
+                            <li class=""><a href="">일정관리</a></li>
+                            <li class=""><a href="">문자발송</a></li>
+                            <li class=""><a href="">채널관리</a></li>
+                            <li class=""><a href="">상담팁</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb utility">
+                        <div class="title"><button>유틸리티</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">할부계산기</a></li>
+                            <li class=""><a href="">자동차세</a></li>
+                            <li class=""><a href="">개별소비세</a></li>
+                            <li class=""><a href="">등록비용</a></li>
+                            <li class=""><a href="">전기차보조금</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb info">
+                        <div class="title"><button class="">이용안내</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">공지사항</a></li>
+                            <li class=""><a href="">게시판</a></li>
+                            <li class=""><a href="">이용안내</a></li>
+                            <li class=""><a href="">이용약관</a></li>
+                            <li class=""><a href="">개인정보 취급방침</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb shopping">
+                        <div class="title"><button>쇼핑</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">상품 목록</a></li>
+                            <li class=""><a href="">주문 내역</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb mypage">
+                        <div class="title"><button class="">마이페이지</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">내정보</a></li>
+                            <li class=""><a href="">이용료 결제</a></li>
+                            <li class=""><a href="">포인트</a></li>
+                            <li class=""><a href="">찜목록</a></li>
+                            <li class=""><a href="">알림메세지 <span class="new">N</span></a></li>
+                            <li class=""><a href="">로그인 설정</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="menuFixed">
+            <ul>
+                <li><a href="javascript:;"><div class="home"></div><span>홈</span></a></li>
+                <li><a href="javascript:;" tab="newcar"><div class="newcar"></div><span>신차</span></a></li>
+                <li><a href="javascript:;" tab="finance"><div class="finance"></div><span>금융</span></a></li>
+                <li><a href="javascript:;" tab="customer"><div class="customer"></div><span>고객</span></a></li>
+                <li><button id="menuOpenFixed"><div class="menu"></div><span>전체메뉴</span></button></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 헤더 끝 -->
+
+    <!-- 본문 시작 -->
+    <div class="container">
+        <main>
+            <section>
+                <article>
+                    <div class="inner">
+                        <div class="mainTop">
+                            <div class="left">
+                                <h2>쉽고 빠른, 상담에 최적화된 견적!</h2>
+                            </div>
+                            <div class="right">
+                                <a href="/board/index/guide" class="list">이용안내</a>
+                                <a class="call" href="tel:1234-5678">1234-5678</a>
+                            </div>
+                        </div>
+                        <div class="deskBox">
+                            <div class="top">
+                                <div class="myBox">
+                                    <div class="infoBox">
+                                        <div class="member"> 
+                                            <span class="title">조은수</span>  회원  <span class="end">(2025-12-31)</span>
+                                            <a class="log" href="/login/logout">로그아웃</a>
+                                        </div>
+                                        <ul>
+                                            <li><a href="/mypage/point">보유 포인트 : <b class="point">1,120,440</b></a></li>
+                                            <li><a href="/mypage/vip">VIP 맴버쉽 가입시 금융진행 우대</a></li>
+                                        </ul> 
+                                    </div>
+                                    
+                                    <div class="buttonBoxLine">
+                                        <a class="gray dues" href="/mypage/dues">이용료결제</a>
+                                        <a class="gray info" href="/mypage/info">내정보</a>
+                                    </div>
+                                </div>
+                                <div class="listBox notice">
+                                    <div class="title">
+                                        <h4>공지사항</h4>
+                                        <a href="/board/index/notice" class="more">전체보기</a>
+                                    </div>
+                                    <ul class="subList">
+                                        <li>
+                                            <a href="/board/view/notice_15496">
+                                                <span class="cate">[이용안내]</span>
+                                                <span class="content">부산/창원/경남 전 차종 도시철도채권 매입 면제 안내</span>
+                                                <span class="date">02-21</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/board/view/notice_15584">
+                                                <span class="cate">[업데이트]</span>
+                                                <span class="content">노후차 교체후 신차 등록시 개별소비세 감면 안내</span>
+                                                <span class="date">03-18</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/board/view/notice_15624">
+                                                <span class="cate">[이용안내]</span>
+                                                <span class="content">인천광역시 다자녀 가구 보조금 추가 지원 안내</span>
+                                                <span class="date">03-31</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/board/view/notice_15624">
+                                                <span class="cate">[이용안내]</span>
+                                                <span class="content">인천광역시 다자녀 가구 보조금 추가 지원 안내</span>
+                                                <span class="date">03-31</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/board/view/notice_15624">
+                                                <span class="cate">[이용안내]</span>
+                                                <span class="content">인천광역시 다자녀 가구 보조금 추가 지원 안내</span>
+                                                <span class="date">03-31</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="favoritesMenuBox">
+                                <div class="titleBox">
+                                    <h3 class="title">즐겨찾기 메뉴</h3>
+                                    <button class="setting layerPopup">설정</button>
+                                </div>
+                                <ul class="list">
+                                    <li><a href="/model/search">모델정보</a></li>
+                                    <li><a href="/fastship/search">선주문•금융사</a></li>
+                                    <li><a href="/stock/domestic">재고차•국산</a></li>
+                                    <li><a href="/estimate/finance">견적내기</a></li>
+                                    <li><a href="/estimate/leaserent">리스/렌트</a></li>
+                                    <li><a href="/discount?brand=111">판매조건/납기</a></li>
+                                    <li><a href="/stock/import">재고차•수입</a></li>
+                                    <li><a href="/estimate/save">저장견적</a></li>
+                                    <li><a href="/utility/electric">전기차보조금</a></li>
+                                    <li><a href="/finance/compareCard">캐시백비교</a></li>
+                                </ul>
+                            </div>
+                            <div class="bannerBox">
+                                <a href="">배너 이미지</a>
+                                <a href="">배너 이미지</a>
+                            </div>
+
+                            <div class="favoritesListBox">
+                                <div class="titleBox">
+                                    <h3 class="title">즐겨찾기 리스트</h3>
+                                    <button class=" setting set layerPopup">설정</button>
+                                </div>
+                                <ul class="list">
+                        
+                            <li>
+                                <div class="listBox save">
+                                    <div class="title">
+                                        <h4>저장견적</h4>
+                                        <a href="/estimate/save" class="more">전체보기</a>
+                                    </div>
+                                    <ul class="subList"> 
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[3528]</span>
+                                                <span class="content">고객명</span>
+                                                <span class="date">2025-11-17</span>
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[3527]</span>
+                                                <span class="content">고객명</span>
+                                                <span class="date">2025-11-03</span>
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[3526]</span>
+                                                <span class="content"> </span>
+                                                <span class="date">2025-09-19</span>
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[3525]</span>
+                                                <span class="content"> </span>
+                                                <span class="date">2025-09-19</span>
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div class="listBox finance">
+                                    <div class="title">
+                                        <h4>금융진행</h4>
+                                        <a href="/finance/list" class="more">전체보기</a>
+                                    </div>
+                                    <ul class="subList"> 
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[카드 - 신청]</span>
+                                                <span class="content">고객명(테스트)</span>
+                                                <span class="date">2025-10-02</span>
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[카드 - 신청]</span>
+                                                <span class="content">고객명(테스트)</span>
+                                                <span class="date">2025-10-02</span>
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[카드 - 신청]</span>
+                                                <span class="content">고객명(테스트)</span>
+                                                <span class="date">2025-10-02</span>
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[프리미엄패키지 - 신청]</span>
+                                                <span class="content">고객명(테스트)</span>
+                                                <span class="date">2025-06-19</span>
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[프리미엄패키지 - 신청]</span>
+                                                <span class="content">고객명(테스트)</span>
+                                                <span class="date">2025-06-19</span>
+                                            </a>
+                                        </li> 
+                                    </ul>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div class="listBox promotion">
+                                    <div class="title">
+                                        <h4>프로모션</h4>
+                                        <a href="/board/index/promotion" class="more">전체보기</a>
+                                    </div>
+                                    <ul class="subList"> 
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[카판]</span>
+                                                <span class="content">카판 25년 11월 종합 할부/캐시백 프로모션</span>
+                                                <span class="date">2025-02-04</span>
+                                            </a>
+                                        </li> 
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[카판]</span>
+                                                <span class="content">카판 신차패키지 최대 60% 할인!</span>
+                                                <span class="date">2024-04-05</span>
+                                            </a>
+                                        </li> 
+                                    </ul>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div class="listBox excel">
+                                    <div class="title">
+                                        <h4>엑셀견적기</h4>
+                                        <a href="/board/index/excel" class="more">전체보기</a>
+                                    </div>
+                                    <ul class="subList">
+                                                <li>
+                                                    <a href="/">
+                                                        <span class="cate">[NH농협캐피탈]</span>
+                                                        <span class="content">국산수입리스 2025-11-17 V3 견적기</span>
+                                                        <span class="date">2025-11-18</span>
+                                                    </a>
+                                                </li>
+                                            
+                                                
+                                                
+                                                <li>
+                                                    <a href="/">
+                                                        <span class="cate">[신한카드]</span>
+                                                        <span class="content">수입렌트 2025-11-17 V3 견적기</span>
+                                                        <span class="date">2025-11-18</span>
+                                                    </a>
+                                                </li>
+                                            
+                                                
+                                                
+                                                <li>
+                                                    <a href="/">
+                                                        <span class="cate">[메리츠캐피탈]</span>
+                                                        <span class="content">국산렌트 2025-11-17 V2 견적기</span>
+                                                        <span class="date">2025-11-17</span>
+                                                    </a>
+                                                </li>
+                                            
+                                                
+                                                
+                                                <li>
+                                                    <a href="/">
+                                                        <span class="cate">[고객사]</span>
+                                                        <span class="content">국산렌트 2025-11-17 V1 견적기</span>
+                                                        <span class="date">2025-11-17</span>
+                                                    </a>
+                                                </li>
+                                            
+                                                
+                                                
+                                                <li>
+                                                    <a href="/">
+                                                        <span class="cate">[우리카드]</span>
+                                                        <span class="content">국산리스 2025-11-14 견적기</span>
+                                                        <span class="date">2025-11-14</span>
+                                                    </a>
+                                                </li>
+                                            
+                                        
+                                    </ul>
+                                </div>
+                            </li>
+                        
+                            <li>
+                                <div class="listBox customer">
+                                    <div class="title">
+                                        <h4>고객관리</h4>
+                                        <a href="/customer/list" class="more">전체보기</a>
+                                    </div>
+                                    <ul class="subList"> 
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[1074]</span>
+                                                <span class="content">고객명</span>
+                                                <span class="date">2025-10-16</span>
+                                            </a>
+                                        </li> 
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[1073]</span>
+                                                <span class="content">고객명(테스트)</span>
+                                                <span class="date">2025-10-15</span>
+                                            </a>
+                                        </li> 
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[1072]</span>
+                                                <span class="content"></span>
+                                                <span class="date">2025-10-15</span>
+                                            </a>
+                                        </li> 
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[1071]</span>
+                                                <span class="content">고객명(테스트)</span>
+                                                <span class="date">2025-10-15</span>
+                                            </a>
+                                        </li> 
+                                        
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[1070]</span>
+                                                <span class="content"></span>
+                                                <span class="date">2025-10-15</span>
+                                            </a>
+                                        </li> 
+                                    </ul>
+                                </div>
+                            </li>
+                
+                            <li>
+                                <div class="listBox channel">
+                                    <div class="title">
+                                        <h4>채널목록</h4>
+                                        <a href="/channel/list" class="more">전체보기</a>
+                                    </div>
+                                    <ul class="subList"> 
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[카매틱]</span>
+                                                <span class="content">전용 채널123</span>
+                                                <span class="date">0000-00-00</span>
+                                            </a>
+                                        </li> 
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[다온]</span>
+                                                <span class="content">자동차동호회</span>
+                                                <span class="date">0000-00-00</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[황태준]</span>
+                                                <span class="content">등산동호회 회원</span>
+                                                <span class="date">0000-00-00</span>
+                                            </a>
+                                        </li> 
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[이름]</span>
+                                                <span class="content">test</span>
+                                                <span class="date">0000-00-00</span>
+                                            </a>
+                                        </li> 
+                                        <li>
+                                            <a href="/">
+                                                <span class="cate">[고객명(테스트)]</span>
+                                                <span class="content">test</span>
+                                                <span class="date">0000-00-00</span>
+                                            </a>
+                                        </li> 
+                                    </ul>
+                                </div>
+                            </li>
+                
+                    <li>
+                        <div class="listBox freeboard">
+                            <div class="title">
+                                <h4>게시판</h4>
+                                <a href="/board/index/freeboard" class="more">전체보기</a>
+                            </div>
+                            <ul class="subList"> 
+                                <li>
+                                    <a href="/">
+                                        <span class="cate">[기타]</span>
+                                        <span class="content">게시판 이용 안내</span>
+                                        <span class="date">2018-11-07</span>
+                                    </a>
+                                </li> 
+                                <li>
+                                    <a href="/">
+                                        <span class="cate">[개선]</span>
+                                        <span class="content">gv70 3.5 21인치 휠 타이어 선택가능하게 변경 부탁드립니다</span>
+                                        <span class="date">2025-07-28</span>
+                                    </a>
+                                </li> 
+                                <li>
+                                    <a href="/">
+                                        <span class="cate">[개선]</span>
+                                        <span class="content">안녕하세요?</span>
+                                        <span class="date">2025-07-01</span>
+                                    </a>
+                                </li> 
+                                <li>
+                                    <a href="/">
+                                        <span class="cate">[개선]</span>
+                                        <span class="content">PV5가격표 공개되어 견적 가능하게 수정 부탁드립니다</span>
+                                        <span class="date">2025-06-09</span>
+                                    </a>
+                                </li> 
+                                <li>
+                                    <a href="/">
+                                        <span class="cate">[질문]</span>
+                                        <span class="content">m캐피탈 전기차</span>
+                                        <span class="date">2025-05-19</span>
+                                    </a>
+                                </li> 
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                
+                            </div>
+                        </div>
+        
+                        <!-- 이상 페이지 내부 파일 -->
+                        <!-- 이하 footer 파일 적용 -->
+                        <div class="popup noticePopup" id="frameAlert">
+                            <div class="dimBg"></div>
+                            <div class="frame">
+                                <div class="content"></div>
+                                <div class="buttonBox" btnLen="1"></div>
+                            </div>
+                        </div>
+
+                        <div class="popup layerPopup" id="framePopup">
+                            <div class="dimBg"></div>
+                            <div class="frame">
+                                <div class="head">
+                                    <h3></h3>
+                                    <button class="close">닫기</button>
+                                </div>
+                                <div class="content"></div>
+                                <div class="buttonBox" btnLen="2"></div>
+                            </div>
+                        </div>
+                        <div class="popup layerPopup" id="framePopup">
+                            <div class="dimBg"></div>
+                            <div class="frame">
+                                <div class="head">
+                                    <h3></h3>
+                                    <button class="close">닫기</button>
+                                </div>
+                                <div class="content"></div>
+                                <div class="buttonBox" btnLen="3"></div>
+                            </div>
+                        </div> 
+                    </div>
+                    
+                </article>
+            </section>
+        </main>
+
+    </div>
+    <!-- 본문 끝 -->
+
+    
+    <!-- 푸터 시작 -->
+    <div class="footer">
+        <div class="inner">
+            푸터 영역
+        </div>
+    </div>
+    <!-- 푸터 끝 -->
+
+
+
+</div>
+<script>
+
+    //닫기 버튼
+    function popupClose() {
+        $(this).closest('.popup').css('display', 'none');
+    }
+    //팝업
+    function openPopupView(w, id) {
+        var $el = $('#' + id);
+        var winWidth = $(window).width();
+        var winHeight = $(window).height();
+        if (winWidth - 20 < w) w = winWidth - 20;
+        $el.css('display', 'block');
+        $el.find('.content').css('overflow-y', 'auto');
+        $el.find('.content').css('height', 'unset');
+        $el.find('.frame').css('width', w + 'px');
+        var btnLen = $el.find('.buttonBox button').length;
+        $el.find('.buttonBox').attr("btnLen", btnLen);
+        var h = $el.find('.frame').outerHeight();
+        if (winHeight - 60 < h) {
+            h = winHeight - 60;
+            if (id == 'frameAlert') h2 = h - 50;
+            else if (id == 'framePopup' && btnLen) h2 = h - 100;
+            else if (id == 'framePopup') h2 = h - 50;
+            $el.find('.content').css('overflow-y', 'auto');
+            $el.find('.content').css('max-height', h2 + 'px');
+        }
+        // $el.find('.frame').draggable();
+        $el.css('display', 'none');
+        $el.css('display', 'block');
+    }
+
+    $(document).on("click", ".popup .head .close,.popup .buttonBox .check,.popup .buttonBox .cancel", function () {
+        $(this).closest(".popup").fadeOut();
+        e.preventDefault();
+        e.stopPropagation();
+    });
+    $(document).on("click", "#framePopup", function (e) {
+        $(this).fadeOut();
+        e.stopPropagation()
+    });
+    $(document).on("click", ".popup .frame, .popup .content, .popup input, .popup button", function (e) {
+        e.stopPropagation()
+    });
+
+    //layerPopup
+    $(document).on('click','.layerPopup', function() {
+        $("#framePopup .head h3").html("즐겨찾기 메뉴 설정");
+        if ($(this).hasClass('setting')) {
+            var btn = `<button class="navy">변경하기</button>`;
+            var str=`
+            <form id="formBook" action="/api/make" method="POST">
+                <div class="favoritesMenu">
+                    <div class="favorites">
+                        <h3>즐겨찾기</h3>
+                        <ul>
+                            <li class="on"><button>견적내기</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                        </ul>    
+                    </div>
+
+                    <div class="menuPick">
+                        <h3>메뉴 선택</h3>
+                        <ul class="menu">
+                            <li>
+                                <div class="title">신차</div>
+                                <ul class="subMenu">
+                                    <li><button>모델정보</button></li>
+                                    <li class="on"><button>견적내기</button></li>
+                                    <li><button>리스/렌트</button></li>
+                                    <li><button>선주문•금융사</button></li>
+                                    <li><button>재고차•국산</button></li>
+                                    <li><button>재고차•수입</button></li>
+                                    <li><button>저장견적</button></li>
+                                    <li><button>차량비교</button></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="title">금융</div>
+                                <ul class="subMenu">
+                                    <li><button>판매조건/납기</button></li>
+                                    <li><button>할부비교</button></li>
+                                    <li><button>캐시백비교</button></li>
+                                    <li><button>프로모션</button></li>
+                                    <li><button>엑셀견적기</button></li> 
+                                    <li><button>금융진행</button></li>
+                                    <li><button>리스렌트팁</button></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="title">고객</div>
+                                <ul class="subMenu">
+                                    <li><button>고객관리</button></li>
+                                    <li><button>차량관리</button></li>
+                                    <li><button>일정관리</button></li>
+                                    <li><button>문자발송</button></li>
+                                    <li><button>채널관리</button></li>
+                                    <li><button>상담팁</button></li> 
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="title">유틸리티</div>
+                                <ul class="subMenu">
+                                    <li><button>할부계산기</button></li>
+                                    <li><button>자동차세</button></li>
+                                    <li><button>개별소비세</button></li>
+                                    <li><button>등록비용</button></li>
+                                    <li><button>전기차보조금</button></li> 
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="title">이용안내</div>
+                                <ul class="subMenu">
+                                    <li><button>공지사항</button></li>
+                                    <li><button>게시판</button></li> 
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="title">쇼핑</div>
+                                <ul class="subMenu">
+                                    <li><button>상품목록</button></li>
+                                    <li><button>주문 내역</button></li> 
+                                </ul>
+                            </li>
+                             <li>
+                                <div class="title">마이페이지</div>
+                                <ul class="subMenu">
+                                    <li><button>찜목록</button></li>
+                                    <li><button>알림메세지</button></li> 
+                                </ul>
+                            </li>
+                        </ul>    
+
+                    </div>
+                
+                </div>
+
+                <div class="noticeBox comment"> 즐겨찾기 박스를 먼저 선택하고 원하는 메뉴을 선택해 주세요.<br>즐겨찾기 박스를 두번 클릭하면 미지정으로 변경됩니다. </div>
+                <input type="hidden" name="book" value="">
+                <input type="hidden" name="no" value="1">
+                <input type="hidden" name="kind" value="bookmark">
+            </form>
+            `
+        } if ($(this).hasClass('set')) {
+            var btn = `<button class="navy">변경하기</button>`;
+            var str=`
+            <form id="formBook" action="/api/make" method="POST">
+                <div class="favoritesMenu">
+                    <div class="favorites">
+                        <h3>즐겨찾기</h3>
+                        <ul>
+                            <li class="on"><button>견적내기</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                            <li class="not"><button>미지정</button></li>
+                        </ul>    
+                    </div>
+
+                    <div class="menuPick">
+                        <h3>메뉴 선택</h3>
+                        <ul class="menu row">
+                            <li class="on"><button>저장견적</button></li>
+                            <li><button>금융진행</button></li>
+                            <li><button>프로모션</button></li>
+                            <li><button>엑셀견적기</button></li>
+                            <li><button>고객관리</button></li>
+                            <li><button>채널목록</button></li>
+                            <li><button>게시판</button></li>
+                            <li><button>주문내역</button></li>
+                        </ul>    
+
+                    </div>
+                
+                </div>
+
+                <div class="noticeBox comment"> 즐겨찾기 박스를 먼저 선택하고 원하는 메뉴을 선택해 주세요.<br>즐겨찾기 박스를 두번 클릭하면 미지정으로 변경됩니다. </div>
+                <input type="hidden" name="book" value="">
+                <input type="hidden" name="no" value="1">
+                <input type="hidden" name="kind" value="bookmark">
+            </form>
+            `
+        } 
+        $("#framePopup .content").html(str);
+        $("#framePopup .buttonBox").html(btn);
+        openPopupView(700, "framePopup");
+    });
+    
+
+
+</script>
+</body>
+</html>

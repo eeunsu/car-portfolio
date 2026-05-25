@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>모델정보 페이지</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/styles/main.css">
+<script src="/scripts/jquery-3.7.1.min.js"></script>
+<script src="/scripts/common.js"></script>
+</head>
+<body>
+<div class="wrapper desktop " id="wrapper" path="model_search">
+    <!-- 헤더 시작 -->
+    <div class="header">
+        <div class="inner">
+            <a href="/desk" class="menuHome">홈</a>
+            <button class="menuDesk" id="menuOpenDesk">메뉴</button>
+        </div>
+        <div class="menuMain" id="menuMain"> 
+            <div class="dimBg"></div>
+            <div class="menuBox">
+                <div class="menuTop">
+                    <button class="menuDesk" id="menuOpenDesk">메뉴</button>
+                    <a href="/desk" class="menuHome home">홈</a>
+                    <div class="info">
+                        <span class="name">홍길동 <i>님</i></span>
+                        <a class="logout" href="/">로그아웃</a>
+                    </div>
+                    <div class="icon">
+                        <button class="brightMode hide" id="changeBright">밝게</button> 
+                        <button class="darkMode" id="changeDark">어둡게</button>
+                        <button class="close" id="menuClose">닫기</button>
+                    </div>
+                </div>
+                <ul class="menuList">
+                    <li class="gnb newcar">
+                        <div class="title"><button>신차</button></div>
+                        <ul class="lnb">
+                            <li class="on"><a href="">모델정보</a></li>
+                            <li class=""><a href="">할부캐시백</a></li>
+                            <li class=""><a href="">비교하기</a></li>
+                            <li class=""><a href="">판매조건납기</a></li>
+                        </ul> 
+                    </li>
+                    <li class="gnb finance">
+                        <div class="title"><button>금융</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">할부비교</a></li>
+                            <li class=""><a href="">캐시백비교</a></li>
+                            <li class=""><a href="">프로모션</a></li>
+                            <li class=""><a href="">엑셀견적기</a></li>
+                            <li class=""><a href="">금융진행</a></li>
+                            <li class=""><a href="">리스렌트팁</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb customer">
+                        <div class="title"><button>고객</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">고객관리</a></li>
+                            <li class=""><a href="">차량관리</a></li>
+                            <li class=""><a href="">일정관리</a></li>
+                            <li class=""><a href="">문자발송</a></li>
+                            <li class=""><a href="">채널관리</a></li>
+                            <li class=""><a href="">상담팁</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb utility">
+                        <div class="title"><button>유틸리티</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">할부계산기</a></li>
+                            <li class=""><a href="">자동차세</a></li>
+                            <li class=""><a href="">개별소비세</a></li>
+                            <li class=""><a href="">등록비용</a></li>
+                            <li class=""><a href="">전기차보조금</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb info">
+                        <div class="title"><button class="">이용안내</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">공지사항</a></li>
+                            <li class=""><a href="">게시판</a></li>
+                            <li class=""><a href="">이용안내</a></li>
+                            <li class=""><a href="">이용약관</a></li>
+                            <li class=""><a href="">개인정보 취급방침</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb shopping">
+                        <div class="title"><button>쇼핑</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">상품 목록</a></li>
+                            <li class=""><a href="">주문 내역</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb mypage">
+                        <div class="title"><button class="">마이페이지</button></div>
+                        <ul class="lnb">
+                            <li class=""><a href="">내정보</a></li>
+                            <li class=""><a href="">이용료 결제</a></li>
+                            <li class=""><a href="">포인트</a></li>
+                            <li class=""><a href="">찜목록</a></li>
+                            <li class=""><a href="">알림메세지 <span class="new">N</span></a></li>
+                            <li class=""><a href="">로그인 설정</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="menuFixed">
+            <ul>
+                <li><a href="javascript:;"><div class="home"></div><span>홈</span></a></li>
+                <li><a href="javascript:;" tab="newcar"><div class="newcar"></div><span>신차</span></a></li>
+                <li><a href="javascript:;" tab="finance"><div class="finance"></div><span>금융</span></a></li>
+                <li><a href="javascript:;" tab="customer"><div class="customer"></div><span>고객</span></a></li>
+                <li><button id="menuOpenFixed"><div class="menu"></div><span>전체메뉴</span></button></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 헤더 끝 -->
+
+    <!-- 본문 시작 -->
+    <div class="container">
+        <main>
+            <section>
+                <article>
+                    <div class="inner">
+                        <div class="mainTop">
+                            <div class="left">
+                                <h2>모델정보</h2>
+                            </div>
+                        </div>
+
+                        <div class="locationBox">
+                            <div class="scrollH">
+                                <div class="selBox brand" kind="brand" code="111" location="N" target="series">
+                                    <button>
+                                        <span class="slide brandName" id="brand">현대</span>
+                                    </button>
+                                    <div class="list hide" kind="brand">
+                                        <ul>
+                                            <li code="111" class="on"><button>현대</button></li> 
+                                            <li code="112" class=""><button>제네시스</button></li> 
+                                            <li code="121" class=""><button>기아</button></li> 
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="selBox series" kind="series" code="1004" location="N" target="model">
+                                    <button>
+                                        <span class="slide seriesName" id="series">아반떼</span>
+                                    </button>
+                                    <div class="list hide">
+                                        <ul></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filterBox">
+                            <div class="choiced" id="selectedBtn">
+                                <span class="title">필터 <div class="filterBtn"> <button class="reset">초기화</button> <button class="openFilter down" id="slideBtn">필터 열기</button></div></span>
+                                <div class="list"><button class="choicedList" brand="121"><span> 기아 </span></button></div>
+                            </div>
+                            
+                            <ul class="choice" id="selectBox">
+                                <!-- 브랜드(메인) -->
+                                <li class="addlocal main" kind="brand" type="brandMain">
+                                    <div class="title">브랜드</div>
+                                    <div class="brandBox">
+                                        <div class="title">인기 브랜드</div>
+                                        <ul class="list brandList"> 
+                                            <li brand="111" class="on">
+                                                <button>
+                                                    <div class="logo">
+                                                        <img src="/images/logo/bmw_logo.png">
+                                                    </div>
+                                                    <div class="name">현대</div>
+                                                </button>
+                                            </li>
+
+                                            <li brand="112">
+                                                <button>
+                                                    <div class="logo">
+                                                        <img src="/images/logo/bmw_logo.png">
+                                                    </div>
+                                                    <div class="name">제네시스</div>
+                                                </button>
+                                            </li>
+
+                                            <li brand="121">
+                                                <button>
+                                                    <div class="logo">
+                                                        <img src="/images/logo/bmw_logo.png">
+                                                    </div>
+                                                    <div class="name">기아</div>
+                                                </button>
+                                            </li>
+
+                                            <li brand="131">
+                                                <button>
+                                                    <div class="logo">
+                                                        <img src="/images/logo/bmw_logo.png">
+                                                    </div>
+                                                    <div class="name">쉐보레</div>
+                                                </button>
+                                            </li>
+
+                                            <li brand="141">
+                                                <button>
+                                                    <div class="logo">
+                                                        <img src="/images/logo/bmw_logo.png">
+                                                    </div>
+                                                    <div class="name">KG모빌리티</div>
+                                                </button>
+                                            </li>
+
+                                            <li brand="151">
+                                                <button>
+                                                    <div class="logo">
+                                                        <img src="/images/logo/bmw_logo.png">
+                                                    </div>
+                                                    <div class="name">르노코리아</div>
+                                                </button>
+                                            </li>
+
+                                            <li brand="221">
+                                                <button>
+                                                    <div class="logo">
+                                                        <img src="/images/logo/bmw_logo.png">
+                                                    </div>
+                                                    <div class="name">벤츠</div>
+                                                </button>
+                                            </li>
+
+                                            <li brand="211">
+                                                <button>
+                                                    <div class="logo">
+                                                        <img src="/images/logo/bmw_logo.png">
+                                                    </div>
+                                                    <div class="name">BMW</div>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                        <div class="buttonBox">
+                                            <button id="moreBrand" class=" gray more"><span>더 보기</span></button>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                <!-- 브랜드(전체) -->
+                                <li class="addlocal main hide" kind="brand" type="brandAll">
+                                    <div class="title">브랜드</div>
+                                    <div class="brandBox">
+                                        
+                                            <div class="title">한국</div>
+                                            <ul class="list brandList">
+                                                
+                                                    <li brand="111" class="on">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/147763.png">
+                                                            </div>
+                                                            <div class="name">현대</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="112">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/1002.png">
+                                                            </div>
+                                                            <div class="name">제네시스</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="121">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/15389.png">
+                                                            </div>
+                                                            <div class="name">기아</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="131">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/1004.png">
+                                                            </div>
+                                                            <div class="name">쉐보레</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="132">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/39183.png">
+                                                            </div>
+                                                            <div class="name">GMC</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="141">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/43032.png">
+                                                            </div>
+                                                            <div class="name">KG모빌리티</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="151">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/121816.png">
+                                                            </div>
+                                                            <div class="name">르노코리아</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                            <div class="title">유럽</div>
+                                            <ul class="list brandList">
+                                                <li brand="221">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1008.png">
+                                                        </div>
+                                                        <div class="name">벤츠</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="211">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1007.png">
+                                                        </div>
+                                                        <div class="name">BMW</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="232">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1015.png">
+                                                        </div>
+                                                        <div class="name">아우디</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="231">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1016.png">
+                                                        </div>
+                                                        <div class="name">폭스바겐</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="212">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1017.png">
+                                                        </div>
+                                                        <div class="name">미니</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="241">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1041.png">
+                                                        </div>
+                                                        <div class="name">볼보</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="242">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/26668.png">
+                                                        </div>
+                                                        <div class="name">폴스타</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="251">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1019.png">
+                                                        </div>
+                                                        <div class="name">재규어</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="252">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1040.png">
+                                                        </div>
+                                                        <div class="name">랜드로버</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="233">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1020.png">
+                                                        </div>
+                                                        <div class="name">포르쉐</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="262">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1021.png">
+                                                        </div>
+                                                        <div class="name">페라리</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="234">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1022.png">
+                                                        </div>
+                                                        <div class="name">람보르기니</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="263">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1023.png">
+                                                        </div>
+                                                        <div class="name">마세라티</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="256">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/17736.png">
+                                                        </div>
+                                                        <div class="name">맥라렌</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="257">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/17737.png">
+                                                        </div>
+                                                        <div class="name">애스턴마틴</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="258">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/116008.png">
+                                                        </div>
+                                                        <div class="name">로터스</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="271">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/16501.png">
+                                                        </div>
+                                                        <div class="name">푸조</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="272">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1025.png">
+                                                        </div>
+                                                        <div class="name">시트로엥</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="273">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/2877.png">
+                                                        </div>
+                                                        <div class="name">DS</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="235">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1028.png">
+                                                        </div>
+                                                        <div class="name">벤틀리</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="223">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1029.png">
+                                                        </div>
+                                                        <div class="name">롤스로이스</div>
+                                                    </button>
+                                                </li>
+                                                
+                                            </ul>
+                                        
+                                            <div class="title">일본</div>
+                                            <ul class="list brandList">
+                                                <li brand="311">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1030.png">
+                                                        </div>
+                                                        <div class="name">토요타</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="312">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1031.png">
+                                                        </div>
+                                                        <div class="name">렉서스</div>
+                                                    </button>
+                                                </li>
+                                            
+                                                <li brand="331">
+                                                    <button>
+                                                        <div class="logo">
+                                                            <img src="https://www.carpan.co.kr/img/brand/1034.png">
+                                                        </div>
+                                                        <div class="name">혼다</div>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        
+                                            <div class="title">미국</div>
+                                            <ul class="list brandList">
+                                                
+                                                    <li brand="411">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/1035.png">
+                                                            </div>
+                                                            <div class="name">포드</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="412">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/1036.png">
+                                                            </div>
+                                                            <div class="name">링컨</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="422">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/1038.png">
+                                                            </div>
+                                                            <div class="name">지프</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="431">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/1039.png">
+                                                            </div>
+                                                            <div class="name">캐딜락</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="441">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/8197.png">
+                                                            </div>
+                                                            <div class="name">테슬라</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                            <div class="title">중국</div>
+                                            <ul class="list brandList">
+                                                
+                                                    <li brand="511">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/136546.png">
+                                                            </div>
+                                                            <div class="name">BYD</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                            <div class="title">전기(소형)</div>
+                                            <ul class="list brandList">
+                                                
+                                                    <li brand="161">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/23473.png">
+                                                            </div>
+                                                            <div class="name">스마트 EV</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="171">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/26664.png">
+                                                            </div>
+                                                            <div class="name">대창모터스</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="181">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/26666.png">
+                                                            </div>
+                                                            <div class="name">디피코</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="191">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/26669.png">
+                                                            </div>
+                                                            <div class="name">쎄보모빌리티</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="166">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/39486.png">
+                                                            </div>
+                                                            <div class="name">제이스 모빌리티</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="167">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/47907.png">
+                                                            </div>
+                                                            <div class="name">EVKMC</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="176">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/39487.png">
+                                                            </div>
+                                                            <div class="name">마이브</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                                    <li brand="196">
+                                                        <button>
+                                                            <div class="logo">
+                                                                <img src="https://www.carpan.co.kr/img/brand/48140.png">
+                                                            </div>
+                                                            <div class="name">모빌리티네트웍스</div>
+                                                        </button>
+                                                    </li>
+                                                
+                                            </ul>
+                                        
+                                        <div class="buttonBox">
+                                            <button id="moreBrand" class="updown gray">접기</button>
+                                        </div>
+                                    </div>
+                                </li>
+                    
+                                <!-- 차종 -->
+                                <li kind="cartype">
+                                    <div class="title">차종</div>
+                                    <ul class="list">
+                                        <li cartype="P1" class="on">
+                                            <button>경형</button>
+                                        </li>
+                                    
+                                        <li cartype="P3">
+                                            <button>소형</button>
+                                        </li>
+                                    
+                                        <li cartype="P4">
+                                            <button>준중형</button>
+                                        </li>
+                                    
+                                        <li cartype="P5">
+                                            <button>중형</button>
+                                        </li>
+                                    
+                                        <li cartype="P6">
+                                            <button>준대형</button>
+                                        </li>
+                                    
+                                        <li cartype="P7">
+                                            <button>대형</button>
+                                        </li>
+                                    
+                                        <li cartype="PS">
+                                            <button>스포츠카</button>
+                                        </li>
+                                    
+                                
+                                    
+                                        <li cartype="R1" class="on">
+                                            <button>경형 SUV</button>
+                                        </li>
+                                    
+                                        <li cartype="R2">
+                                            <button>소형 SUV</button>
+                                        </li>
+                                    
+                                        <li cartype="R3">
+                                            <button>준중형 SUV</button>
+                                        </li>
+                                    
+                                        <li cartype="R5">
+                                            <button>중형 SUV</button>
+                                        </li>
+                                    
+                                        <li cartype="R7">
+                                            <button>대형 SUV</button>
+                                        </li>
+                                    
+                                        <li cartype="RM">
+                                            <button>RV/MPV</button>
+                                        </li>
+                                    
+                                
+                                    
+                                        <li cartype="B0">
+                                            <button>승합</button>
+                                        </li>
+                                    
+                                        <li cartype="T0">
+                                            <button>화물</button>
+                                        </li> 
+                                    </ul>
+                                </li>
+                    
+                                <!-- 엔진 -->
+                                <li kind="engine">
+                                    <span class="title">엔진</span>
+                                    <ul class="list">
+                                        <li engine="G" class="on"><button>가솔린</button></li>
+                                        <li engine="D"><button>디젤</button></li>
+                                        <li engine="L"><button>LPG</button></li>
+                                        <li engine="E"><button>전기</button></li>
+                                        <li engine="H"><button>수소</button></li>
+                                        <li engine="C"><button>CNG</button></li>
+                                        <li engine="X"><button>하이브리드</button></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="orderList">
+                            <div class="box">
+                                <button class="populity on" kind="populity">판매량순</button>
+                                <button class="row" kind="row">낮은가격순</button>
+                                <button class="high" kind="high">높은가격순</button>
+                                <button class="fast" kind="fast">즉시출고 우선</button>   
+                            </div>
+                            <div class="box">
+                                <div class="searchCnt">259</div>
+                                <div class="searchBox">
+                                    <input type="text" name="word" id="searchText" value="" placeholder="검색">
+                                    <button id="" class="btnSearch">찾기</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 모델리스트 -->
+                         <div class="modelBox">
+                            <ul class="modelList wide" id="searchList">
+                                <li model="11716" class="state2 " engine="G" cartype="R1" ipopularity="6041" fastship="0" price="14500000">
+                                    <a href="/model/11716">
+                                        <div class="infoBox">
+                                            
+                                            <div class="car"><img src="/images/logo/model_logo.png"></div>
+                                            <div class="title"><span class="logo"><img src="/images/logo/bmw_logo.png" alt="BMW"></span><span class="name">더 뉴 캐스퍼</span></div>
+                                            <dl><div class="data"><dt>차종</dt><dd><span>경형 SUV</span></dd></div><div class="data"><dt>연비</dt><dd><div><span style="display:block;">가솔린 3.3~3.8<i> ㎞/ℓ</i></span></div></dd></div></dl>
+                                        </div>
+                                        <div class="price">1,450~2,070<span class="unit">만원</span></div>
+                                    </a>
+                                </li>
+                                <li model="11689" class="state2 e" engine="E" cartype="R2" ipopularity="4400" fastship="25" price="26981867">
+                                    <a href="/model/11689">
+                                        <div class="infoBox">
+                                            <div class="car"><img src="/images/logo/model_logo.png"></div>
+                                            <div class="title"><span class="logo"><img src="/images/logo/bmw_logo.png" alt="현대"></span><span class="name">캐스퍼 일렉트릭</span></div>
+                                            <dl><div class="data"><dt>차종</dt><dd><span>소형 SUV</span></dd></div><div class="data"><dt>연비</dt><dd><div><span style="display:block;">전기 3.3~3.8<i> kWh</i></span></div></dd></div></dl>
+                                        </div>
+                                        <div class="price">2,698~3,142<span class="unit">만원</span></div>
+                                    </a>
+                                </li>
+                                <li model="11414" class="state2 " engine="G,L" cartype="P4" ipopularity="13374" fastship="45" price="19640000">
+                                    <a href="/model/11414">
+                                        <div class="infoBox">
+                                            <div class="car"><img src="/images/logo/model_logo.png"></div>
+                                            <div class="title"><span class="logo"><img src="/images/logo/bmw_logo.png" alt="BMW"></span><span class="name">더 뉴 아반떼</span></div>
+                                            <dl><div class="data"><dt>차종</dt><dd><span>준중형</span></dd></div><div class="data"><dt>연비</dt><dd><div><span style="display:block;">가솔린 3.3~3.8<i> ㎞/ℓ</i></span><span style="display:block;">LPG 3.3~3.8<i> ㎞/ℓ</i></span></div></dd></div></dl>
+                                        </div>
+                                        <div class="price">1,964~2,783<span class="unit">만원</span></div>
+                                    </a>
+                                </li>
+                                <li model="11415" class="state3 x" engine="GX" cartype="P4" ipopularity="4092" fastship="329" price="24285579">
+                                    <a href="/model/11415">
+                                        <div class="infoBox">
+                                            <div class="car"><img src="/images/logo/model_logo.png"></div>
+                                            <div class="title"><span class="logo"><img src="/images/logo/bmw_logo.png" alt="BMW"></span><span class="name">더 뉴 아반떼 HEV</span></div>
+                                            <dl><div class="data"><dt>차종</dt><dd><span>준중형</span></dd></div><div class="data"><dt>연비</dt><dd><div><span style="display:block;">가솔린 하이브리드 3.3~3.8<i> ㎞/ℓ</i></span></div></dd></div></dl>
+                                        </div>
+                                        <div class="price">2,429~3,111<span class="unit">만원</span></div>
+                                    </a>
+                                </li>
+                                <li model="11736" class="state2" engine="GX" cartype="R7" ipopularity="5892" fastship="320" price="49250000">
+                                    <a href="/model/11736">
+                                        <div class="infoBox">
+                                            <div class="car"><img src="/images/logo/model_logo.png"></div>
+                                            <div class="title"><span class="logo"><img src="/images/logo/bmw_logo.png" alt="BMW"></span><span class="name">디 올 뉴 팰리세이드 HEV</span></div>
+                                            <dl><div class="data"><dt>차종</dt><dd><span>대형 SUV</span></dd></div><div class="data"><dt>연비</dt><dd><div><span style="display:block;">가솔린 하이브리드 3.3~3.8<i> ㎞/ℓ</i></span></div></dd></div></dl>
+                                        </div>
+                                        <div class="price">4,925~6,563<span class="unit">만원</span></div>
+                                    </a>
+                                </li>
+                                <li model="11462" class="state2 " engine="G,L" cartype="P5" ipopularity="10932" fastship="20" price="25460000">
+                                    <a href="/model/11462">
+                                        <div class="infoBox">
+                                            <div class="car"><img src="/images/logo/model_logo.png"></div>
+                                            <div class="title"><span class="logo"><img src="/images/logo/bmw_logo.png" alt="BMW"></span><span class="name">쏘나타 디 엣지</span></div>
+                                            <dl><div class="data"><dt>차종</dt><dd><span>중형</span></dd></div><div class="data"><dt>연비</dt><dd><div><span style="display:block;">가솔린 3.3~3.8<i> ㎞/ℓ</i></span><span style="display:block;">LPG 3.3~3.8<i> ㎞/ℓ</i></span></div></dd></div></dl>
+                                        </div>
+                                        <div class="price">2,546~3,866<span class="unit">만원</span></div>
+                                    </a>
+                                </li>
+                                <li class="no">해당하는 차량 모델이 없습니다.</li>
+                            
+                            </ul>
+                         </div>
+
+                        
+
+
+
+
+                        
+                        
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+</div>
+    <!-- 본문 끝 -->
+
+    
+    <!-- 푸터 시작 -->
+    <div class="footer">
+        <div class="inner">
+            푸터 영역
+        </div>
+    </div>
+    <!-- 푸터 끝 -->
+
+
+
+</div>
+</body>
+</html>

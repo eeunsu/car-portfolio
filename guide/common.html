@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공통 페이지</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <script src="/scripts/jquery-3.7.1.min.js"></script>
+    <style>
+        .inner {padding: 50px;}
+        .guideDesc {
+            color: var(--gray-500);
+            font-size: 16px;
+            font-weight: 500;
+            margin: 50px 0 10px 0;
+            display: inline-block;
+        } 
+        /* 라디오 & 체크박스 */
+        .data {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper desktop">
+        <div class="container">
+            <div class="inner">
+
+                <div class="guideDesc">1. .mainTop : 페이지 공통 헤더, 왼쪽 타이틀, 오른쪽 버튼 배치</div>
+                <div class="mainTop">
+                    <div class="left">
+                        <h2>페이지명</h2>
+                        <form class="searchBoxForm" action="" method="POST">
+                            <input type="text" name="search" id="nameCustomer" value="" placeholder="고객명">
+                            <button id="estmBtnWorking" class="btnSearch">찾기</button>
+                        </form>
+                    </div>
+                    <div class="right">
+                        <button class="list"><span class="name">목록</span><span class="count num">0</span></button>
+                    </div>
+                </div>
+
+                <div class="guideDesc">2. 라디오 / 체크박스</div>
+                <div class="data">
+                    <label><input type="radio" name="kind" value="" checked=""><span>radio</span></label>
+                    <label><input type="radio" name="kind" value=""><span>radio</span></label>
+                </div>
+                <div class="data">
+                    <label><input type="checkbox" name="checkbox" value="" checked=""><span>checkbox</span></label>
+                    <label><input type="checkbox" name="checkbox" value=""><span>checkbox</span></label>
+                    <label><input type="checkbox" name="checkbox" value=""><span>checkbox</span></label>
+                </div>
+
+                <div class="guideDesc">2-1. 라디오버튼 형식</div>
+                <div class="btnRadio">
+                    <label><input type="radio" name="kind" value="P" checked=""><span>승용</span></label>
+                    <label><input type="radio" name="kind" value="B"><span>승합</span></label>
+                    <label><input type="radio" name="kind" value="T"><span>화물</span></label>
+                    <label><input type="radio" name="kind" value="S"><span>특수</span></label>
+                    <label><input type="radio" name="kind" value="M"><span>3륜이하 소형</span></label>
+                </div>
+
+                <div class="guideDesc">2-2. 체크박스버튼 형식</div>
+                <div class="btnCheck">
+                    <label><input type="checkbox" name="view[]" value="schedule"><span>체크</span></label>
+                    <label><input type="checkbox" name="view[]" value="schedule"><span>체크</span></label>
+                    <label><input type="checkbox" name="view[]" value="schedule"><span>체크</span></label>
+                    <label><input type="checkbox" name="view[]" value="schedule"><span>체크</span></label>
+                </div>
+                
+
+                <div class="guideDesc">3. 버튼</div>
+                <div class="buttonBox"><button><span>Button</span></button></div><br>
+                <div class="buttonBox"><button class="gray more"><span>더 보기</span></button></div>
+                <br>
+                <div class="buttonBox">
+                    <button class="navy"><span>navy Button</span></button>
+                    <button class="navyLine"><span>navyLine Button</span></button>
+                    <button class="orangeLine"><span>orangeLine Button</span></button>
+                    <button class="gray"><span>gray Button</span></button>
+                    <button class="dis"><span>dis Button</span></button>
+                </div>
+
+                <div class="guideDesc">4. 공지사항</div>
+                <div class="noticeBox alert"><span>noticeBox.alert</span></div>
+                <div class="noticeBox comment"><span>noticeBox.comment</span></div>
+                <div class="noticeBox notice"><span>noticeBox.notice</span></div>
+
+                <div class="guideDesc">5. Tab (tablist)</div>
+                <div class="tablist">
+                    <button class="on">오토캐시백</button>
+                    <button class="">할부</button>
+                </div>
+                <div class="guideDesc">5-1. Tab(tablist.round)</div>
+                <div class="tablist round">
+                    <button class="on">오토캐시백</button>
+                    <button class="">할부</button>
+                </div>
+                <div class="guideDesc">5-2. Tab(tablist.bookmark)</div>
+                <div class="tablist bookmark">
+                    <button class="on">오토캐시백</button>
+                    <button class="">할부</button>
+                </div>
+                <div class="guideDesc">6. Tab a/button</div>
+                <div class="tabButton">
+                    <ul class="list">
+                        <li class="on"><button>소형</button></li>
+                        <li><button>중형</button></li>
+                        <li><button>준중형</button></li>
+                        <li><button>준대형</button></li>
+                        <li><button>대형</button></li>
+                        <li><a href="javascritp:;">동호회</a></li>
+                        <li><a href="javascritp:;">포럼</a></li>
+                        <li><a href="javascritp:;">커뮤니티</a></li>
+                        <li><a href="javascritp:;">네이버</a></li>
+                        <li><a href="javascritp:;">보도자료</a></li>
+                    </ul>
+                </div>
+                <div class="guideDesc">7. 금융사 로고</div>
+                <div class="btnCapital btnCheck" id="companyF">
+                    <label><input type="checkbox" name="companyF[]" value="1897">
+                        <span><img src="/images/logo/finance_logo.png">우리카드 </span>
+                    </label>
+                    <label><input type="checkbox" name="companyF[]" value="1897">
+                        <span><img src="/images/logo/finance_logo.png">우리카드 </span>
+                    </label>
+                </div>
+                <br>
+                <div class="btnCapital">
+                    <button class="on">
+                        <img src="/images/logo/finance_logo.png">
+                        우리카드
+                    </button>
+                </div>
+                <br>
+                <ul class="btnCapital row" id="boardButtonTheme" code="excel">
+                    <li>
+                        <button class="on" theme="1897">
+                            <img src="/images/logo/finance_logo.png">우리카드
+                        </button>
+                    </li>
+
+                    <li>
+                        <button class="" theme="1902">
+                            <img src="/images/logo/finance_logo.png">우리카드
+                        </button>
+                    </li>
+
+                    <li>
+                        <button class="" theme="1904">
+                            <img src="/images/logo/finance_logo.png">우리카드
+                        </button>
+                    </li>
+                </ul>
+
+
+                
+
+
+
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
